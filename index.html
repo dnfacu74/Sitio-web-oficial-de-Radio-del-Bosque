@@ -12,52 +12,50 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
 <style>
-/* =======================
-   (TU CSS ORIGINAL SIN CAMBIOS)
-   ======================= */
+/* 🔥 TU CSS ORIGINAL SE MANTIENE COMPLETO */
 
-/* SOLO AGREGO ESTO NUEVO */
-.live-fallback {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-  color: #fff;
+/* SOLO AGREGAMOS ESTO NUEVO */
+.live-fallback{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:12px;
+  background:#000;
+  color:white;
+  text-align:center;
 }
 
-.live-fallback img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
+.live-fallback img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.5;
 }
 
-.live-fallback button {
-  z-index: 2;
-  padding: 12px 20px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  background: #e63946;
-  color: white;
-  font-weight: bold;
+.live-fallback button{
+  z-index:2;
+  padding:12px 20px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  background:#e63946;
+  color:white;
+  font-weight:700;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER (igual) ================= -->
-
+<!-- ================= HEADER ================= -->
 <header class="header" id="header">
   <div class="header__container container">
+
     <a href="#" class="header__brand">
       <img src="images/logo_radio.png" class="header__logo" />
       <div class="header__brand-text">
@@ -78,12 +76,13 @@
     <button class="header__toggle" id="menuToggle">
       <span></span><span></span><span></span>
     </button>
+
   </div>
 </header>
 
 <main>
 
-<!-- ================= HERO (igual) ================= -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero__background">
     <div class="hero__overlay"></div>
@@ -103,8 +102,10 @@
       <span class="hero__title-line hero__title-line--accent">BOSQUE</span>
     </h1>
 
+    <p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
+
     <div class="hero__actions">
-      <a href="#player" class="btn btn-primary">▶ Escuchanos</a>
+      <a href="#player" class="btn btn-primary">▶ Escuchanos en Vivo</a>
       <a href="#nosotros" class="btn btn-secondary">Conocé la Radio</a>
     </div>
   </div>
@@ -136,7 +137,7 @@
 </div>
 </section>
 
-<!-- ================= LIVE VIDEO (MEJORADO) ================= -->
+<!-- ================= LIVE ================= -->
 <section class="live-section">
 <div class="container">
 
@@ -146,7 +147,6 @@
 
 <div class="live-grid">
 
-  <!-- Fallback primero -->
   <div class="live-video">
 
     <div class="live-video__header">
@@ -154,27 +154,34 @@
       <span>Facebook Live</span>
     </div>
 
-    <div class="live-fallback" id="videoFallback">
-      <img src="images/live-poster.jpg" alt="Live preview" loading="lazy">
-      <button id="openFb">Ver en Facebook</button>
-    </div>
+    <div class="live-video__container" style="position:relative; aspect-ratio:16/9;">
 
-    <!-- iframe lazy -->
-    <div class="live-video__container" id="videoContainer" style="display:none;">
+      <div class="live-fallback" id="liveFallback">
+        <img src="images/live-poster.jpg" alt="Live" loading="lazy">
+        <button id="openFacebook">Ver en Facebook</button>
+      </div>
+
       <iframe
+        id="liveIframe"
         data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fradiodelbosque.ok%2Fvideos%2F&show_text=false"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        allowfullscreen
         loading="lazy"
-        allowfullscreen>
-      </iframe>
+        style="display:none;"
+      ></iframe>
+
     </div>
 
   </div>
 
 </div>
+
 </div>
 </section>
 
-<!-- ================= NOSOTROS ================= -->
+<!-- ================= ABOUT + QR ================= -->
 <section id="nosotros" class="about-section">
 <div class="container">
 
@@ -189,22 +196,24 @@
       Radio del Bosque es una emisora digital independiente de La Plata.
     </p>
 
-    <!-- 🔥 BLOQUE NUEVO DE COLABORACIÓN -->
+    <!-- 💸 BLOQUE QR -->
     <div style="margin-top:40px; padding:30px; border:1px solid rgba(95,191,138,.3); border-radius:16px;">
 
-      <h3 style="font-size:1.6rem; margin-bottom:16px; color:#5fbf8a;">
+      <h3 style="color:#5fbf8a; font-size:1.6rem; margin-bottom:16px;">
         Colaborá con nosotros
       </h3>
 
-      <img src="images/QR_radio.png" alt="QR Radio del Bosque" style="width:180px; margin-bottom:20px;" />
+      <img src="images/QR_radio.png" style="width:180px; display:block; margin:20px auto;" />
 
-      <p style="color:#b8b0a0; line-height:1.6;">
-        Radio del Bosque es un proyecto independiente que crece gracias al apoyo de quienes nos escuchan. Cada aporte, por pequeño que sea, nos ayuda a seguir transmitiendo, mejorar nuestra programación y mantener este espacio de comunicación y música para toda la comunidad.
-        <br><br>
-        Escaneá el código QR con Mercado Pago, ingresá el monto que desees y colaborá con la radio.
-        <br><br>
-        Tu aporte hace posible que sigamos al aire.
-        <br><br>
+      <p style="color:#b8b0a0; line-height:1.7;">
+        Ayudanos a mantener viva Radio del Bosque<br><br>
+
+        Radio del Bosque es un proyecto independiente que crece gracias al apoyo de quienes nos escuchan. Cada aporte, por pequeño que sea, nos ayuda a seguir transmitiendo, mejorar nuestra programación y mantener este espacio de comunicación y música para toda la comunidad.<br><br>
+
+        Escaneá el código QR con Mercado Pago, ingresá el monto que desees y colaborá con la radio.<br><br>
+
+        Tu aporte hace posible que sigamos al aire.<br><br>
+
         Muchas gracias por ser parte de Radio del Bosque.
       </p>
 
@@ -219,35 +228,54 @@
 
 </main>
 
+<!-- ================= JS ================= -->
 <script>
 
-/* ================= MENU ================= */
+// MENU
 document.getElementById('menuToggle').onclick = () => {
   document.getElementById('nav').classList.toggle('header__nav--open');
 };
 
-/* ================= LIVE VIDEO LAZY LOAD ================= */
-const videoObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
+// AUDIO
+const audio = document.getElementById("audioPlayer");
+const playBtn = document.getElementById("playBtn");
+let playing = false;
 
-      const iframe = document.querySelector('iframe[data-src]');
-      if (iframe && !iframe.src) {
-        iframe.src = iframe.dataset.src;
-      }
+const stream = "https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_13354_stream_641358950";
 
-      document.getElementById('videoFallback').style.display = "none";
-      document.getElementById('videoContainer').style.display = "block";
+playBtn.onclick = () => {
+  if (!playing) {
+    audio.src = stream;
+    audio.play();
+    playing = true;
+    playBtn.textContent = "⏸";
+  } else {
+    audio.pause();
+    playing = false;
+    playBtn.textContent = "▶";
+  }
+};
 
-      videoObserver.disconnect();
+// LAZY LOAD VIDEO
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+
+      const iframe = document.getElementById("liveIframe");
+      iframe.src = iframe.dataset.src;
+
+      document.getElementById("liveFallback").style.display = "none";
+      iframe.style.display = "block";
+
+      observer.disconnect();
     }
   });
 }, { threshold: 0.3 });
 
-videoObserver.observe(document.querySelector('.live-video'));
+observer.observe(document.querySelector(".live-video"));
 
-/* botón fallback */
-document.getElementById('openFb').onclick = () => {
+// FACEBOOK BUTTON
+document.getElementById("openFacebook").onclick = () => {
   window.open("https://www.facebook.com/radiodelbosque.ok", "_blank");
 };
 

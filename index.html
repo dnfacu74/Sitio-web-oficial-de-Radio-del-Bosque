@@ -330,41 +330,82 @@ font-size: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.2);
 .program-card__time { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--gold); font-weight: 500; }
 .program-card__host { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
 
-/* GALLERY */
+/* GALLERY - TARJETAS QUE ENLAZAN A LAS PÁGINAS */
 .gallery-section { padding: 100px 0; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
-.gallery-categories { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
-.gallery-category {
-padding: 12px 24px; background: transparent;
-border: 2px solid var(--green-dark); border-radius: var(--radius-full);
-color: var(--text-secondary); font-family: var(--font-body);
-font-size: 0.9rem; font-weight: 600; cursor: pointer;
-transition: all var(--transition-fast);
+.gallery-category-cards {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 24px;
+margin-top: 16px;
 }
-.gallery-category:hover { border-color: var(--green-accent); color: var(--text-primary); }
-.gallery-category--active { background: var(--green-accent); border-color: var(--green-accent); color: var(--bg-primary); }
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.gallery-item {
-position: relative; aspect-ratio: 4/3; border-radius: var(--radius-md);
-overflow: hidden; cursor: pointer; border: 1px solid rgba(95, 191, 138, 0.2);
+.gallery-category-card {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+padding: 48px 32px;
+background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+border: 1px solid rgba(95, 191, 138, 0.2);
+border-radius: var(--radius-lg);
+text-decoration: none;
+color: var(--text-primary);
+transition: all var(--transition-normal);
+position: relative;
+overflow: hidden;
 }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.08) saturate(1.15) brightness(1.03); transition: all var(--transition-slow); }
-.gallery-item:hover img { filter: contrast(1.12) saturate(1.25) brightness(1.08); transform: scale(1.05); }
-.gallery-item__overlay {
-position: absolute; inset: 0;
-background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
-display: flex; align-items: flex-end; justify-content: center; padding: 24px;
-opacity: 0; transition: opacity var(--transition-normal);
+.gallery-category-card::before {
+content: '';
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at 50% 0%, rgba(95, 191, 138, 0.12), transparent 60%);
+opacity: 0;
+transition: opacity var(--transition-normal);
 }
-.gallery-item:hover .gallery-item__overlay { opacity: 1; }
-.gallery-lightbox {
-position: fixed; inset: 0; background: rgba(0, 0, 0, 0.97);
-z-index: 2000; display: none; align-items: center; justify-content: center;
-padding: 24px; cursor: pointer;
+.gallery-category-card:hover {
+transform: translateY(-6px);
+border-color: var(--green-accent);
+box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
-.gallery-lightbox.active { display: flex; animation: fadeInUp 0.3s ease; }
-.gallery-lightbox__content { max-width: 900px; max-height: 90vh; text-align: center; }
-.gallery-lightbox__content img { max-width: 100%; max-height: 80vh; border-radius: var(--radius-md); box-shadow: 0 0 80px rgba(95, 191, 138, 0.4); border: 3px solid rgba(212, 165, 116, 0.5); }
-.gallery-lightbox__caption { margin-top: 16px; color: var(--text-secondary); font-size: 1rem; }
+.gallery-category-card:hover::before { opacity: 1; }
+.gallery-category-card__icon {
+font-size: 3.5rem;
+margin-bottom: 20px;
+filter: drop-shadow(0 0 20px rgba(95, 191, 138, 0.4));
+position: relative;
+z-index: 1;
+}
+.gallery-category-card__title {
+font-family: var(--font-display);
+font-size: 1.6rem;
+margin-bottom: 12px;
+color: var(--text-primary);
+position: relative;
+z-index: 1;
+}
+.gallery-category-card__desc {
+font-size: 0.95rem;
+color: var(--text-secondary);
+line-height: 1.6;
+margin-bottom: 24px;
+max-width: 320px;
+position: relative;
+z-index: 1;
+}
+.gallery-category-card__link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+color: var(--green-accent);
+font-weight: 600;
+font-size: 0.95rem;
+letter-spacing: 0.05em;
+transition: color var(--transition-fast);
+position: relative;
+z-index: 1;
+}
+.gallery-category-card:hover .gallery-category-card__link {
+color: var(--gold);
+}
 
 /* MODAL COLABORAR */
 .donate-modal {
@@ -421,6 +462,65 @@ transform: rotate(90deg);
 margin-top: 20px;
 color: var(--text-secondary);
 font-size: 0.95rem;
+}
+
+/* AUDIOS SECTION */
+.audios-section {
+padding: 100px 0;
+background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.audios-preview {
+display: grid;
+grid-template-columns: 280px 1fr;
+gap: 48px;
+align-items: center;
+max-width: 900px;
+margin: 0 auto;
+background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+border: 2px solid rgba(95, 191, 138, 0.3);
+border-radius: var(--radius-lg);
+padding: 40px;
+box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+.audios-preview__image {
+display: flex;
+justify-content: center;
+}
+.audios-preview__image img {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+border: 4px solid rgba(245, 240, 232, 0.9);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(95, 191, 138, 0.3);
+object-fit: cover;
+}
+.audios-preview__title {
+font-family: var(--font-display);
+font-size: 1.8rem;
+color: var(--gold);
+margin-bottom: 16px;
+line-height: 1.2;
+}
+.audios-preview__text {
+font-size: 1rem;
+color: var(--text-secondary);
+line-height: 1.7;
+margin-bottom: 24px;
+}
+.audios-preview__list {
+list-style: none;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 32px;
+}
+.audios-preview__list li {
+font-size: 0.9rem;
+color: var(--text-secondary);
+padding: 8px 12px;
+background: rgba(95, 191, 138, 0.08);
+border-radius: var(--radius-sm);
+border-left: 3px solid var(--green-accent);
 }
 
 /* ADVERTISERS */
@@ -539,10 +639,24 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 .player-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
 .player-card__equalizer { height: 80px; }
 .programming-grid { grid-template-columns: 1fr; }
-.gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 .contact-grid { grid-template-columns: 1fr; }
 .hero__logo-top { width: 120px; height: 120px; }
 .donate-modal__inner img { max-width: 95vw; }
+.audios-preview {
+grid-template-columns: 1fr;
+text-align: center;
+padding: 32px 24px;
+}
+.audios-preview__list {
+grid-template-columns: 1fr;
+}
+.audios-preview__image img {
+width: 160px;
+height: 160px;
+}
+.gallery-category-cards {
+grid-template-columns: 1fr;
+}
 }
 @media (max-width: 640px) {
 .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -566,6 +680,7 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 <a href="#programacion" class="header__link">Programación</a>
 <a href="novedades.html" class="header__link">Novedades</a>
 <a href="#galeria" class="header__link">Galería</a>
+<a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
 <a href="#nosotros" class="header__link">Sobre Nosotros</a>
 <a href="#contacto" class="header__link">Contacto</a>
 <a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
@@ -605,7 +720,7 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 </div>
 </section>
 
-<!-- PLAYER (sin cartel QR) -->
+<!-- PLAYER -->
 <section id="player" class="player-section">
 <div class="container">
 <h2 class="player-section__title">ESCUCHANOS EN VIVO</h2>
@@ -658,7 +773,7 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 </div>
 </section>
 
-<!-- ABOUT (con botón que abre modal) -->
+<!-- ABOUT -->
 <section id="nosotros" class="about-section">
 <div class="container">
 <div class="about-grid">
@@ -696,21 +811,65 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 </div>
 </section>
 
-<!-- GALLERY -->
+<!-- GALLERY - CON TARJETAS QUE ENLAZAN A LAS PÁGINAS DE GALERÍA -->
 <section id="galeria" class="gallery-section">
 <div class="container">
 <div class="section-header">
 <h2 class="section-title">Galería de <span class="text-accent">Fotos</span></h2>
 <div class="divider"></div>
-<p class="section-subtitle">Momentos detrás de escena y en el aire</p>
+<p class="section-subtitle">Explorá los momentos detrás de escena y en el aire</p>
 </div>
-<div class="gallery-categories" id="galleryCategories"></div>
-<div class="gallery-grid" id="galleryGrid"></div>
+<div class="gallery-category-cards">
+<a href="bichos-radio.html" class="gallery-category-card" aria-label="Ver galería Bichos de Radio">
+<div class="gallery-category-card__icon" aria-hidden="true">🎙️</div>
+<h3 class="gallery-category-card__title">Bichos de Radio</h3>
+<p class="gallery-category-card__desc">Nuestros conductores y equipos en plena transmisión, la esencia del aire.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
+<a href="carrusel.html" class="gallery-category-card" aria-label="Ver galería Carrusel">
+<div class="gallery-category-card__icon" aria-hidden="true">🎠</div>
+<h3 class="gallery-category-card__title">Carrusel</h3>
+<p class="gallery-category-card__desc">Imágenes dinámicas del día a día en el estudio y en cabina.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
+<a href="encuentros-en-el-bosque.html" class="gallery-category-card" aria-label="Ver galería Encuentros en el Bosque">
+<div class="gallery-category-card__icon" aria-hidden="true">🌳</div>
+<h3 class="gallery-category-card__title">Encuentros en el Bosque</h3>
+<p class="gallery-category-card__desc">Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
 </div>
-<div class="gallery-lightbox" id="lightbox">
-<div class="gallery-lightbox__content">
-<img src="" alt="" id="lightboxImg" />
-<p class="gallery-lightbox__caption" id="lightboxCaption"></p>
+</div>
+</section>
+
+<!-- AUDIOS -->
+<section id="audios" class="audios-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Encuentros en el Bosque <span class="text-accent">- Audios</span></h2>
+<div class="divider"></div>
+<p class="section-subtitle">Homenaje a nuestra querida Marta Navarro. Escuchá los relatos que dejaron huella en la radio.</p>
+</div>
+<div class="audios-preview">
+<div class="audios-preview__image">
+<img src="images/marta_perfil.png" alt="Marta Navarro - Encuentros en el Bosque" loading="lazy" />
+</div>
+<div class="audios-preview__content">
+<h3 class="audios-preview__title">7 relatos de Marta Navarro</h3>
+<p class="audios-preview__text">
+Descubrí los audios del programa "Encuentros en el Bosque". Relatos que tocaron el corazón de quienes nos escuchan.
+</p>
+<ul class="audios-preview__list">
+<li>🎙️ Cuando Pasen en Mi Los Años</li>
+<li>🎙️ Lo Mejor Esta Por Venir</li>
+<li>🎙️ No Te Detengas</li>
+<li>🎙️ Si Lo Mejor de Todo</li>
+<li>🎙️ Todo Termina Algun Día</li>
+<li>🎙️ Un día Cualquiera</li>
+<li>🎙️ Un lugar en el Bosque</li>
+</ul>
+<a href="encuentros-en-el-bosque-audios.html" class="btn btn-gold">🎧 Escuchar los audios</a>
+</div>
 </div>
 </div>
 </section>
@@ -806,6 +965,7 @@ Enviar mensaje por WhatsApp
 <li><a href="#programacion">Programación</a></li>
 <li><a href="novedades.html">Novedades</a></li>
 <li><a href="#galeria">Galería</a></li>
+<li><a href="encuentros-en-el-bosque-audios.html">Audios</a></li>
 <li><a href="#nosotros">Sobre Nosotros</a></li>
 <li><a href="#contacto">Contacto</a></li>
 </ul>
@@ -839,7 +999,7 @@ Enviar mensaje por WhatsApp
 <button class="donate-modal__close" id="donateClose" aria-label="Cerrar">✕</button>
 <div class="donate-modal__inner">
 <img src="images/promo.png" alt="Ayudanos a mantener viva Radio del Bosque - Escaneá el código QR para colaborar" />
-<p class="donate-modal__hint">Escaneá el código QR o hacé clic para agrandar la imagen</p>
+<p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
 </div>
 </div>
 
@@ -939,7 +1099,7 @@ const programs = [
 { id: 4, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
 { id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '🌳', image: 'images/La Tarde del Bosque.png' },
 { id: 6, title: 'Resumen de Noticias - Tarde', time: '19:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la tarde', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Tarde.png' },
-{ id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '🌙', image: 'images/Noche en el Bosque.png' },
+{ id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '', image: 'images/Noche en el Bosque.png' },
 { id: 8, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '🎶', image: 'images/Fin de Semana.png' },
 { id: 9, title: 'Pasajeros del Espacio', time: '10:00 - 13:00', days: 'Sábados', host: 'Marisa Waters, Fakundo DN y Rocío Escalante', category: 'Especial', icon: '🚀', image: 'images/Pasajeros del Espacio.png' },
 ];
@@ -968,81 +1128,6 @@ ${p.time} · ${p.days}
 `).join('');
 }
 renderPrograms();
-
-/* Galería */
-const galleryImages = {
-bichos: [
-{ src: 'images/Conductor con auriculares en cabina.jpg', alt: 'Conductor con auriculares en cabina' },
-{ src: 'images/Dos locutoras al aire.jpg', alt: 'Dos locutoras al aire' },
-{ src: 'images/Equipo completo en cabina.jpg', alt: 'Equipo completo en cabina' },
-{ src: 'images/Locutores con auriculares.jpg', alt: 'Locutores con auriculares' },
-{ src: 'images/Transmisión nocturna.jpg', alt: 'Transmisión nocturna' },
-],
-carrusel: [
-{ src: 'images/Equipo en cabina.jpg', alt: 'Equipo en cabina' },
-{ src: 'images/Equipo leyendo guiones.jpg', alt: 'Equipo leyendo guiones' },
-{ src: 'images/Locutores trabajando.jpg', alt: 'Locutores trabajando' },
-{ src: 'images/Plena transmisión.jpg', alt: 'Plena transmisión' },
-{ src: 'images/Equipo con árbol de Navidad.jpg', alt: 'Equipo con árbol de Navidad' },
-],
-encuentros: [
-{ src: 'images/Marta Navarro en el estudio.jpg', alt: 'Marta Navarro en el estudio' },
-{ src: 'images/Locutora al aire.jpg', alt: 'Locutora al aire' },
-{ src: 'images/Tres mujeres en cabina.jpg', alt: 'Tres mujeres en cabina' },
-{ src: 'images/Marta Navarro junto al árbol.jpg', alt: 'Marta Navarro junto al árbol' },
-{ src: 'images/Foto artística en cabina.jpg', alt: 'Foto artística en cabina' },
-],
-};
-const categories = [
-{ id: 'bichos', label: '🎙️ Bichos de Radio' },
-{ id: 'carrusel', label: '🎠 Carrusel' },
-{ id: 'encuentros', label: '🌳 Encuentros en el Bosque' },
-];
-let activeCategory = 'bichos';
-const categoriesContainer = document.getElementById('galleryCategories');
-const galleryGrid = document.getElementById('galleryGrid');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
-
-function renderCategories() {
-categoriesContainer.innerHTML = categories.map(c =>
-`<button class="gallery-category ${activeCategory === c.id ? 'gallery-category--active' : ''}" data-cat="${c.id}">${c.label}</button>`
-).join('');
-document.querySelectorAll('.gallery-category').forEach(btn => {
-btn.addEventListener('click', () => {
-activeCategory = btn.dataset.cat;
-renderCategories();
-renderGallery();
-});
-});
-}
-function renderGallery() {
-const imgs = galleryImages[activeCategory] || [];
-galleryGrid.innerHTML = imgs.map((img, idx) => `
-<div class="gallery-item" data-idx="${idx}">
-<img src="${img.src}" alt="${img.alt}" loading="lazy" />
-<div class="gallery-item__overlay">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
-</div>
-</div>
-`).join('');
-document.querySelectorAll('.gallery-item').forEach(item => {
-item.addEventListener('click', () => {
-const img = imgs[parseInt(item.dataset.idx)];
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-lightboxCaption.textContent = img.alt;
-lightbox.classList.add('active');
-});
-});
-}
-lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape') lightbox.classList.remove('active');
-});
-renderCategories();
-renderGallery();
 </script>
 </body>
 </html>

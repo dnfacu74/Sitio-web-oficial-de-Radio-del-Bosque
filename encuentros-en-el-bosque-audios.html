@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<meta name="description" content="Encuentros en el Bosque - Audios - Homenaje a Marta Navarro - Radio del Bosque LP" />
+<title>Encuentros en el Bosque - Audios — Radio del Bosque LP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+:root {
+--bg-primary: #0a0f0d;
+--bg-secondary: #0f1a14;
+--bg-tertiary: #142218;
+--green-dark: #1a3d2e;
+--green-mid: #2d5a3f;
+--green-light: #4a8b6a;
+--green-accent: #5fbf8a;
+--gold: #d4a574;
+--gold-light: #e8c49a;
+--orange: #c97b3a;
+--orange-light: #e89850;
+--text-primary: #f5f0e8;
+--text-secondary: #b8b0a0;
+--text-muted: #7a7568;
+--red-live: #e63946;
+--font-display: 'Playfair Display', serif;
+--font-body: 'Inter', sans-serif;
+--font-title: 'Bebas Neue', sans-serif;
+--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+--shadow-glow: 0 0 20px rgba(95, 191, 138, 0.3);
+--radius-sm: 8px;
+--radius-md: 12px;
+--radius-lg: 20px;
+--radius-full: 9999px;
+--transition-fast: 0.2s ease;
+--transition-normal: 0.3s ease;
+--transition-slow: 0.5s ease;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+font-family: var(--font-body);
+background: var(--bg-primary);
+color: var(--text-primary);
+line-height: 1.6;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section-title {
+font-family: var(--font-title);
+font-size: clamp(2rem, 5vw, 3.5rem);
+color: var(--text-primary);
+text-align: center;
+letter-spacing: 0.15em;
+margin-bottom: 16px;
+text-transform: uppercase;
+}
+.divider {
+width: 80px; height: 3px;
+background: linear-gradient(90deg, var(--green-accent), var(--gold));
+margin: 0 auto 32px;
+border-radius: var(--radius-full);
+}
+.text-accent { color: var(--green-accent); }
+.btn {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 14px 28px; border: none; border-radius: var(--radius-full);
+font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+cursor: pointer; transition: all var(--transition-normal);
+text-decoration: none; letter-spacing: 0.05em;
+}
+.btn-secondary {
+background: transparent; color: var(--text-primary);
+border: 2px solid var(--green-accent);
+}
+.btn-secondary:hover { background: var(--green-accent); color: var(--bg-primary); }
+.header {
+position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+padding: 20px 0; transition: all var(--transition-normal);
+background: rgba(10, 15, 13, 0.95);
+backdrop-filter: blur(20px);
+}
+.header__container { display: flex; align-items: center; justify-content: space-between; }
+.header__brand {
+display: flex; align-items: center; gap: 12px;
+text-decoration: none; color: var(--text-primary);
+}
+.header__logo {
+width: 48px; height: 48px; border-radius: 50%;
+border: 2px solid var(--green-accent);
+transition: transform var(--transition-normal);
+}
+.header__brand:hover .header__logo { transform: rotate(360deg); }
+.header__brand-text { display: flex; flex-direction: column; }
+.header__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+.header__location { font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 0.05em; }
+.header__nav { display: flex; align-items: center; gap: 8px; }
+.header__link {
+color: var(--text-primary); text-decoration: none;
+font-size: 0.9rem; font-weight: 500;
+padding: 8px 16px; border-radius: var(--radius-full);
+transition: all var(--transition-fast);
+}
+.header__link:hover { background: rgba(95, 191, 138, 0.15); color: var(--green-accent); }
+.header__whatsapp {
+display: inline-flex; align-items: center; gap: 8px;
+background: #25d366; color: white; padding: 10px 20px;
+border-radius: var(--radius-full); text-decoration: none;
+font-weight: 600; font-size: 0.9rem; margin-left: 12px;
+transition: all var(--transition-normal);
+}
+.header__whatsapp:hover { background: #128c7e; transform: translateY(-2px); }
+.header__toggle {
+display: none; flex-direction: column; gap: 5px;
+background: none; border: none; cursor: pointer; padding: 8px;
+}
+.header__toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: all var(--transition-normal); }
+
+/* AUDIO PAGE STYLES */
+.audio-page {
+padding: 140px 0 100px;
+min-height: 100vh;
+background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.audio-page__header {
+display: flex;
+align-items: center;
+gap: 32px;
+margin-bottom: 48px;
+flex-wrap: wrap;
+justify-content: center;
+}
+.audio-page__profile {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+border: 4px solid rgba(245, 240, 232, 0.9);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(95, 191, 138, 0.3);
+object-fit: cover;
+flex-shrink: 0;
+}
+.audio-page__title-section {
+text-align: center;
+}
+.audio-page__title {
+font-family: var(--font-display);
+font-size: clamp(2rem, 5vw, 3rem);
+color: var(--text-primary);
+margin-bottom: 12px;
+line-height: 1.1;
+}
+.audio-page__subtitle {
+font-size: 1.1rem;
+color: var(--green-accent);
+font-style: italic;
+font-weight: 300;
+}
+.audio-list {
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+gap: 24px;
+}
+.audio-item {
+background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+border: 1px solid rgba(95, 191, 138, 0.2);
+border-radius: var(--radius-lg);
+padding: 28px 32px;
+transition: all var(--transition-normal);
+}
+.audio-item:hover {
+border-color: var(--green-accent);
+box-shadow: var(--shadow-md), var(--shadow-glow);
+transform: translateY(-2px);
+}
+.audio-item__title {
+font-family: var(--font-display);
+font-size: 1.4rem;
+color: var(--gold);
+margin-bottom: 16px;
+line-height: 1.3;
+}
+.audio-item__player {
+width: 100%;
+}
+.audio-item__player audio {
+width: 100%;
+height: 50px;
+border-radius: var(--radius-full);
+}
+.audio-item__player audio::-webkit-media-controls-panel {
+background: linear-gradient(135deg, var(--green-dark), var(--bg-secondary));
+}
+.audio-item__player audio::-webkit-media-controls-play-button {
+background: var(--green-accent);
+border-radius: 50%;
+}
+.back-to-home {
+text-align: center;
+margin-top: 48px;
+}
+.footer { background: var(--bg-primary); border-top: 1px solid rgba(95, 191, 138, 0.2); padding: 80px 0 32px; margin-top: 80px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
+.footer__logo { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--green-accent); margin-bottom: 16px; }
+.footer__name { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 12px; }
+.footer__desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; max-width: 320px; }
+.footer__title { font-family: var(--font-title); font-size: 1.1rem; color: var(--green-accent); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer__list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer__list li, .footer__list a { font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; transition: color var(--transition-fast); }
+.footer__list a:hover { color: var(--green-accent); }
+.footer__social-links { display: flex; gap: 12px; }
+.footer__social-links a {
+width: 44px; height: 44px; border-radius: 50%;
+background: var(--bg-secondary); border: 1px solid rgba(95, 191, 138, 0.3);
+display: flex; align-items: center; justify-content: center;
+color: var(--text-secondary); transition: all var(--transition-fast);
+}
+.footer__social-links a:hover { background: var(--green-accent); color: var(--bg-primary); border-color: var(--green-accent); transform: translateY(-2px); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(95, 191, 138, 0.15); text-align: center; }
+.footer-bottom p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
+.footer-bottom__sub { font-size: 0.8rem; letter-spacing: 0.1em; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 968px) {
+.header__nav {
+position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px;
+height: 100vh; background: var(--bg-secondary);
+flex-direction: column; padding: 80px 24px 24px;
+transition: right var(--transition-normal);
+box-shadow: var(--shadow-lg); align-items: stretch;
+}
+.header__nav--open { right: 0; }
+.header__link { padding: 16px; font-size: 1.1rem; }
+.header__whatsapp { margin-left: 0; margin-top: 16px; justify-content: center; }
+.header__toggle { display: flex; }
+.footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+.container { padding: 0 16px; }
+.audio-page { padding: 120px 0 60px; }
+.audio-page__header { flex-direction: column; text-align: center; }
+.audio-page__profile { width: 160px; height: 160px; }
+.audio-item { padding: 20px 24px; }
+.audio-item__title { font-size: 1.2rem; }
+.footer-grid { grid-template-columns: 1fr; gap: 32px; }
+.footer-brand { align-items: center; text-align: center; }
+.footer__desc { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<header class="header" id="header">
+<div class="header__container container">
+<a href="index.html" class="header__brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="header__logo" width="48" height="48" />
+<div class="header__brand-text">
+<span class="header__name">Radio del Bosque</span>
+<span class="header__location">La Plata · Argentina</span>
+</div>
+</a>
+<nav class="header__nav" id="nav">
+<a href="index.html#player" class="header__link">En Vivo</a>
+<a href="index.html#programacion" class="header__link">Programación</a>
+<a href="index.html#novedades" class="header__link">Novedades</a>
+<a href="index.html#galeria" class="header__link">Galería</a>
+<a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
+<a href="index.html#nosotros" class="header__link">Sobre Nosotros</a>
+<a href="index.html#contacto" class="header__link">Contacto</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
+</nav>
+<button class="header__toggle" id="menuToggle" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+
+<main class="audio-page">
+<div class="container">
+<div class="audio-page__header">
+<img src="images/marta_perfil.png" alt="Marta Navarro" class="audio-page__profile" />
+<div class="audio-page__title-section">
+<h1 class="audio-page__title">ENCUENTROS EN EL BOSQUE <span class="text-accent">- AUDIOS</span></h1>
+<p class="audio-page__subtitle">Homenaje a nuestra querida Marta Navarro.</p>
+</div>
+</div>
+
+<div class="audio-list">
+
+<div class="audio-item">
+<div class="audio-item__title">Cuando Pasen en Mi Los Años</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio1.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">Lo Mejor Esta Por Venir</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio2.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">No Te Detengas</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio3.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">Si Lo Mejor de Todo</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio4.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">Todo Termina Algun Dia</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio5.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">Un día Cualquiera</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio6.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+<div class="audio-item">
+<div class="audio-item__title">Un lugar en el Bosque</div>
+<div class="audio-item__player">
+<audio controls preload="metadata">
+<source src="audio/audio7.mp3" type="audio/mpeg">
+Tu navegador no soporta el reproductor de audio.
+</audio>
+</div>
+</div>
+
+</div>
+
+<div class="back-to-home">
+<a href="index.html" class="btn btn-secondary">← Volver al inicio</a>
+</div>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="footer__logo" width="64" height="64" loading="lazy" />
+<h3 class="footer__name">Radio del Bosque LP</h3>
+<p class="footer__desc">Emisora digital independiente de La Plata, Buenos Aires, Argentina. Música, cultura, información y entretenimiento las 24 horas.</p>
+</div>
+<div class="footer-links">
+<h4 class="footer__title">Accesos Rápidos</h4>
+<ul class="footer__list">
+<li><a href="index.html#player">En Vivo</a></li>
+<li><a href="index.html#programacion">Programación</a></li>
+<li><a href="index.html#novedades">Novedades</a></li>
+<li><a href="index.html#galeria">Galería</a></li>
+<li><a href="encuentros-en-el-bosque-audios.html">Audios</a></li>
+<li><a href="index.html#nosotros">Sobre Nosotros</a></li>
+<li><a href="index.html#contacto">Contacto</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h4 class="footer__title">Contacto</h4>
+<ul class="footer__list">
+<li>📍 La Plata, Buenos Aires, Argentina</li>
+<li>📱 +54 9 221 602-6192</li>
+<li>📷 @radiodelbosque.ok</li>
+</ul>
+</div>
+<div class="footer-social">
+<h4 class="footer__title">Seguinos</h4>
+<div class="footer__social-links">
+<a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
+<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
+</div>
+</div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+header.classList.toggle('header--scrolled', window.scrollY > 50);
+});
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+menuToggle.addEventListener('click', () => {
+nav.classList.toggle('header__nav--open');
+});
+document.querySelectorAll('.header__link').forEach(link => {
+link.addEventListener('click', () => nav.classList.remove('header__nav--open'));
+});
+</script>
+</body>
+</html>

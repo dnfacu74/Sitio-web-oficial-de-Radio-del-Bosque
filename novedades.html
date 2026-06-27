@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<meta name="description" content="Novedades - Radio del Bosque LP. Últimas noticias y eventos de la radio." />
+<title>Novedades — Radio del Bosque LP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+:root {
+--bg-primary: #0a0f0d;
+--bg-secondary: #0f1a14;
+--bg-tertiary: #142218;
+--green-dark: #1a3d2e;
+--green-mid: #2d5a3f;
+--green-accent: #5fbf8a;
+--gold: #d4a574;
+--orange: #c97b3a;
+--text-primary: #f5f0e8;
+--text-secondary: #b8b0a0;
+--text-muted: #7a7568;
+--red-live: #e63946;
+--font-display: 'Playfair Display', serif;
+--font-body: 'Inter', sans-serif;
+--font-title: 'Bebas Neue', sans-serif;
+--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+--shadow-glow: 0 0 20px rgba(95, 191, 138, 0.3);
+--radius-md: 12px;
+--radius-lg: 20px;
+--radius-full: 9999px;
+--transition-fast: 0.2s ease;
+--transition-normal: 0.3s ease;
+--transition-slow: 0.5s ease;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section-title { font-family: var(--font-title); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text-primary); text-align: center; letter-spacing: 0.15em; margin-bottom: 16px; text-transform: uppercase; }
+.section-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 48px; font-weight: 300; }
+.divider { width: 80px; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--gold)); margin: 0 auto 32px; border-radius: var(--radius-full); }
+.text-accent { color: var(--green-accent); }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: none; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all var(--transition-normal); text-decoration: none; letter-spacing: 0.05em; }
+.btn-primary { background: linear-gradient(135deg, var(--green-accent), var(--green-mid)); color: white; box-shadow: var(--shadow-glow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(95, 191, 138, 0.5); }
+.btn-secondary { background: transparent; color: var(--text-primary); border: 2px solid var(--green-accent); }
+.btn-secondary:hover { background: var(--green-accent); color: var(--bg-primary); }
+
+/* Header */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: all var(--transition-normal); background: rgba(10, 15, 13, 0.95); backdrop-filter: blur(20px); }
+.header__container { display: flex; align-items: center; justify-content: space-between; }
+.header__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+.header__logo { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--green-accent); transition: transform var(--transition-normal); }
+.header__brand:hover .header__logo { transform: rotate(360deg); }
+.header__brand-text { display: flex; flex-direction: column; }
+.header__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+.header__location { font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 0.05em; }
+.header__nav { display: flex; align-items: center; gap: 8px; }
+.header__link { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 8px 16px; border-radius: var(--radius-full); transition: all var(--transition-fast); }
+.header__link:hover { background: rgba(95, 191, 138, 0.15); color: var(--green-accent); }
+.header__link--active { background: rgba(95, 191, 138, 0.2); color: var(--green-accent); }
+.header__whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: white; padding: 10px 20px; border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 12px; transition: all var(--transition-normal); }
+.header__whatsapp:hover { background: #128c7e; transform: translateY(-2px); }
+.header__toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.header__toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: all var(--transition-normal); }
+
+/* Página Novedades */
+.novedades-page { padding: 140px 0 100px; min-height: 100vh; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
+.novedades-page__top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+.back-to-home { padding: 10px 20px; font-size: 0.9rem; }
+
+/* Tarjeta de novedad */
+.novedades-card { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary)); border: 2px solid rgba(95, 191, 138, 0.3); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-glow); }
+.novedades-badge { display: block; text-align: center; padding: 12px 24px; background: linear-gradient(135deg, var(--gold), var(--orange)); color: var(--bg-primary); font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.25em; text-transform: uppercase; }
+.novedades-date { text-align: center; font-size: 1rem; color: var(--green-accent); font-weight: 600; letter-spacing: 0.1em; margin: 24px 0 16px; text-transform: uppercase; }
+.novedades-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text-primary); text-align: center; margin: 0 24px 24px; line-height: 1.2; }
+.novedades-image { width: 100%; height: auto; display: block; border-top: 1px solid rgba(95, 191, 138, 0.2); border-bottom: 1px solid rgba(95, 191, 138, 0.2); }
+.novedades-content { padding: 32px 40px; }
+.novedades-text { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 32px; }
+.novedades-actions { text-align: center; padding-bottom: 8px; }
+
+/* Footer */
+.footer { background: var(--bg-primary); border-top: 1px solid rgba(95, 191, 138, 0.2); padding: 80px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
+.footer__logo { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--green-accent); margin-bottom: 16px; }
+.footer__name { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 12px; }
+.footer__desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; max-width: 320px; }
+.footer__title { font-family: var(--font-title); font-size: 1.1rem; color: var(--green-accent); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer__list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer__list li, .footer__list a { font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; transition: color var(--transition-fast); }
+.footer__list a:hover { color: var(--green-accent); }
+.footer__social-links { display: flex; gap: 12px; }
+.footer__social-links a { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-secondary); border: 1px solid rgba(95, 191, 138, 0.3); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all var(--transition-fast); }
+.footer__social-links a:hover { background: var(--green-accent); color: var(--bg-primary); border-color: var(--green-accent); transform: translateY(-2px); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(95, 191, 138, 0.15); text-align: center; }
+.footer-bottom p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
+.footer-bottom__sub { font-size: 0.8rem; letter-spacing: 0.1em; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 968px) {
+.header__nav { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--bg-secondary); flex-direction: column; padding: 80px 24px 24px; transition: right var(--transition-normal); box-shadow: var(--shadow-lg); align-items: stretch; }
+.header__nav--open { right: 0; }
+.header__link { padding: 16px; font-size: 1.1rem; }
+.header__whatsapp { margin-left: 0; margin-top: 16px; justify-content: center; }
+.header__toggle { display: flex; }
+.footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+.container { padding: 0 16px; }
+.novedades-page { padding: 120px 0 60px; }
+.novedades-page__top { justify-content: center; }
+.novedades-content { padding: 24px 20px; }
+.footer-grid { grid-template-columns: 1fr; gap: 32px; }
+.footer-brand { align-items: center; text-align: center; }
+.footer__desc { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+<div class="header__container container">
+<a href="index.html" class="header__brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="header__logo" width="48" height="48" />
+<div class="header__brand-text">
+<span class="header__name">Radio del Bosque</span>
+<span class="header__location">La Plata · Argentina</span>
+</div>
+</a>
+<nav class="header__nav" id="nav">
+<a href="index.html#player" class="header__link">En Vivo</a>
+<a href="index.html#programacion" class="header__link">Programación</a>
+<a href="novedades.html" class="header__link header__link--active">Novedades</a>
+<a href="index.html#galeria" class="header__link">Galería</a>
+<a href="index.html#nosotros" class="header__link">Sobre Nosotros</a>
+<a href="index.html#contacto" class="header__link">Contacto</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
+</nav>
+<button class="header__toggle" id="menuToggle" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+
+<main class="novedades-page">
+<div class="container">
+<div class="novedades-page__top">
+<a href="index.html" class="btn btn-secondary back-to-home">← Volver al inicio</a>
+</div>
+
+<div style="text-align:center; margin-bottom:48px;">
+<h1 class="section-title">NOVEDADES</h1>
+<div class="divider"></div>
+<p class="section-subtitle">Las últimas noticias y eventos de Radio del Bosque</p>
+</div>
+
+<!-- ============================================ -->
+<!--  ACÁ ACTUALIZÁS LA NOVEDAD DESTACADA         -->
+<!-- ============================================ -->
+<div class="novedades-card">
+<div class="novedades-badge">📢 NOVEDAD DESTACADA</div>
+<div class="novedades-date">27 de junio de 2026</div>
+<h3 class="novedades-title">Lanzamiento de Nueva Programación 2026</h3>
+<img src="images/novedad-principal.jpg" alt="Novedad destacada de Radio del Bosque" class="novedades-image" loading="lazy" />
+<div class="novedades-content">
+<p class="novedades-text">
+Nos complace anunciar el lanzamiento de nuestra nueva programación para el segundo semestre de 2026.
+Incorporamos nuevos espacios dedicados a la música local, entrevistas exclusivas y contenidos especiales
+que nos permitirán seguir acercándote la mejor información y entretenimiento desde el corazón del Bosque.
+</p>
+<div class="novedades-actions">
+<a href="https://wa.me/5492216026192?text=Hola!%20Quiero%20saber%20más%20sobre%20la%20nueva%20programación" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Consultar por WhatsApp</a>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="footer__logo" width="64" height="64" loading="lazy" />
+<h3 class="footer__name">Radio del Bosque LP</h3>
+<p class="footer__desc">Emisora digital independiente de La Plata, Buenos Aires, Argentina. Música, cultura, información y entretenimiento las 24 horas.</p>
+</div>
+<div class="footer-links">
+<h4 class="footer__title">Accesos Rápidos</h4>
+<ul class="footer__list">
+<li><a href="index.html#player">En Vivo</a></li>
+<li><a href="index.html#programacion">Programación</a></li>
+<li><a href="novedades.html">Novedades</a></li>
+<li><a href="index.html#galeria">Galería</a></li>
+<li><a href="index.html#nosotros">Sobre Nosotros</a></li>
+<li><a href="index.html#contacto">Contacto</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h4 class="footer__title">Contacto</h4>
+<ul class="footer__list">
+<li>📍 La Plata, Buenos Aires, Argentina</li>
+<li>📱 +54 9 221 602-6192</li>
+<li>📷 @radiodelbosque.ok</li>
+</ul>
+</div>
+<div class="footer-social">
+<h4 class="footer__title">Seguinos</h4>
+<div class="footer__social-links">
+<a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
+<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
+</div>
+</div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { header.classList.toggle('header--scrolled', window.scrollY > 50); });
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+menuToggle.addEventListener('click', () => { nav.classList.toggle('header__nav--open'); });
+document.querySelectorAll('.header__link').forEach(link => { link.addEventListener('click', () => nav.classList.remove('header__nav--open')); });
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<meta name="description" content="Galería Bichos de Radio - Radio del Bosque LP. Conductores y equipos en plena transmisión." />
+<title>Bichos de Radio — Radio del Bosque LP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header class="header" id="header">
+<div class="header__container container">
+<a href="index.html" class="header__brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="header__logo" width="48" height="48" />
+<div class="header__brand-text">
+<span class="header__name">Radio del Bosque</span>
+<span class="header__location">La Plata · Argentina</span>
+</div>
+</a>
+<nav class="header__nav" id="nav">
+<a href="index.html#player" class="header__link">En Vivo</a>
+<a href="index.html#programacion" class="header__link">Programación</a>
+<a href="index.html#galeria" class="header__link">Galería</a>
+<a href="index.html#nosotros" class="header__link">Sobre Nosotros</a>
+<a href="index.html#contacto" class="header__link">Contacto</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
+</nav>
+<button class="header__toggle" id="menuToggle" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+
+<main class="gallery-page">
+<div class="container">
+<div class="gallery-page__top">
+<a href="index.html" class="btn btn-secondary back-to-home">← Volver al inicio</a>
+</div>
+<div class="gallery-page__header">
+<h1 class="section-title">Bichos de <span class="text-accent">Radio</span></h1>
+<div class="divider"></div>
+<p class="section-subtitle">Nuestros conductores y equipos en plena transmisión, la esencia del aire.</p>
+</div>
+<div class="gallery-grid" id="galleryGrid" data-category="bichos"></div>
+</div>
+</main>
+
+<div class="gallery-lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imagen">
+<div class="gallery-lightbox__content">
+<img src="" alt="" id="lightboxImg" />
+<p class="gallery-lightbox__caption" id="lightboxCaption"></p>
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="footer__logo" width="64" height="64" loading="lazy" />
+<h3 class="footer__name">Radio del Bosque LP</h3>
+<p class="footer__desc">Emisora digital independiente de La Plata, Buenos Aires, Argentina. Música, cultura, información y entretenimiento las 24 horas.</p>
+</div>
+<div class="footer-links">
+<h4 class="footer__title">Accesos Rápidos</h4>
+<ul class="footer__list">
+<li><a href="index.html#player">En Vivo</a></li>
+<li><a href="index.html#programacion">Programación</a></li>
+<li><a href="index.html#galeria">Galería</a></li>
+<li><a href="index.html#nosotros">Sobre Nosotros</a></li>
+<li><a href="index.html#contacto">Contacto</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h4 class="footer__title">Contacto</h4>
+<ul class="footer__list">
+<li>📍 La Plata, Buenos Aires, Argentina</li>
+<li>+54 9 221 602-6192</li>
+<li>📷 @radiodelbosque.ok</li>
+</ul>
+</div>
+<div class="footer-social">
+<h4 class="footer__title">Seguinos</h4>
+<div class="footer__social-links">
+<a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
+<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
+</div>
+</div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

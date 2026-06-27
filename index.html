@@ -1057,8 +1057,7 @@ const playIcon = document.getElementById('playIcon');
 const playerStatus = document.getElementById('playerStatus');
 const volumeSlider = document.getElementById('volumeSlider');
 const equalizer = document.getElementById('equalizer');
-let isPlaying = false;
-http://uk5freenew.listen2myradio.com:8707/admin.cgi?user=admin&pass=Superman128dj type="audio/mpeg">
+let isPlaying = false;const streamUrl = 'https://radiodelbosqueok.radiostream321.com/';
 
 for (let i = 0; i < 24; i++) {
 const bar = document.createElement('div');
@@ -1080,7 +1079,7 @@ playBtn.classList.remove('player-card__play-btn--playing');
 playerStatus.textContent = 'Listo para escuchar';
 document.querySelectorAll('.player-card__bar').forEach(b => b.classList.remove('player-card__bar--active'));
 } else {
-audioPlayer.src = streamUrl;
+const streamUrl = 'https://radiodelbosqueok.radiostream321.com/';
 audioPlayer.play().then(() => {
 isPlaying = true;
 playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';

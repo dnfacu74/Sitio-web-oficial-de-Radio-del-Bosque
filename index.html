@@ -1057,7 +1057,8 @@ const playIcon = document.getElementById('playIcon');
 const playerStatus = document.getElementById('playerStatus');
 const volumeSlider = document.getElementById('volumeSlider');
 const equalizer = document.getElementById('equalizer');
-let isPlaying = false;const streamUrl = 'https://radiodelbosqueok.radiostream321.com/';
+let isPlaying = false;
+const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_13354_stream_641358950';
 
 for (let i = 0; i < 24; i++) {
 const bar = document.createElement('div');
@@ -1079,7 +1080,7 @@ playBtn.classList.remove('player-card__play-btn--playing');
 playerStatus.textContent = 'Listo para escuchar';
 document.querySelectorAll('.player-card__bar').forEach(b => b.classList.remove('player-card__bar--active'));
 } else {
-const streamUrl = 'http://uk5freenew.listen2myradio.com:8707/stream.mp3';
+audioPlayer.src = streamUrl;
 audioPlayer.play().then(() => {
 isPlaying = true;
 playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -1098,7 +1099,7 @@ const programs = [
 { id: 4, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
 { id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '🌳', image: 'images/La Tarde del Bosque.png' },
 { id: 6, title: 'Resumen de Noticias - Tarde', time: '19:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la tarde', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Tarde.png' },
-{ id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '🌙', image: 'images/Noche en el Bosque.png' },
+{ id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '', image: 'images/Noche en el Bosque.png' },
 { id: 8, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '🎶', image: 'images/Fin de Semana.png' },
 { id: 9, title: 'Pasajeros del Espacio', time: '10:00 - 13:00', days: 'Sábados', host: 'Marisa Waters, Fakundo DN y Rocío Escalante', category: 'Especial', icon: '🚀', image: 'images/Pasajeros del Espacio.png' },
 ];

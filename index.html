@@ -52,11 +52,21 @@
     .btn:hover { background: #3db83d; }
 
     /* ===== REPRODUCTOR ===== */
+    .player-section {
+      padding: 3rem 2rem;
+      text-align: center;
+      background: #1a1a2e;
+    }
+    .player-section h2 {
+      color: #90ee90;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
     .player-card {
       background: linear-gradient(135deg, #0f3d0f, #1a5c1a);
       border-radius: 15px;
       padding: 2rem;
-      margin: 2rem auto;
+      margin: 0 auto 2rem;
       max-width: 500px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -117,6 +127,19 @@
     .player-card__volume input[type="range"] {
       width: 150px;
       accent-color: #2d8f2d;
+    }
+    .live-section {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .live-section h3 {
+      color: #90ee90;
+      margin-bottom: 1rem;
+    }
+    .video-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
     /* ===== SECCIONES ===== */
@@ -211,15 +234,15 @@
     <a href="#nosotros" class="btn">Conocé la Radio</a>
   </div>
 
-  <!-- ===== REPRODUCTOR ===== -->
-  <section id="player">
+  <!-- ===== REPRODUCTOR DE AUDIO ===== -->
+  <section id="player" class="player-section">
     <h2>ESCUCHANOS EN VIVO</h2>
 
-    <!-- ⚠️ ETIQUETA AUDIO AGREGADA (esto faltaba) -->
+    <!-- ⚠️ AGREGADO: Elemento de audio oculto para streaming -->
     <audio id="audioPlayer" preload="none"></audio>
 
     <div class="player-card">
-      <h3>️ Radio del Bosque LP</h3>
+      <h3>🎙️ Radio del Bosque LP</h3>
       <p class="player-card__status" id="playerStatus">Listo para escuchar</p>
 
       <div class="player-card__equalizer" id="equalizer"></div>
@@ -233,14 +256,15 @@
       <div class="player-card__volume">
         <span>🔈</span>
         <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
-        <span></span>
+        <span>🔊</span>
       </div>
     </div>
 
-    <div style="text-align:center; margin-top:2rem;">
+    <!-- ===== REPRODUCTOR DE VIDEO (Facebook Live) - SIN CAMBIOS ===== -->
+    <div class="live-section">
       <h3>Mirános en Vivo</h3>
       <p>Transmitimos en vivo desde el Estudio Marta Navarro en La Plata</p>
-      <a href="https://facebook.com/radiodelbosque.ok" class="btn" target="_blank"> Facebook Live</a>
+      <a href="https://facebook.com/radiodelbosque.ok" class="btn" target="_blank">📹 Facebook Live</a>
     </div>
   </section>
 
@@ -284,7 +308,7 @@
         <a href="#">Ver galería →</a>
       </div>
       <div class="gallery-card">
-        <div class="icon"></div>
+        <div class="icon">🌳</div>
         <h4>Encuentros en el Bosque</h4>
         <p>Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
         <a href="#">Ver galería →</a>
@@ -302,7 +326,7 @@
     <div style="max-width:600px; margin:0 auto; background:#16213e; padding:2rem; border-radius:10px;">
       <p>🎙️ Cuando Pasen en Mi Los Años</p>
       <p>🎙️ Lo Mejor Esta Por Venir</p>
-      <p>️ No Te Detengas</p>
+      <p>🎙️ No Te Detengas</p>
       <p>🎙️ Si Lo Mejor de Todo</p>
       <p>🎙️ Todo Termina Algun Día</p>
       <p>🎙️ Un día Cualquiera</p>
@@ -354,7 +378,7 @@
       <a href="#contacto">Contacto</a>
     </div>
     <p>📍 La Plata, Buenos Aires, Argentina</p>
-    <p> +54 9 221 602-6192 · 📷 @radiodelbosque.ok</p>
+    <p>📱 +54 9 221 602-6192 · 📷 @radiodelbosque.ok</p>
     <div style="margin:1rem 0;">
       <a href="https://instagram.com/radiodelbosque.ok">IG</a> ·
       <a href="https://wa.me/5492216026192">WA</a> ·
@@ -366,7 +390,7 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    /* ===== REPRODUCTOR ===== */
+    /* ===== REPRODUCTOR DE AUDIO ===== */
     const audioPlayer = document.getElementById('audioPlayer');
     const playBtn = document.getElementById('playBtn');
     const playIcon = document.getElementById('playIcon');
@@ -375,7 +399,7 @@
     const equalizer = document.getElementById('equalizer');
     let isPlaying = false;
 
-    // ✅ URL ACTUALIZADA con el nuevo servidor
+    // ✅ URL ACTUALIZADA - Nuevo servidor Listen2MyRadio
     const streamUrl = 'http://uk5freenew.listen2myradio.com:8707/stream.mp3';
 
     // Crear barras del ecualizador
@@ -406,7 +430,7 @@
           isPlaying = true;
           playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
           playBtn.classList.add('player-card__play-btn--playing');
-          playerStatus.textContent = ' Transmitiendo ahora';
+          playerStatus.textContent = '🔴 Transmitiendo ahora';
           document.querySelectorAll('.player-card__bar').forEach(b => b.classList.add('player-card__bar--active'));
         }).catch(err => {
           console.error('Error al reproducir:', err);
@@ -422,8 +446,8 @@
       { id: 3, title: 'Mediodía en el Bosque', time: '12:00 - 14:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Variedades', icon: '🌞', image: 'images/Mediodía en el Bosque.png' },
       { id: 4, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
       { id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '🌳', image: 'images/La Tarde del Bosque.png' },
-      { id: 6, title: 'Resumen de Noticias - Tarde', time: '19:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la tarde', category: 'Noticias', icon: '', image: 'images/Resumen de Noticias - Tarde.jpg' },
-      { id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '', image: 'images/Noche en el Bosque.png' },
+      { id: 6, title: 'Resumen de Noticias - Tarde', time: '19:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la tarde', category: 'Noticias', icon: '📺', image: 'images/Resumen de Noticias - Tarde.jpg' },
+      { id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '🌙', image: 'images/Noche en el Bosque.png' },
       { id: 8, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '', image: 'images/Fin de Semana.png' },
     ];
 

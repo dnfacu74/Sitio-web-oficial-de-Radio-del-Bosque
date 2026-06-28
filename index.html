@@ -315,189 +315,105 @@ overflow: hidden; transition: all var(--transition-normal); cursor: pointer;
 .program-card:hover { transform: translateY(-4px); border-color: var(--green-accent); box-shadow: var(--shadow-md); }
 .program-card__image { position: relative; aspect-ratio: 16/9; overflow: hidden; }
 .program-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
-.program-card:hover .program-card__image img { transform: scale(1.08); }
-.program-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%); }
+.program-card:hover .program-card__image img { transform: scale(1.05); }
+.program-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); }
 .program-card__icon-badge {
-position: absolute; top: 16px; right: 16px; width: 48px; height: 48px;
-background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
-border-radius: 50%; display: flex; align-items: center; justify-content: center;
-font-size: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.2);
+position: absolute; top: 16px; right: 16px;
+width: 40px; height: 40px; border-radius: 50%;
+background: rgba(95, 191, 138, 0.9);
+display: flex; align-items: center; justify-content: center;
+font-size: 1.2rem; color: white; backdrop-filter: blur(4px);
 }
 .program-card__content { padding: 24px; }
-.program-card__category { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; color: var(--green-accent); text-transform: uppercase; margin-bottom: 8px; }
-.program-card__title { font-family: var(--font-display); font-size: 1.3rem; color: var(--text-primary); margin-bottom: 8px; line-height: 1.3; }
-.program-card__meta { display: flex; gap: 16px; margin-bottom: 8px; }
-.program-card__time { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--gold); font-weight: 500; }
-.program-card__host { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+.program-card__category { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; display: block; }
+.program-card__title { font-family: var(--font-display); font-size: 1.4rem; color: var(--text-primary); margin-bottom: 12px; }
+.program-card__meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.program-card__time, .program-card__days { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+.program-card__host { font-size: 0.95rem; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px; font-style: italic; }
 
-/* GALLERY - TARJETAS QUE ENLAZAN A LAS PÁGINAS */
-.gallery-section { padding: 100px 0; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
+/* GALLERY SECTION */
+.gallery-section {
+padding: 100px 0;
+background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
 .gallery-category-cards {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 24px;
-margin-top: 16px;
+grid-template-columns: repeat(3, 1fr);
+gap: 32px;
+margin-top: 48px;
 }
 .gallery-category-card {
+background: var(--bg-tertiary);
+border-radius: var(--radius-lg);
+padding: 40px 32px;
+text-align: center;
+text-decoration: none;
+border: 1px solid rgba(95, 191, 138, 0.2);
+transition: all var(--transition-normal);
 display: flex;
 flex-direction: column;
 align-items: center;
-text-align: center;
-padding: 48px 32px;
-background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-border: 1px solid rgba(95, 191, 138, 0.2);
-border-radius: var(--radius-lg);
-text-decoration: none;
-color: var(--text-primary);
-transition: all var(--transition-normal);
-position: relative;
-overflow: hidden;
-}
-.gallery-category-card::before {
-content: '';
-position: absolute;
-inset: 0;
-background: radial-gradient(circle at 50% 0%, rgba(95, 191, 138, 0.12), transparent 60%);
-opacity: 0;
-transition: opacity var(--transition-normal);
 }
 .gallery-category-card:hover {
-transform: translateY(-6px);
+transform: translateY(-8px);
 border-color: var(--green-accent);
-box-shadow: var(--shadow-lg), var(--shadow-glow);
+box-shadow: var(--shadow-glow);
+background: rgba(95, 191, 138, 0.05);
 }
-.gallery-category-card:hover::before { opacity: 1; }
 .gallery-category-card__icon {
-font-size: 3.5rem;
-margin-bottom: 20px;
-filter: drop-shadow(0 0 20px rgba(95, 191, 138, 0.4));
-position: relative;
-z-index: 1;
+font-size: 3rem;
+margin-bottom: 24px;
+filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 .gallery-category-card__title {
 font-family: var(--font-display);
-font-size: 1.6rem;
-margin-bottom: 12px;
+font-size: 1.5rem;
 color: var(--text-primary);
-position: relative;
-z-index: 1;
+margin-bottom: 16px;
 }
 .gallery-category-card__desc {
 font-size: 0.95rem;
 color: var(--text-secondary);
 line-height: 1.6;
 margin-bottom: 24px;
-max-width: 320px;
-position: relative;
-z-index: 1;
 }
 .gallery-category-card__link {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-color: var(--green-accent);
 font-weight: 600;
-font-size: 0.95rem;
-letter-spacing: 0.05em;
-transition: color var(--transition-fast);
-position: relative;
-z-index: 1;
-}
-.gallery-category-card:hover .gallery-category-card__link {
-color: var(--gold);
-}
-
-/* MODAL COLABORAR */
-.donate-modal {
-position: fixed; inset: 0;
-background: rgba(0, 0, 0, 0.95);
-z-index: 3000;
-display: none;
-align-items: center;
-justify-content: center;
-padding: 24px;
-cursor: pointer;
-}
-.donate-modal.active {
-display: flex;
-animation: fadeInUp 0.3s ease;
-}
-.donate-modal__inner {
-max-width: 520px;
-width: 100%;
-text-align: center;
-cursor: default;
-}
-.donate-modal__inner img {
-width: 100%;
-max-width: 480px;
-height: auto;
-border-radius: var(--radius-lg);
-box-shadow: 0 0 60px rgba(212, 165, 116, 0.4), 0 0 120px rgba(95, 191, 138, 0.2);
-border: 3px solid rgba(212, 165, 116, 0.5);
-}
-.donate-modal__close {
-position: absolute;
-top: 24px;
-right: 32px;
-background: none;
-border: 2px solid rgba(245, 240, 232, 0.4);
-color: var(--text-primary);
-font-size: 1.5rem;
-width: 48px;
-height: 48px;
-border-radius: 50%;
-cursor: pointer;
-transition: all var(--transition-fast);
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.donate-modal__close:hover {
-background: var(--red-live);
-border-color: var(--red-live);
-transform: rotate(90deg);
-}
-.donate-modal__hint {
-margin-top: 20px;
-color: var(--text-secondary);
-font-size: 0.95rem;
+color: var(--green-accent);
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
 }
 
 /* AUDIOS SECTION */
 .audios-section {
 padding: 100px 0;
-background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+background: var(--bg-primary);
 }
 .audios-preview {
 display: grid;
-grid-template-columns: 280px 1fr;
-gap: 48px;
+grid-template-columns: 1fr 1.5fr;
+gap: 64px;
 align-items: center;
-max-width: 900px;
-margin: 0 auto;
-background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
-border: 2px solid rgba(95, 191, 138, 0.3);
+background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
 border-radius: var(--radius-lg);
-padding: 40px;
-box-shadow: var(--shadow-lg), var(--shadow-glow);
+padding: 64px;
+border: 1px solid rgba(95, 191, 138, 0.2);
 }
 .audios-preview__image {
-display: flex;
-justify-content: center;
+position: relative;
 }
 .audios-preview__image img {
-width: 200px;
-height: 200px;
+width: 100%;
+height: auto;
 border-radius: 50%;
-border: 4px solid rgba(245, 240, 232, 0.9);
-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(95, 191, 138, 0.3);
-object-fit: cover;
+border: 4px solid var(--gold);
+box-shadow: 0 0 40px rgba(212, 165, 116, 0.3);
 }
 .audios-preview__title {
 font-family: var(--font-display);
-font-size: 1.8rem;
-color: var(--gold);
+font-size: 2.5rem;
+color: var(--text-primary);
 margin-bottom: 16px;
 line-height: 1.2;
 }
@@ -606,6 +522,48 @@ color: var(--text-secondary); transition: all var(--transition-fast);
 .footer-bottom p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
 .footer-bottom__sub { font-size: 0.8rem; letter-spacing: 0.1em; }
 
+/* DONATE MODAL */
+.donate-modal {
+position: fixed; inset: 0; z-index: 9999;
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(8px);
+display: flex; align-items: center; justify-content: center;
+opacity: 0; pointer-events: none;
+transition: opacity var(--transition-normal);
+}
+.donate-modal.active { opacity: 1; pointer-events: all; }
+.donate-modal__inner {
+position: relative;
+max-width: 480px; width: 90%;
+border-radius: var(--radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow-lg);
+background: var(--bg-secondary);
+padding: 32px;
+text-align: center;
+}
+.donate-modal__inner img {
+width: 100%; height: auto; display: block;
+border-radius: var(--radius-md);
+margin-bottom: 16px;
+}
+.donate-modal__hint {
+font-size: 0.95rem;
+color: var(--text-secondary);
+margin-top: 8px;
+}
+.donate-modal__close {
+position: absolute; top: 12px; right: 12px;
+width: 36px; height: 36px; border-radius: 50%;
+background: rgba(95, 191, 138, 0.9);
+border: none; cursor: pointer;
+font-size: 1rem; color: white;
+display: flex; align-items: center; justify-content: center;
+transition: background var(--transition-fast);
+z-index: 10;
+}
+.donate-modal__close:hover { background: var(--green-mid); }
+
 /* ANIMATIONS */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -711,8 +669,6 @@ grid-template-columns: 1fr;
 <p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
 <p class="hero__studio">Estudio Marta Navarro</p>
 <div class="hero__actions">
-<a href="#player" class="btn btn-primary">▶ Escuchanos en Vivo</a>
-<a href="#nosotros" class="btn btn-secondary">Conocé la Radio</a>
 </div>
 <div class="hero__scroll">
 <div class="hero__scroll-indicator"></div>
@@ -758,17 +714,8 @@ grid-template-columns: 1fr;
 <div class="divider"></div>
 <p class="section-subtitle">Transmitimos en vivo desde el Estudio Marta Navarro en La Plata</p>
 </div>
-<div class="live-grid">
-<div class="live-video">
-<div class="live-video__header">
-<span class="live-video__badge"><span class="live-video__dot"></span>EN VIVO</span>
-<span class="live-video__platform">Facebook Live</span>
-</div>
-<div class="live-video__container">
-<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fradiodelbosque.ok%2Fvideos%2F&show_text=false&width=560" width="100%" height="100%" scrolling="no" frameBorder="0" allowFullScreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Radio del Bosque - Facebook Live" loading="lazy"></iframe>
-</div>
-<p class="live-video__description">Seguinos en vivo por Facebook Live. Transmitimos desde el Estudio Marta Navarro con la mejor música, cultura y entretenimiento las 24 horas.</p>
-</div>
+<div class="live-grid" style="text-align: center; margin-top: 24px;">
+<a href="(PONE ACA TU URL DE STREAM)" target="_blank" class="btn btn-primary" style="font-size: 1rem; padding: 14px 36px; display: inline-flex; width: auto;">📺 CLICK ACÁ PARA VERNOS EN VIVO</a>
 </div>
 </div>
 </section>
@@ -787,7 +734,7 @@ grid-template-columns: 1fr;
 <div class="about-stat"><span class="about-stat__value">24/7</span><span class="about-stat__label">Transmisión Continua</span></div>
 <div class="about-stat"><span class="about-stat__value">100%</span><span class="about-stat__label">Digital e Independiente</span></div>
 </div>
-<button class="btn btn-gold" id="btnColaborar">❤️ Colaborá con nosotros</button>
+<button id="btnColaborar" class="btn btn-gold" style="border: none; cursor: pointer;">❤️ Colaborá con nosotros</button>
 </div>
 <div class="about-image">
 <div class="about-image__frame">
@@ -805,7 +752,7 @@ grid-template-columns: 1fr;
 <div class="section-header">
 <h2 class="section-title">Escuchá nuestros <span class="text-accent">Programas</span></h2>
 <div class="divider"></div>
-<p class="section-subtitle">Descubrí nuestra grilla de programación</p>
+<p class="section-subtitle">Una grilla pensada para acompañarte en cada momento del día</p>
 </div>
 <div class="programming-grid" id="programmingGrid"></div>
 </div>
@@ -842,37 +789,7 @@ grid-template-columns: 1fr;
 </div>
 </section>
 
-<!-- AUDIOS -->
-<section id="audios" class="audios-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">Encuentros en el Bosque <span class="text-accent">- Audios</span></h2>
-<div class="divider"></div>
-<p class="section-subtitle">Homenaje a nuestra querida Marta Navarro. Escuchá los relatos que dejaron huella en la radio.</p>
-</div>
-<div class="audios-preview">
-<div class="audios-preview__image">
-<img src="images/marta_perfil.png" alt="Marta Navarro - Encuentros en el Bosque" loading="lazy" />
-</div>
-<div class="audios-preview__content">
-<h3 class="audios-preview__title">7 relatos de Marta Navarro</h3>
-<p class="audios-preview__text">
-Descubrí los audios del programa "Encuentros en el Bosque". Relatos que tocaron el corazón de quienes nos escuchan.
-</p>
-<ul class="audios-preview__list">
-<li>🎙️ Cuando Pasen en Mi Los Años</li>
-<li>🎙️ Lo Mejor Esta Por Venir</li>
-<li>🎙️ No Te Detengas</li>
-<li>🎙️ Si Lo Mejor de Todo</li>
-<li>🎙️ Todo Termina Algun Día</li>
-<li>🎙️ Un día Cualquiera</li>
-<li>🎙️ Un lugar en el Bosque</li>
-</ul>
-<a href="encuentros-en-el-bosque-audios.html" class="btn btn-gold">🎧 Escuchar los audios</a>
-</div>
-</div>
-</div>
-</section>
+
 
 <!-- ADVERTISERS -->
 <section class="advertisers-section">
@@ -898,16 +815,32 @@ Descubrí los audios del programa "Encuentros en el Bosque". Relatos que tocaron
 <p class="advertiser-card__location">📍 La Plata, Argentina</p>
 </div>
 </a>
-<div class="advertiser-card">
+<a href="images/publicidad1.png" target="_blank" class="advertiser-card">
 <div class="advertiser-card__image">
-<img src="images/publicidad1.png" alt="Panqueques Caseros" loading="lazy" />
+<img src="images/panqueques_lp.jpg" alt="Panqueques Caseros" loading="lazy" />
 </div>
 <div class="advertiser-card__info">
 <h4 class="advertiser-card__name">Panqueques Caseros</h4>
 <p class="advertiser-card__desc">Tartas y panqueques artesanales</p>
-<a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" class="advertiser-card__link">Contactar →</a>
+<span class="advertiser-card__link">Ver más →</span>
+</div>
+</a>
+
+<a href="https://wa.me/5492214080474" target="_blank" rel="noopener noreferrer" class="advertiser-card advertiser-card--link">
+<div class="advertiser-card__image">
+<img src="images/diseños_web.jpg" alt="Diseños Web" loading="lazy" />
+<div class="advertiser-card__link-overlay">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+<span class="advertiser-card__link-text">CONTACTO</span>
 </div>
 </div>
+<div class="advertiser-card__info">
+<span class="advertiser-card__badge">Nuevo Anuncio</span>
+<h4 class="advertiser-card__name">Diseños Web</h4>
+<p class="advertiser-card__desc">Desarrollo y diseño web profesional</p>
+<span class="advertiser-card__link">Contactar →</span>
+</div>
+</a>
 </div>
 </div>
 </section>
@@ -1098,8 +1031,6 @@ const programs = [
 { id: 3, title: 'Mediodía en el Bosque', time: '12:00 - 14:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Variedades', icon: '☀️', image: 'images/Mediodia en el Bosque.png' },
 { id: 4, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
 { id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '🌳', image: 'images/La Tarde del Bosque.png' },
-{ id: 6, title: 'Resumen de Noticias - Tarde', time: '19:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la tarde', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Tarde.png' },
-{ id: 7, title: 'Noche en el Bosque', time: '21:00 - 00:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Nocturno', icon: '', image: 'images/Noche en el Bosque.png' },
 { id: 8, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '🎶', image: 'images/Fin de Semana.png' },
 { id: 9, title: 'Pasajeros del Espacio', time: '10:00 - 13:00', days: 'Sábados', host: 'Marisa Waters, Fakundo DN y Rocío Escalante', category: 'Especial', icon: '🚀', image: 'images/Pasajeros del Espacio.png' },
 ];

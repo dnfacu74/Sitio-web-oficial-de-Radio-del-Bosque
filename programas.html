@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<title>Programas - Radio del Bosque LP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+/* Copiamos las variables y estilos base del index para mantener la identidad */
+:root {
+--bg-primary: #0a0f0d; --bg-secondary: #0f1a14; --bg-tertiary: #142218;
+--green-dark: #1a3d2e; --green-mid: #2d5a3f; --green-accent: #5fbf8a;
+--gold: #d4a574; --text-primary: #f5f0e8; --text-secondary: #b8b0a0;
+--font-display: 'Playfair Display', serif; --font-body: 'Inter', sans-serif;
+--font-title: 'Bebas Neue', sans-serif; --radius-lg: 20px; --radius-md: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Header simplificado para volver al inicio */
+.header-simple { padding: 20px 0; border-bottom: 1px solid rgba(95, 191, 138, 0.2); margin-bottom: 40px; }
+.header-simple a { color: var(--green-accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+.header-simple a:hover { color: var(--gold); }
+
+/* Estilos específicos para la página de programas */
+.programs-hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.programs-hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    margin-bottom: 32px;
+    border: 1px solid rgba(95, 191, 138, 0.3);
+}
+.content-block {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(95, 191, 138, 0.15);
+}
+.content-block h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+.content-block h3 {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+}
+.content-block p, .content-block li {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+.content-block ul {
+    margin-left: 20px;
+    margin-bottom: 24px;
+}
+.content-block blockquote {
+    border-left: 4px solid var(--green-accent);
+    padding-left: 20px;
+    margin: 32px 0;
+    font-style: italic;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+.btn-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+    color: white;
+    padding: 16px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 24px;
+    transition: transform 0.3s ease;
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(95, 191, 138, 0.4); }
+
+@media (max-width: 768px) {
+    .content-block { padding: 24px; }
+    .content-block h2 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header-simple">
+    <div class="container">
+        <a href="index.html">← Volver a la Home</a>
+    </div>
+</div>
+
+<main class="container">
+    <div class="programs-hero">
+        <!-- Aquí va la imagen pequeña que mencionaste -->
+        <img src="images/portada_programas.png" alt="Convocatoria de Programas" />
+    </div>
+
+    <div class="content-block">
+        <h2>¿Siempre soñaste con tener tu propio programa de radio?</h2>
+        
+        <p>Este puede ser el momento de hacerlo realidad.</p>
+        <p>En Radio del Bosque abrimos nuestra programación a nuevas propuestas y buscamos personas con ganas de comunicar, crear y compartir sus ideas.</p>
+        
+        <p><strong>Recibimos propuestas de:</strong></p>
+        <ul>
+            <li>Programas en vivo.</li>
+            <li>Programas grabados (enlatados).</li>
+            <li>Contenidos culturales, musicales, periodísticos, deportivos, educativos, de entretenimiento y temáticos.</li>
+        </ul>
+        
+        <p>Todos los programas cuentan con repetición durante el fin de semana para llegar a una mayor audiencia.</p>
+        <p style="color: var(--green-accent); font-weight: 600;">Consultá por los horarios disponibles.</p>
+        
+        <h3>Un espacio abierto para nuevas voces</h3>
+        
+        <p>En Radio del Bosque no cobramos espacio de aire. Creemos que la comunicación debe generar oportunidades y no barreras.</p>
+        <p>Únicamente solicitamos una <strong>colaboración voluntaria</strong>, cuyo monto queda a criterio de cada conductor o equipo de trabajo.</p>
+        <p>Además, cada programa puede contar con <strong>sus propios auspiciantes</strong>, cuyos anuncios serán exclusivos dentro del espacio que realicen.</p>
+        <p>No importa si es tu primera experiencia o si ya tenés recorrido en los medios. Lo más importante es tener una idea, una voz y las ganas de compartirla.</p>
+        
+        <blockquote>
+            "Las mejores historias empiezan cuando alguien se anima a encender un micrófono. Tu programa puede ser la próxima."
+        </blockquote>
+
+        <div style="text-align: center;">
+            <a href="https://wa.me/5492216023878?text=Hola!%20Quiero%20información%20sobre%20cómo%20tener%20mi%20propio%20programa" target="_blank" class="btn-cta">
+                Quiero tener mi programa
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; border-top: 1px solid rgba(95, 191, 138, 0.1);">
+    © 2024 Radio del Bosque LP
+</footer>
+
+</body>
+</html>

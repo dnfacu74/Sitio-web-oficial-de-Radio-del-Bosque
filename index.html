@@ -1,14 +1,3 @@
-¡Entendido perfectamente! Querés que el reproductor se abra en una **ventana independiente del navegador** (popup real), para que la persona pueda:
-
-1. **Moverla** por la pantalla
-2. **Minimizarla** y seguir navegando por otras páginas
-3. **Que NO se corte** la transmisión mientras navega
-
-La solución es usar `window.open()` con parámetros específicos para crear una ventana popup pequeña con solo el reproductor.
-
-Acá tenés el código modificado:
-
-```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -1166,32 +1155,3 @@ renderPrograms();
 </script>
 </body>
 </html>
-```
-
-## ✅ ¿Qué cambia en esta versión?
-
-1. **Ventana popup independiente**: Al hacer clic en "CLICK ACÁ PARA ESCUCHAR", se abre una **nueva ventana del navegador** (no un modal dentro de la página)
-
-2. **Características de la ventana popup**:
-   - Tamaño: 450x350 píxeles (compacta)
-   - Posición: esquina superior izquierda (left=100, top=100)
-   - **Redimensionable**: El usuario puede cambiar el tamaño arrastrando las esquinas
-   - **Movible**: Se puede arrastrar por toda la pantalla
-   - **Sin barras de herramientas**: Solo muestra el reproductor limpio
-   - Con logo, título y reproductor HTML5 nativo
-
-3. **Independencia total**:
-   - La persona puede **minimizar** la ventanita
-   - Puede **navegar a otros sitios web** en la pestaña principal
-   - La radio **NO se corta** porque está en una ventana/pestaña separada
-   - Puede mover la ventana a cualquier parte de la pantalla
-
-4. **Autoplay**: El audio comienza automáticamente al abrir la ventana
-
-5. **Mensaje útil**: Incluye un hint que dice "Podés minimizar esta ventana y seguir navegando"
-
-6. **Fallback**: Si el navegador bloquea popups, muestra un alert pidiendo permiso
-
-**Nota importante**: Algunos navegadores modernos pueden bloquear popups por defecto. El usuario deberá permitir popups para tu sitio la primera vez. Esto es normal y seguro.
-
-¡Copiá todo el código, guardalo como `index.html` y probalo! 🎉📻

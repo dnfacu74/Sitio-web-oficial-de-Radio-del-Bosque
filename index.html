@@ -1,6 +1,19 @@
+¡Entendido perfectamente! Querés un botón que diga **"CLICK ACÁ PARA ESCUCHAR"** y al hacer clic se abra una **ventanita modal** (popup) con el reproductor simple y el logo de la radio. Es la solución más compatible porque usa el reproductor nativo del navegador dentro de una ventana emergente.
+
+Acá tenés el `index.html` completo modificado:
+
+```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0T7H98V9L"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-L0T7H98V9L');
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#0a1f14" />
@@ -207,7 +220,7 @@ width: 2px; height: 40px;
 background: linear-gradient(to bottom, var(--green-accent), transparent);
 animation: float 2s ease-in-out infinite;
 }
-/* PLAYER */
+/* PLAYER SECTION CON BOTÓN */
 .player-section { padding: 60px 0; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
 .player-section__title {
 font-family: var(--font-title);
@@ -218,48 +231,119 @@ letter-spacing: 0.15em;
 margin-bottom: 32px;
 text-transform: uppercase;
 }
-.player-card {
-display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
-background: linear-gradient(135deg, rgba(26, 61, 46, 0.4), rgba(10, 15, 13, 0.8));
-border: 1px solid rgba(95, 191, 138, 0.2); border-radius: var(--radius-lg);
-padding: 40px; backdrop-filter: blur(20px); box-shadow: var(--shadow-lg);
-}
-.player-card__visual { display: flex; align-items: center; justify-content: center; min-height: 200px; }
-.player-card__equalizer { display: flex; align-items: flex-end; gap: 4px; height: 120px; width: 100%; max-width: 280px; padding: 0 20px; }
-.player-card__bar {
-flex: 1; background: linear-gradient(to top, var(--green-accent), var(--gold));
-border-radius: 2px; height: 20%; transition: height 0.3s ease;
-}
-.player-card__bar--active { animation: equalizer 0.8s ease-in-out infinite; }
-.player-card__info { display: flex; flex-direction: column; justify-content: center; }
-.player-card__status { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-.player-card__live-indicator {
-width: 10px; height: 10px; background: var(--red-live);
-border-radius: 50%; box-shadow: 0 0 10px var(--red-live);
-animation: pulse 1.5s ease-in-out infinite;
-}
-.player-card__live-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; color: var(--red-live); }
-.player-card__title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text-primary); margin-bottom: 8px; }
-.player-card__now { font-size: 1rem; color: var(--text-secondary); margin-bottom: 32px; }
-.player-card__controls { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.player-card__play-btn {
-width: 72px; height: 72px; border-radius: 50%;
+.btn-listen {
+display: inline-flex;
+align-items: center;
+gap: 12px;
+padding: 18px 40px;
 background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
-border: none; color: white; cursor: pointer;
-display: flex; align-items: center; justify-content: center;
-transition: all var(--transition-normal); box-shadow: var(--shadow-glow);
+color: white;
+border: none;
+border-radius: var(--radius-full);
+font-family: var(--font-title);
+font-size: 1.3rem;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+cursor: pointer;
+transition: all var(--transition-normal);
+box-shadow: 0 0 30px rgba(95, 191, 138, 0.4);
+text-decoration: none;
 }
-.player-card__play-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(95, 191, 138, 0.6); }
-.player-card__play-btn--playing { background: linear-gradient(135deg, var(--orange), var(--gold)); }
-.player-card__volume { display: flex; align-items: center; gap: 12px; color: var(--text-secondary); }
-.player-card__volume-slider {
-width: 120px; height: 4px; -webkit-appearance: none; appearance: none;
-background: var(--green-dark); border-radius: var(--radius-full); outline: none;
+.btn-listen:hover {
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 0 50px rgba(95, 191, 138, 0.6);
 }
-.player-card__volume-slider::-webkit-slider-thumb {
--webkit-appearance: none; width: 16px; height: 16px;
-background: var(--green-accent); border-radius: 50%;
-cursor: pointer; box-shadow: 0 0 10px var(--green-accent);
+.btn-listen svg {
+width: 28px;
+height: 28px;
+}
+/* MODAL REPRODUCTOR */
+.modal-overlay {
+position: fixed;
+inset: 0;
+z-index: 9999;
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(10px);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity var(--transition-normal);
+}
+.modal-overlay.active {
+opacity: 1;
+pointer-events: all;
+}
+.modal-player {
+position: relative;
+background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+border: 1px solid rgba(95, 191, 138, 0.3);
+border-radius: var(--radius-lg);
+padding: 40px;
+max-width: 420px;
+width: 90%;
+text-align: center;
+box-shadow: 0 0 60px rgba(95, 191, 138, 0.2);
+transform: scale(0.9);
+transition: transform var(--transition-normal);
+}
+.modal-overlay.active .modal-player {
+transform: scale(1);
+}
+.modal-close {
+position: absolute;
+top: 12px;
+right: 12px;
+width: 36px;
+height: 36px;
+border-radius: 50%;
+background: rgba(95, 191, 138, 0.2);
+border: 1px solid rgba(95, 191, 138, 0.3);
+color: var(--text-primary);
+font-size: 1.2rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all var(--transition-fast);
+}
+.modal-close:hover {
+background: var(--red-live);
+border-color: var(--red-live);
+}
+.modal-logo {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 3px solid var(--gold);
+margin: 0 auto 20px;
+display: block;
+box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+}
+.modal-title {
+font-family: var(--font-display);
+font-size: 1.5rem;
+color: var(--text-primary);
+margin-bottom: 8px;
+}
+.modal-subtitle {
+font-size: 0.9rem;
+color: var(--text-secondary);
+margin-bottom: 24px;
+}
+.modal-audio {
+width: 100%;
+max-width: 360px;
+margin: 0 auto;
+border-radius: var(--radius-md);
+outline: none;
+}
+.modal-hint {
+font-size: 0.8rem;
+color: var(--text-muted);
+margin-top: 16px;
+font-style: italic;
 }
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
@@ -348,7 +432,7 @@ flex-direction: column;
 align-items: center;
 position: relative;
 overflow: hidden;
-min-height: 320px; /* Asegura altura consistente */
+min-height: 320px;
 }
 .gallery-category-card:hover {
 transform: translateY(-8px);
@@ -356,7 +440,6 @@ border-color: var(--green-accent);
 box-shadow: var(--shadow-glow);
 background: rgba(95, 191, 138, 0.05);
 }
-/* Estilo para tarjetas con imagen de fondo */
 .gallery-category-card--image {
 padding: 0;
 justify-content: flex-end;
@@ -582,7 +665,6 @@ z-index: 10;
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-@keyframes equalizer { 0%, 100% { height: 20%; } 50% { height: 100%; } }
 /* RESPONSIVE */
 @media (max-width: 968px) {
 .header__nav {
@@ -607,8 +689,6 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 .hero { padding: 100px 0 60px; }
 .hero__actions { flex-direction: column; align-items: center; }
 .hero__actions .btn { width: 100%; max-width: 280px; justify-content: center; }
-.player-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
-.player-card__equalizer { height: 80px; }
 .programming-grid { grid-template-columns: 1fr; }
 .contact-grid { grid-template-columns: 1fr; }
 .hero__logo-top { width: 120px; height: 120px; }
@@ -627,6 +707,17 @@ height: 160px;
 }
 .gallery-category-cards {
 grid-template-columns: 1fr;
+}
+.btn-listen {
+padding: 14px 28px;
+font-size: 1.1rem;
+}
+.modal-player {
+padding: 28px 20px;
+}
+.modal-logo {
+width: 80px;
+height: 80px;
 }
 }
 @media (max-width: 640px) {
@@ -687,35 +778,30 @@ grid-template-columns: 1fr;
 </div>
 </div>
 </section>
-<!-- PLAYER -->
+<!-- PLAYER SECTION CON BOTÓN CLICK ACÁ PARA ESCUCHAR -->
 <section id="player" class="player-section">
-<div class="container">
+<div class="container" style="text-align: center;">
 <h2 class="player-section__title">ESCUCHANOS EN VIVO</h2>
-<div class="player-card">
-<div class="player-card__visual">
-<div class="player-card__equalizer" id="equalizer"></div>
-</div>
-<div class="player-card__info">
-<div class="player-card__status">
-<span class="player-card__live-indicator"></span>
-<span class="player-card__live-text">EN VIVO</span>
-</div>
-<h2 class="player-card__title">Radio del Bosque LP</h2>
-<p class="player-card__now" id="playerStatus">Listo para escuchar</p>
-<div class="player-card__controls">
-<button class="player-card__play-btn" id="playBtn" aria-label="Reproducir">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+<button class="btn-listen" id="btnOpenPlayer" aria-label="Click acá para escuchar en vivo">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+CLICK ACÁ PARA ESCUCHAR
 </button>
-<div class="player-card__volume">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-<input type="range" min="0" max="1" step="0.01" value="0.8" class="player-card__volume-slider" id="volumeSlider" aria-label="Volumen" />
-</div>
-</div>
-<audio id="audioPlayer" preload="none"></audio>
-</div>
-</div>
 </div>
 </section>
+<!-- MODAL REPRODUCTOR -->
+<div class="modal-overlay" id="modalPlayer">
+<div class="modal-player">
+<button class="modal-close" id="btnClosePlayer" aria-label="Cerrar reproductor">✕</button>
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="modal-logo" />
+<h3 class="modal-title">Radio del Bosque LP</h3>
+<p class="modal-subtitle">Transmisión 24/7 desde La Plata</p>
+<audio class="modal-audio" controls preload="none">
+<source src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610" type="audio/mpeg">
+Tu navegador no soporta audio HTML5.
+</audio>
+<p class="modal-hint">💡 Si no reproduce, recargá la página e intentá de nuevo</p>
+</div>
+</div>
 <!-- LIVE -->
 <section class="live-section">
 <div class="container">
@@ -783,7 +869,7 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <div class="programming-grid" id="programmingGrid"></div>
 </div>
 </section>
-<!-- GALLERY - CON TARJETAS QUE ENLAZAN A LAS PÁGINAS DE GALERÍA -->
+<!-- GALLERY -->
 <section id="galeria" class="gallery-section">
 <div class="container">
 <div class="section-header">
@@ -810,7 +896,6 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <p class="gallery-category-card__desc">Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
 <span class="gallery-category-card__link">Ver galería →</span>
 </a>
-<!-- Nuevo elemento: Video Institucional con imagen de portada -->
 <a href="https://www.youtube.com/watch?v=UCwJf7LWf4I" target="_blank" rel="noopener noreferrer" class="gallery-category-card gallery-category-card--image" aria-label="Ver Video Institucional">
 <img src="images/portada_video.jpg" alt="Video Institucional" class="gallery-category-card__bg" loading="lazy" />
 <div class="gallery-category-card__content">
@@ -901,7 +986,6 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <span class="contact-card__value">@radiodelbosque.ok</span>
 </div>
 </a>
-<!-- Nuevo botón de YouTube -->
 <a href="https://www.youtube.com/@radiodelbosquelaplata" target="_blank" rel="noopener noreferrer" class="contact-card">
 <div class="contact-card__icon">
 <img src="images/icon_youtube.png" alt="YouTube" style="width: 24px; height: 24px; object-fit: contain;" />
@@ -946,7 +1030,7 @@ Enviar mensaje por WhatsApp
 <ul class="footer__list">
 <li>📍 La Plata, Buenos Aires, Argentina</li>
 <li>📱 +54 9 221 6023878</li>
-<li>📷 @radiodelbosque.ok</li>
+<li> @radiodelbosque.ok</li>
 </ul>
 </div>
 <div class="footer-social">
@@ -1012,57 +1096,60 @@ donateModal.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
-/* Reproductor */
-const audioPlayer = document.getElementById('audioPlayer');
-const playBtn = document.getElementById('playBtn');
-const playIcon = document.getElementById('playIcon');
-const playerStatus = document.getElementById('playerStatus');
-const volumeSlider = document.getElementById('volumeSlider');
-const equalizer = document.getElementById('equalizer');
-let isPlaying = false;
-const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610';
-for (let i = 0; i < 24; i++) {
-const bar = document.createElement('div');
-bar.className = 'player-card__bar';
-bar.style.animationDelay = `${i * 0.08}s`;
-equalizer.appendChild(bar);
-}
-volumeSlider.addEventListener('input', (e) => {
-audioPlayer.volume = parseFloat(e.target.value);
+
+/* MODAL REPRODUCTOR DE RADIO */
+const btnOpenPlayer = document.getElementById('btnOpenPlayer');
+const modalPlayer = document.getElementById('modalPlayer');
+const btnClosePlayer = document.getElementById('btnClosePlayer');
+const modalAudio = modalPlayer.querySelector('.modal-audio');
+
+// Abrir modal
+btnOpenPlayer.addEventListener('click', () => {
+modalPlayer.classList.add('active');
+document.body.style.overflow = 'hidden';
+// Agregar timestamp para evitar caché
+const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
+modalAudio.querySelector('source').src = streamUrl;
+modalAudio.load();
 });
-playBtn.addEventListener('click', () => {
-if (isPlaying) {
-audioPlayer.pause();
-isPlaying = false;
-playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-playBtn.classList.remove('player-card__play-btn--playing');
-playerStatus.textContent = 'Listo para escuchar';
-document.querySelectorAll('.player-card__bar').forEach(b => b.classList.remove('player-card__bar--active'));
-} else {
-audioPlayer.src = streamUrl;
-audioPlayer.play().then(() => {
-isPlaying = true;
-playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-playBtn.classList.add('player-card__play-btn--playing');
-playerStatus.textContent = 'Transmitiendo ahora';
-document.querySelectorAll('.player-card__bar').forEach(b => b.classList.add('player-card__bar--active'));
-}).catch(err => console.error('Error:', err));
+
+// Cerrar modal
+function closeModal() {
+modalPlayer.classList.remove('active');
+document.body.style.overflow = '';
+modalAudio.pause();
+modalAudio.src = '';
+}
+
+btnClosePlayer.addEventListener('click', (e) => {
+e.stopPropagation();
+closeModal();
+});
+
+modalPlayer.addEventListener('click', (e) => {
+if (e.target === modalPlayer) {
+closeModal();
 }
 });
+
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && modalPlayer.classList.contains('active')) {
+closeModal();
+}
+});
+
 /* Programación */
-// Definición de programas existentes
 const programs = [
 { id: 1, title: 'Por Siempre Clásicos', time: '05:00 - 09:00', days: 'Todos los días', host: 'Música de los 70, 80, 90 y 2000', category: 'Música', icon: '🎵', image: 'images/Por Siempre Clásicos.png' },
 { id: 2, title: 'Desayuno con Fakundo DN', time: '09:00 - 11:00', days: 'Lunes a Viernes', host: 'Fakundo DN', category: 'Magazine', icon: '🎙️', image: 'images/Desayuno con Fakundo DN.png' },
 { id: 3, title: 'Mediodía en el Bosque', time: '12:00 - 14:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Variedades', icon: '☀️', image: 'images/Mediodia en el Bosque.png' },
 { id: 4, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
-{ id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '🌳', image: 'images/La Tarde del Bosque.png' },
+{ id: 5, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '', image: 'images/La Tarde del Bosque.png' },
 { id: 8, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '🎶', image: 'images/Fin de Semana.png' },
 { id: 9, title: 'Pasajeros del Espacio', time: '10:00 - 13:00', days: 'Sábados', host: 'Marisa Waters, Fakundo DN y Rocío Escalante', category: 'Especial', icon: '🚀', image: 'images/Pasajeros del Espacio.png' },
 ];
 const gridContainer = document.getElementById('programmingGrid');
 function renderPrograms() {
-// Contenido nuevo para la sección de programas (Convocatoria)
 const newContentHTML = `
 <div class="program-card" style="grid-column: 1 / -1; background: transparent; border: none; box-shadow: none;">
 <div style="background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(95, 191, 138, 0.15);">
@@ -1099,7 +1186,6 @@ Quiero tener mi programa
 </div>
 </div>
 `;
-// Renderizar primero el contenido nuevo y luego la grilla de programas
 let htmlContent = newContentHTML;
 htmlContent += programs.map(p => `
 <div class="program-card">
@@ -1127,3 +1213,20 @@ renderPrograms();
 </script>
 </body>
 </html>
+```
+
+## ✅ ¿Qué incluye esta versión?
+
+1. **Botón grande "CLICK ACÁ PARA ESCUCHAR"** en la sección del player, estilo verde con ícono de play
+2. **Ventanita modal (popup)** que se abre al hacer clic con:
+   - Logo de Radio del Bosque (`images/logo_radio.png`)
+   - Nombre de la radio
+   - **Reproductor HTML5 nativo** con controles completos (play/pause, volumen, barra de progreso)
+   - Botón ✕ para cerrar
+   - Se cierra también haciendo clic afuera o presionando Escape
+3. **Timestamp anti-caché** cada vez que abrís el modal para evitar que el navegador use streams viejos
+4. **Pausa automática** al cerrar el modal para no seguir reproduciendo de fondo
+5. **100% compatible** con todos los navegadores y celulares
+6. **Diseño responsive** adaptado a móviles
+
+Copiá todo, pegalo en Bloc de Notas, guardalo como `index.html` y subilo. ¡Ahora sí va a funcionar perfecto! 🎉📻

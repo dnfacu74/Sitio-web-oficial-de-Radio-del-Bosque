@@ -1,6 +1,12 @@
-¡Entendido perfectamente! Querés un botón que diga **"CLICK ACÁ PARA ESCUCHAR"** y al hacer clic se abra una **ventanita modal** (popup) con el reproductor simple y el logo de la radio. Es la solución más compatible porque usa el reproductor nativo del navegador dentro de una ventana emergente.
+¡Entendido perfectamente! Querés que el reproductor se abra en una **ventana independiente del navegador** (popup real), para que la persona pueda:
 
-Acá tenés el `index.html` completo modificado:
+1. **Moverla** por la pantalla
+2. **Minimizarla** y seguir navegando por otras páginas
+3. **Que NO se corte** la transmisión mientras navega
+
+La solución es usar `window.open()` con parámetros específicos para crear una ventana popup pequeña con solo el reproductor.
+
+Acá tenés el código modificado:
 
 ```html
 <!DOCTYPE html>
@@ -256,94 +262,6 @@ box-shadow: 0 0 50px rgba(95, 191, 138, 0.6);
 .btn-listen svg {
 width: 28px;
 height: 28px;
-}
-/* MODAL REPRODUCTOR */
-.modal-overlay {
-position: fixed;
-inset: 0;
-z-index: 9999;
-background: rgba(0, 0, 0, 0.85);
-backdrop-filter: blur(10px);
-display: flex;
-align-items: center;
-justify-content: center;
-opacity: 0;
-pointer-events: none;
-transition: opacity var(--transition-normal);
-}
-.modal-overlay.active {
-opacity: 1;
-pointer-events: all;
-}
-.modal-player {
-position: relative;
-background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-border: 1px solid rgba(95, 191, 138, 0.3);
-border-radius: var(--radius-lg);
-padding: 40px;
-max-width: 420px;
-width: 90%;
-text-align: center;
-box-shadow: 0 0 60px rgba(95, 191, 138, 0.2);
-transform: scale(0.9);
-transition: transform var(--transition-normal);
-}
-.modal-overlay.active .modal-player {
-transform: scale(1);
-}
-.modal-close {
-position: absolute;
-top: 12px;
-right: 12px;
-width: 36px;
-height: 36px;
-border-radius: 50%;
-background: rgba(95, 191, 138, 0.2);
-border: 1px solid rgba(95, 191, 138, 0.3);
-color: var(--text-primary);
-font-size: 1.2rem;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all var(--transition-fast);
-}
-.modal-close:hover {
-background: var(--red-live);
-border-color: var(--red-live);
-}
-.modal-logo {
-width: 100px;
-height: 100px;
-border-radius: 50%;
-border: 3px solid var(--gold);
-margin: 0 auto 20px;
-display: block;
-box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
-}
-.modal-title {
-font-family: var(--font-display);
-font-size: 1.5rem;
-color: var(--text-primary);
-margin-bottom: 8px;
-}
-.modal-subtitle {
-font-size: 0.9rem;
-color: var(--text-secondary);
-margin-bottom: 24px;
-}
-.modal-audio {
-width: 100%;
-max-width: 360px;
-margin: 0 auto;
-border-radius: var(--radius-md);
-outline: none;
-}
-.modal-hint {
-font-size: 0.8rem;
-color: var(--text-muted);
-margin-top: 16px;
-font-style: italic;
 }
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
@@ -712,13 +630,6 @@ grid-template-columns: 1fr;
 padding: 14px 28px;
 font-size: 1.1rem;
 }
-.modal-player {
-padding: 28px 20px;
-}
-.modal-logo {
-width: 80px;
-height: 80px;
-}
 }
 @media (max-width: 640px) {
 .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -788,20 +699,6 @@ CLICK ACÁ PARA ESCUCHAR
 </button>
 </div>
 </section>
-<!-- MODAL REPRODUCTOR -->
-<div class="modal-overlay" id="modalPlayer">
-<div class="modal-player">
-<button class="modal-close" id="btnClosePlayer" aria-label="Cerrar reproductor">✕</button>
-<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="modal-logo" />
-<h3 class="modal-title">Radio del Bosque LP</h3>
-<p class="modal-subtitle">Transmisión 24/7 desde La Plata</p>
-<audio class="modal-audio" controls preload="none">
-<source src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610" type="audio/mpeg">
-Tu navegador no soporta audio HTML5.
-</audio>
-<p class="modal-hint">💡 Si no reproduce, recargá la página e intentá de nuevo</p>
-</div>
-</div>
 <!-- LIVE -->
 <section class="live-section">
 <div class="container">
@@ -1096,45 +993,101 @@ donateModal.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
-
-/* MODAL REPRODUCTOR DE RADIO */
+/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE */
 const btnOpenPlayer = document.getElementById('btnOpenPlayer');
-const modalPlayer = document.getElementById('modalPlayer');
-const btnClosePlayer = document.getElementById('btnClosePlayer');
-const modalAudio = modalPlayer.querySelector('.modal-audio');
 
-// Abrir modal
 btnOpenPlayer.addEventListener('click', () => {
-modalPlayer.classList.add('active');
-document.body.style.overflow = 'hidden';
-// Agregar timestamp para evitar caché
+// URL del stream con timestamp anti-caché
 const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
-modalAudio.querySelector('source').src = streamUrl;
-modalAudio.load();
-});
+const logoUrl = 'images/logo_radio.png';
 
-// Cerrar modal
-function closeModal() {
-modalPlayer.classList.remove('active');
-document.body.style.overflow = '';
-modalAudio.pause();
-modalAudio.src = '';
+// Contenido HTML de la ventana popup
+const playerWindowContent = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio del Bosque LP - En Vivo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(135deg, #0f1a14, #142218);
+color: #f5f0e8;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+padding: 20px;
 }
-
-btnClosePlayer.addEventListener('click', (e) => {
-e.stopPropagation();
-closeModal();
-});
-
-modalPlayer.addEventListener('click', (e) => {
-if (e.target === modalPlayer) {
-closeModal();
+.container {
+text-align: center;
+max-width: 400px;
+width: 100%;
 }
-});
+.logo {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 3px solid #d4a574;
+margin-bottom: 20px;
+box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+}
+.title {
+font-family: 'Playfair Display', serif;
+font-size: 1.5rem;
+margin-bottom: 8px;
+color: #f5f0e8;
+}
+.subtitle {
+font-size: 0.9rem;
+color: #b8b0a0;
+margin-bottom: 24px;
+}
+audio {
+width: 100%;
+max-width: 360px;
+border-radius: 12px;
+outline: none;
+}
+.hint {
+font-size: 0.8rem;
+color: #7a7568;
+margin-top: 16px;
+font-style: italic;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<img src="${logoUrl}" alt="Radio del Bosque LP" class="logo" />
+<h1 class="title">Radio del Bosque LP</h1>
+<p class="subtitle">Transmisión 24/7 desde La Plata</p>
+<audio controls autoplay preload="none">
+<source src="${streamUrl}" type="audio/mpeg">
+Tu navegador no soporta audio HTML5.
+</audio>
+<p class="hint">💡 Podés minimizar esta ventana y seguir navegando</p>
+</div>
+</body>
+</html>
+`;
 
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && modalPlayer.classList.contains('active')) {
-closeModal();
+// Abrir ventana popup con dimensiones específicas
+const playerWindow = window.open(
+'',
+'RadioDelBosquePlayer',
+'width=450,height=350,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
+);
+
+if (playerWindow) {
+playerWindow.document.write(playerWindowContent);
+playerWindow.document.close();
+} else {
+alert('Por favor, permití las ventanas emergentes (popups) para escuchar la radio.');
 }
 });
 
@@ -1215,18 +1168,30 @@ renderPrograms();
 </html>
 ```
 
-## ✅ ¿Qué incluye esta versión?
+## ✅ ¿Qué cambia en esta versión?
 
-1. **Botón grande "CLICK ACÁ PARA ESCUCHAR"** en la sección del player, estilo verde con ícono de play
-2. **Ventanita modal (popup)** que se abre al hacer clic con:
-   - Logo de Radio del Bosque (`images/logo_radio.png`)
-   - Nombre de la radio
-   - **Reproductor HTML5 nativo** con controles completos (play/pause, volumen, barra de progreso)
-   - Botón ✕ para cerrar
-   - Se cierra también haciendo clic afuera o presionando Escape
-3. **Timestamp anti-caché** cada vez que abrís el modal para evitar que el navegador use streams viejos
-4. **Pausa automática** al cerrar el modal para no seguir reproduciendo de fondo
-5. **100% compatible** con todos los navegadores y celulares
-6. **Diseño responsive** adaptado a móviles
+1. **Ventana popup independiente**: Al hacer clic en "CLICK ACÁ PARA ESCUCHAR", se abre una **nueva ventana del navegador** (no un modal dentro de la página)
 
-Copiá todo, pegalo en Bloc de Notas, guardalo como `index.html` y subilo. ¡Ahora sí va a funcionar perfecto! 🎉📻
+2. **Características de la ventana popup**:
+   - Tamaño: 450x350 píxeles (compacta)
+   - Posición: esquina superior izquierda (left=100, top=100)
+   - **Redimensionable**: El usuario puede cambiar el tamaño arrastrando las esquinas
+   - **Movible**: Se puede arrastrar por toda la pantalla
+   - **Sin barras de herramientas**: Solo muestra el reproductor limpio
+   - Con logo, título y reproductor HTML5 nativo
+
+3. **Independencia total**:
+   - La persona puede **minimizar** la ventanita
+   - Puede **navegar a otros sitios web** en la pestaña principal
+   - La radio **NO se corta** porque está en una ventana/pestaña separada
+   - Puede mover la ventana a cualquier parte de la pantalla
+
+4. **Autoplay**: El audio comienza automáticamente al abrir la ventana
+
+5. **Mensaje útil**: Incluye un hint que dice "Podés minimizar esta ventana y seguir navegando"
+
+6. **Fallback**: Si el navegador bloquea popups, muestra un alert pidiendo permiso
+
+**Nota importante**: Algunos navegadores modernos pueden bloquear popups por defecto. El usuario deberá permitir popups para tu sitio la primera vez. Esto es normal y seguro.
+
+¡Copiá todo el código, guardalo como `index.html` y probalo! 🎉📻

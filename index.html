@@ -842,6 +842,17 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <span class="advertiser-card__link">Contactar →</span>
 </div>
 </a>
+<!-- NUEVO: Taxy -->
+<a href="images/taxy.jpg" target="_blank" class="advertiser-card">
+<div class="advertiser-card__image">
+<img src="images/taxy.jpg" alt="Taxy" loading="lazy" />
+</div>
+<div class="advertiser-card__info">
+<h4 class="advertiser-card__name">Taxy</h4>
+<p class="advertiser-card__desc">Servicio de transporte</p>
+<span class="advertiser-card__link">Ver imagen →</span>
+</div>
+</a>
 </div>
 </div>
 </section>
@@ -984,12 +995,10 @@ document.body.style.overflow = '';
 });
 /* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE */
 const btnOpenPlayer = document.getElementById('btnOpenPlayer');
-
 btnOpenPlayer.addEventListener('click', () => {
 // URL del stream con timestamp anti-caché
 const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
 const logoUrl = 'images/logo_radio.png';
-
 // Contenido HTML de la ventana popup
 const playerWindowContent = `
 <!DOCTYPE html>
@@ -1064,14 +1073,12 @@ Tu navegador no soporta audio HTML5.
 </body>
 </html>
 `;
-
 // Abrir ventana popup con dimensiones específicas
 const playerWindow = window.open(
 '',
 'RadioDelBosquePlayer',
 'width=450,height=350,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
 );
-
 if (playerWindow) {
 playerWindow.document.write(playerWindowContent);
 playerWindow.document.close();
@@ -1079,7 +1086,6 @@ playerWindow.document.close();
 alert('Por favor, permití las ventanas emergentes (popups) para escuchar la radio.');
 }
 });
-
 /* Programación */
 const programs = [
 { id: 1, title: 'Por Siempre Clásicos', time: '05:00 - 09:00', days: 'Todos los días', host: 'Música de los 70, 80, 90 y 2000', category: 'Música', icon: '🎵', image: 'images/Por Siempre Clásicos.png' },

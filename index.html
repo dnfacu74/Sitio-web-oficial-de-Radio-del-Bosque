@@ -1000,7 +1000,7 @@ document.body.style.overflow = '';
 const btnOpenPlayer = document.getElementById('btnOpenPlayer');
 btnOpenPlayer.addEventListener('click', () => {
 // URL del stream con timestamp anti-caché
-const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
+const streamUrl = 'http://uk5freenew.listen2myradio.com:8707/stream?t=' + Date.now();
 const logoUrl = 'images/logo_radio.png';
 // Contenido HTML de la ventana popup
 const playerWindowContent = `

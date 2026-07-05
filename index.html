@@ -57,11 +57,6 @@ color: var(--text-primary);
 line-height: 1.6;
 overflow-x: hidden;
 -webkit-font-smoothing: antialiased;
-/* Padding bottom para compensar el sticky player */
-padding-bottom: 80px; 
-}
-@media (max-width: 768px) {
-    body { padding-bottom: 100px; }
 }
 .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 .section-title {
@@ -219,43 +214,6 @@ color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.2em;
 width: 2px; height: 40px;
 background: linear-gradient(to bottom, var(--green-accent), transparent);
 animation: float 2s ease-in-out infinite;
-}
-/* PLAYER SECTION CON BOTÓN */
-.player-section { padding: 60px 0; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
-.player-section__title {
-font-family: var(--font-title);
-font-size: clamp(2rem, 5vw, 3rem);
-color: var(--text-primary);
-text-align: center;
-letter-spacing: 0.15em;
-margin-bottom: 32px;
-text-transform: uppercase;
-}
-.btn-listen {
-display: inline-flex;
-align-items: center;
-gap: 12px;
-padding: 18px 40px;
-background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
-color: white;
-border: none;
-border-radius: var(--radius-full);
-font-family: var(--font-title);
-font-size: 1.3rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-cursor: pointer;
-transition: all var(--transition-normal);
-box-shadow: 0 0 30px rgba(95, 191, 138, 0.4);
-text-decoration: none;
-}
-.btn-listen:hover {
-transform: translateY(-3px) scale(1.05);
-box-shadow: 0 0 50px rgba(95, 191, 138, 0.6);
-}
-.btn-listen svg {
-width: 28px;
-height: 28px;
 }
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
@@ -573,119 +531,6 @@ transition: background var(--transition-fast);
 z-index: 10;
 }
 .donate-modal__close:hover { background: var(--green-mid); }
-
-/* STICKY AUDIO PLAYER (NUEVO) */
-.sticky-player {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(15, 26, 20, 0.98);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--green-accent);
-    padding: 12px 24px;
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-.sticky-player.visible {
-    transform: translateY(0);
-}
-.sticky-player__info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-}
-.sticky-player__logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-}
-.sticky-player__text {
-    display: flex;
-    flex-direction: column;
-}
-.sticky-player__title {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-.sticky-player__status {
-    font-size: 0.75rem;
-    color: var(--green-accent);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.sticky-player__controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.sticky-player__btn {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.sticky-player__btn:hover {
-    background: rgba(255,255,255,0.1);
-    color: var(--green-accent);
-}
-.sticky-player__play-btn {
-    width: 48px;
-    height: 48px;
-    background: var(--green-accent);
-    color: var(--bg-primary);
-}
-.sticky-player__play-btn:hover {
-    background: var(--gold);
-    color: var(--bg-primary);
-    transform: scale(1.1);
-}
-.sticky-player__volume {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.sticky-player__volume input {
-    width: 100px;
-    accent-color: var(--green-accent);
-}
-.equalizer-container {
-    display: flex;
-    align-items: flex-end;
-    height: 20px;
-    gap: 2px;
-    margin-left: 10px;
-}
-.player-bar {
-    width: 3px;
-    background: var(--green-accent);
-    height: 5px;
-    transition: height 0.1s ease;
-}
-.player-bar.active {
-    animation: equalize 0.5s infinite alternate;
-}
-@keyframes equalize {
-    0% { height: 5px; }
-    100% { height: 20px; }
-}
-
 /* ANIMATIONS */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -708,15 +553,6 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 .about-stats { grid-template-columns: 1fr; gap: 16px; }
 .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 .hero__logo-top { width: 140px; height: 140px; }
-.sticky-player {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-}
-.sticky-player__volume {
-    width: 100%;
-    justify-content: center;
-}
 }
 @media (max-width: 768px) {
 .container { padding: 0 16px; }
@@ -741,10 +577,6 @@ height: 160px;
 }
 .gallery-category-cards {
 grid-template-columns: 1fr;
-}
-.btn-listen {
-padding: 14px 28px;
-font-size: 1.1rem;
 }
 }
 @media (max-width: 640px) {
@@ -805,16 +637,7 @@ font-size: 1.1rem;
 </div>
 </div>
 </section>
-<!-- PLAYER SECTION CON BOTÓN CLICK ACÁ PARA ESCUCHAR -->
-<section id="player" class="player-section">
-<div class="container" style="text-align: center;">
-<h2 class="player-section__title">ESCUCHANOS EN VIVO</h2>
-<button class="btn-listen" id="btnOpenPlayer" aria-label="Click acá para escuchar en vivo">
-<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-CLICK ACÁ PARA ESCUCHAR
-</button>
-</div>
-</section>
+
 <!-- LIVE -->
 <section class="live-section">
 <div class="container">
@@ -1083,32 +906,6 @@ Enviar mensaje por WhatsApp
 <p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
 </div>
 </div>
-
-<!-- STICKY AUDIO PLAYER INTEGRADO -->
-<div class="sticky-player" id="stickyPlayer">
-    <div class="sticky-player__info">
-        <img src="images/logo_radio.png" alt="Logo" class="sticky-player__logo">
-        <div class="sticky-player__text">
-            <span class="sticky-player__title">Radio del Bosque LP</span>
-            <span class="sticky-player__status" id="playerStatus">Listo para escuchar</span>
-        </div>
-        <div class="equalizer-container" id="equalizer">
-            <!-- Barras generadas por JS -->
-        </div>
-    </div>
-    <div class="sticky-player__controls">
-        <div class="sticky-player__volume">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.8">
-        </div>
-        <button class="sticky-player__btn sticky-player__play-btn" id="playBtn" aria-label="Reproducir/Pausar">
-            <svg id="playIcon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-    </div>
-</div>
-
-<!-- Elemento Audio Oculto -->
-<audio id="audioPlayer" preload="none"></audio>
 
 <script src="script.js"></script>
 </body>

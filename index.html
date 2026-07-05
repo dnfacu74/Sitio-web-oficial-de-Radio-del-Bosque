@@ -243,7 +243,6 @@ cursor: pointer;
 transition: all var(--transition-normal);
 box-shadow: 0 0 30px rgba(95, 191, 138, 0.4);
 text-decoration: none;
-margin-bottom: 30px;
 }
 .btn-listen:hover {
 transform: translateY(-3px) scale(1.05);
@@ -252,30 +251,6 @@ box-shadow: 0 0 50px rgba(95, 191, 138, 0.6);
 .btn-listen svg {
 width: 28px;
 height: 28px;
-}
-/* Reproductor Nativo Incrustado */
-.native-player-wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-    background: rgba(15, 26, 20, 0.8);
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid rgba(95, 191, 138, 0.2);
-    backdrop-filter: blur(10px);
-}
-.native-player-wrapper audio {
-    width: 100%;
-    height: 50px;
-    outline: none;
-    border-radius: 25px;
-}
-.player-status {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #5fbf8a;
-    margin-top: 12px;
-    font-weight: 600;
-    min-height: 1.2em;
 }
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
@@ -703,23 +678,14 @@ font-size: 1.1rem;
 </div>
 </div>
 </section>
-<!-- PLAYER SECTION CON REPRODUCTOR NATIVO INCRUSTADO -->
+<!-- PLAYER SECTION CON BOTÓN CLICK ACÁ PARA ESCUCHAR -->
 <section id="player" class="player-section">
 <div class="container" style="text-align: center;">
 <h2 class="player-section__title">ESCUCHANOS EN VIVO</h2>
-<button class="btn-listen" id="btnScrollToPlayer" aria-label="Ir al reproductor">
+<button class="btn-listen" id="btnOpenPlayer" aria-label="Click acá para escuchar en vivo">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 CLICK ACÁ PARA ESCUCHAR
 </button>
-
-<!-- REPRODUCTOR NATIVO SIMPLE Y COMPATIBLE -->
-<div class="native-player-wrapper">
-    <audio id="mainAudioPlayer" controls preload="none">
-        <source src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
-    </audio>
-    <div id="playerStatusText" class="player-status">Listo para reproducir</div>
-</div>
 </div>
 </section>
 <!-- LIVE -->
@@ -1030,46 +996,99 @@ donateModal.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
-
-/* SCROLL AL REPRODUCTOR Y LÓGICA BÁSICA DE ESTADO */
-const btnScrollToPlayer = document.getElementById('btnScrollToPlayer');
-const mainAudioPlayer = document.getElementById('mainAudioPlayer');
-const playerStatusText = document.getElementById('playerStatusText');
-
-// Al hacer click en el botón grande, baja suavemente al reproductor nativo
-btnScrollToPlayer.addEventListener('click', () => {
-    const playerWrapper = document.querySelector('.native-player-wrapper');
-    if(playerWrapper) {
-        playerWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Pequeño delay para asegurar que el usuario vea el reproductor antes de intentar play
-        setTimeout(() => {
-            mainAudioPlayer.focus();
-            mainAudioPlayer.play().catch(() => {
-                // Si falla autoplay, el usuario ya está viendo el reproductor y puede tocar play manualmente
-                playerStatusText.textContent = 'Toca ▶ para iniciar';
-            });
-        }, 600);
-    }
+/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE */
+const btnOpenPlayer = document.getElementById('btnOpenPlayer');
+btnOpenPlayer.addEventListener('click', () => {
+// URL del stream con timestamp anti-caché
+const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
+const logoUrl = 'images/logo_radio.png';
+// Contenido HTML de la ventana popup
+const playerWindowContent = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio del Bosque LP - En Vivo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(135deg, #0f1a14, #142218);
+color: #f5f0e8;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+padding: 20px;
+}
+.container {
+text-align: center;
+max-width: 400px;
+width: 100%;
+}
+.logo {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 3px solid #d4a574;
+margin-bottom: 20px;
+box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+}
+.title {
+font-family: 'Playfair Display', serif;
+font-size: 1.5rem;
+margin-bottom: 8px;
+color: #f5f0e8;
+}
+.subtitle {
+font-size: 0.9rem;
+color: #b8b0a0;
+margin-bottom: 24px;
+}
+audio {
+width: 100%;
+max-width: 360px;
+border-radius: 12px;
+outline: none;
+}
+.hint {
+font-size: 0.8rem;
+color: #7a7568;
+margin-top: 16px;
+font-style: italic;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<img src="${logoUrl}" alt="Radio del Bosque LP" class="logo" />
+<h1 class="title">Radio del Bosque LP</h1>
+<p class="subtitle">Transmisión 24/7 desde La Plata</p>
+<audio controls autoplay preload="none">
+<source src="${streamUrl}" type="audio/mpeg">
+Tu navegador no soporta audio HTML5.
+</audio>
+<p class="hint">💡 Podés minimizar esta ventana y seguir navegando</p>
+</div>
+</body>
+</html>
+`;
+// Abrir ventana popup con dimensiones específicas
+const playerWindow = window.open(
+'',
+'RadioDelBosquePlayer',
+'width=450,height=350,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
+);
+if (playerWindow) {
+playerWindow.document.write(playerWindowContent);
+playerWindow.document.close();
+} else {
+alert('Por favor, permití las ventanas emergentes (popups) para escuchar la radio.');
+}
 });
-
-// Feedback visual básico usando eventos nativos del navegador
-mainAudioPlayer.addEventListener('playing', () => {
-    playerStatusText.textContent = '▶ Reproduciendo en vivo';
-    playerStatusText.style.color = '#5fbf8a';
-});
-mainAudioPlayer.addEventListener('pause', () => {
-    playerStatusText.textContent = '⏸ Pausado';
-    playerStatusText.style.color = '#b8b0a0';
-});
-mainAudioPlayer.addEventListener('waiting', () => {
-    playerStatusText.textContent = '⏳ Cargando...';
-    playerStatusText.style.color = '#e89850';
-});
-mainAudioPlayer.addEventListener('error', () => {
-    playerStatusText.textContent = '❌ Error de conexión. Intenta recargar.';
-    playerStatusText.style.color = '#e63946';
-});
-
 /* Programación */
 const programs = [
 { id: 1, title: 'Por Siempre Clásicos', time: '05:00 - 09:00', days: 'Todos los días', host: 'Música de los 70, 80, 90 y 2000', category: 'Música', icon: '🎵', image: 'images/Por Siempre Clásicos.png' },

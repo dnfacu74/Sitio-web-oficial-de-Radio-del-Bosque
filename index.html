@@ -490,6 +490,20 @@ color: var(--text-secondary); transition: all var(--transition-fast);
 .footer-bottom { padding-top: 32px; border-top: 1px solid rgba(95, 191, 138, 0.15); text-align: center; }
 .footer-bottom p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
 .footer-bottom__sub { font-size: 0.8rem; letter-spacing: 0.1em; }
+
+/* VERTEX STUDIO CREDIT STYLES */
+.vertex-credit {
+    margin-top: 3rem; 
+    padding-top: 2rem; 
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+    text-align: center;
+}
+.vertex-credit strong { color: var(--text-secondary); }
+.vertex-credit a { text-decoration: none; transition: color var(--transition-fast); }
+.vertex-credit a:hover { opacity: 0.8; }
+
 /* DONATE MODAL */
 .donate-modal {
 position: fixed; inset: 0; z-index: 9999;
@@ -637,7 +651,6 @@ grid-template-columns: 1fr;
 </div>
 </div>
 </section>
-
 <!-- LIVE -->
 <section class="live-section">
 <div class="container">
@@ -721,13 +734,13 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <span class="gallery-category-card__link">Ver galería →</span>
 </a>
 <a href="carrusel.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Carrusel">
-<div class="gallery-category-card__icon" aria-hidden="true">🎠</div>
+<div class="gallery-category-card__icon" aria-hidden="true"></div>
 <h3 class="gallery-category-card__title">Carrusel</h3>
 <p class="gallery-category-card__desc">Imágenes dinámicas del día a día en el estudio y en cabina.</p>
 <span class="gallery-category-card__link">Ver galería →</span>
 </a>
 <a href="encuentros-en-el-bosque.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Encuentros en el Bosque">
-<div class="gallery-category-card__icon" aria-hidden="true">🌳</div>
+<div class="gallery-category-card__icon" aria-hidden="true"></div>
 <h3 class="gallery-category-card__title">Encuentros en el Bosque</h3>
 <p class="gallery-category-card__desc">Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
 <span class="gallery-category-card__link">Ver galería →</span>
@@ -780,7 +793,7 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 </div>
 </a>
 <!-- Diseños Web -->
-<a href="www.vertexdigital.com.ar" target="_blank" rel="noopener noreferrer" class="advertiser-card advertiser-card--link">
+<a href="https://www.vertexdigital.com.ar" target="_blank" rel="noopener noreferrer" class="advertiser-card advertiser-card--link">
 <div class="advertiser-card__image">
 <img src="images/diseños_web.jpg" alt="Diseños Web" loading="lazy" />
 <div class="advertiser-card__link-overlay">
@@ -878,7 +891,7 @@ Enviar mensaje por WhatsApp
 <div class="footer-contact">
 <h4 class="footer__title">Contacto</h4>
 <ul class="footer__list">
-<li>📍 La Plata, Buenos Aires, Argentina</li>
+<li> La Plata, Buenos Aires, Argentina</li>
 <li>📱 +54 9 221 6023878</li>
 <li> @radiodelbosque.ok</li>
 </ul>
@@ -895,6 +908,38 @@ Enviar mensaje por WhatsApp
 <div class="footer-bottom">
 <p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
 <p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
+
+<!-- SECCIÓN LICENCIA Y CONTACTO VERTEX STUDIO INTEGRADA -->
+<div class="vertex-credit">
+    <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+         <strong>Licencia</strong><br>
+        © 2026 Vertex Studio. Todos los derechos reservados.<br>
+        El código fuente de este repositorio es propiedad exclusiva de Vertex Studio.<br>
+        Queda prohibida su reproducción, distribución o uso comercial sin autorización escrita.
+    </p>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <p style="font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">👤 Autor y Contacto: Vertex Studio</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;">
+            <span>📍 La Plata, Buenos Aires, Argentina</span>
+            
+            <a href="mailto:hola@vertexdigital.com.ar" style="color: var(--green-accent);">
+                 hola@vertexdigital.com.ar
+            </a>
+            
+            <a href="https://wa.me/5492216026192" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
+                📱 WhatsApp: +54 9 221 602 6192
+            </a>
+            
+            <a href="https://www.vertexdigital.com.ar" target="_blank" rel="noopener noreferrer" style="color: var(--green-accent);">
+                 www.vertexdigital.com.ar
+            </a>
+        </div>
+    </div>
+</div>
+<!-- FIN SECCIÓN VERTEX STUDIO -->
+
 </div>
 </div>
 </footer>
@@ -906,7 +951,6 @@ Enviar mensaje por WhatsApp
 <p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
 </div>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>

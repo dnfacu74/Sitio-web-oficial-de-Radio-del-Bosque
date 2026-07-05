@@ -765,7 +765,7 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 </div>
 <div class="gallery-category-cards">
 <a href="bichos-radio.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Bichos de Radio">
-<div class="gallery-category-card__icon" aria-hidden="true">🎙️</div>
+<div class="gallery-category-card__icon" aria-hidden="true">️</div>
 <h3 class="gallery-category-card__title">Bichos de Radio</h3>
 <p class="gallery-category-card__desc">Nuestros conductores y equipos en plena transmisión, la esencia del aire.</p>
 <span class="gallery-category-card__link">Ver galería →</span>
@@ -996,13 +996,15 @@ donateModal.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
-/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE */
+
+/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE CON AUTORECONEXIÓN */
 const btnOpenPlayer = document.getElementById('btnOpenPlayer');
 btnOpenPlayer.addEventListener('click', () => {
 // URL del stream con timestamp anti-caché
 const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
 const logoUrl = 'images/logo_radio.png';
-// Contenido HTML de la ventana popup
+
+// Contenido HTML de la ventana popup MEJORADO
 const playerWindowContent = `
 <!DOCTYPE html>
 <html lang="es">
@@ -1023,42 +1025,17 @@ justify-content: center;
 min-height: 100vh;
 padding: 20px;
 }
-.container {
-text-align: center;
-max-width: 400px;
-width: 100%;
-}
+.container { text-align: center; max-width: 400px; width: 100%; }
 .logo {
-width: 100px;
-height: 100px;
-border-radius: 50%;
-border: 3px solid #d4a574;
-margin-bottom: 20px;
+width: 100px; height: 100px; border-radius: 50%;
+border: 3px solid #d4a574; margin-bottom: 20px;
 box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
 }
-.title {
-font-family: 'Playfair Display', serif;
-font-size: 1.5rem;
-margin-bottom: 8px;
-color: #f5f0e8;
-}
-.subtitle {
-font-size: 0.9rem;
-color: #b8b0a0;
-margin-bottom: 24px;
-}
-audio {
-width: 100%;
-max-width: 360px;
-border-radius: 12px;
-outline: none;
-}
-.hint {
-font-size: 0.8rem;
-color: #7a7568;
-margin-top: 16px;
-font-style: italic;
-}
+.title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; color: #f5f0e8; }
+.subtitle { font-size: 0.9rem; color: #b8b0a0; margin-bottom: 24px; }
+audio { width: 100%; max-width: 360px; border-radius: 12px; outline: none; }
+.hint { font-size: 0.8rem; color: #7a7568; margin-top: 16px; font-style: italic; }
+.status { font-size: 0.8rem; color: #5fbf8a; margin-top: 8px; min-height: 1.2em; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 </head>
@@ -1067,20 +1044,77 @@ font-style: italic;
 <img src="${logoUrl}" alt="Radio del Bosque LP" class="logo" />
 <h1 class="title">Radio del Bosque LP</h1>
 <p class="subtitle">Transmisión 24/7 desde La Plata</p>
-<audio controls autoplay preload="none">
+<audio id="streamAudio" controls preload="none">
 <source src="${streamUrl}" type="audio/mpeg">
 Tu navegador no soporta audio HTML5.
 </audio>
+<div id="statusText" class="status">Conectando...</div>
 <p class="hint">💡 Podés minimizar esta ventana y seguir navegando</p>
 </div>
+
+<script>
+(function() {
+    const audio = document.getElementById('streamAudio');
+    const statusText = document.getElementById('statusText');
+    let retryInterval = null;
+    
+    // Función para intentar reproducir
+    function tryPlay() {
+        audio.load();
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                statusText.textContent = '▶ Reproduciendo en vivo';
+                clearInterval(retryInterval);
+            }).catch(error => {
+                statusText.textContent = '⏸ Click en Play para iniciar';
+                console.log('Autoplay bloqueado, esperando interacción');
+            });
+        }
+    }
+
+    // Intentar autoplay al cargar
+    window.addEventListener('load', tryPlay);
+    
+    // Si el usuario hace click en cualquier lado, intentamos reproducir
+    document.addEventListener('click', () => {
+        if(audio.paused) tryPlay();
+    }, { once: true });
+
+    // Sistema de reconexión automática
+    audio.addEventListener('stalled', () => {
+        statusText.textContent = '⚠ Reconectando...';
+    });
+    
+    audio.addEventListener('error', () => {
+        statusText.textContent = '⚠ Señal interrumpida. Reintentando...';
+        if (!retryInterval) {
+            retryInterval = setInterval(() => {
+                audio.load();
+                audio.play().catch(() => {});
+            }, 5000); // Reintenta cada 5 segundos
+        }
+    });
+    
+    audio.addEventListener('playing', () => {
+        statusText.textContent = '▶ Reproduciendo en vivo';
+        if (retryInterval) {
+            clearInterval(retryInterval);
+            retryInterval = null;
+        }
+    });
+})();
+<\/script>
 </body>
 </html>
 `;
+
 // Abrir ventana popup con dimensiones específicas
 const playerWindow = window.open(
 '',
 'RadioDelBosquePlayer',
-'width=450,height=350,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
+'width=450,height=400,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
 );
 if (playerWindow) {
 playerWindow.document.write(playerWindowContent);
@@ -1089,6 +1123,7 @@ playerWindow.document.close();
 alert('Por favor, permití las ventanas emergentes (popups) para escuchar la radio.');
 }
 });
+
 /* Programación */
 const programs = [
 { id: 1, title: 'Por Siempre Clásicos', time: '05:00 - 09:00', days: 'Todos los días', host: 'Música de los 70, 80, 90 y 2000', category: 'Música', icon: '🎵', image: 'images/Por Siempre Clásicos.png' },
@@ -1097,12 +1132,12 @@ const programs = [
 { id: 4, title: 'Mediodía en el Bosque', time: '12:00 - 14:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Variedades', icon: '☀️', image: 'images/Mediodia en el Bosque.png' },
 { id: 5, title: 'Resumen de Noticias - Mañana', time: '12:00 HS', days: 'Lunes a Viernes', host: 'Resumen de la mañana', category: 'Noticias', icon: '📰', image: 'images/Resumen de Noticias - Mañana.jpg' },
 { id: 6, title: 'La Tarde del Bosque', time: '16:00 - 19:00', days: 'Lunes a Viernes', host: 'Equipo Radio del Bosque', category: 'Musical', icon: '', image: 'images/La Tarde del Bosque.png' },
-{ id: 9, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '🎶', image: 'images/Fin de Semana.png' },
+{ id: 9, title: 'El Bosque del Fin de Semana', time: '10:00 - 14:00', days: 'Sábados y Domingos', host: 'Equipo Radio del Bosque', category: 'Fin de Semana', icon: '', image: 'images/Fin de Semana.png' },
 { id: 10, title: 'Pasajeros del Espacio', time: '10:00 - 13:00', days: 'Sábados', host: 'Marisa Waters, Fakundo DN y Rocío Escalante', category: 'Especial', icon: '🚀', image: 'images/Pasajeros del Espacio.png' },
 ];
 const gridContainer = document.getElementById('programmingGrid');
 function renderPrograms() {
-const newContentHTML = `
+const newContentHTML = \`
 <div class="program-card" style="grid-column: 1 / -1; background: transparent; border: none; box-shadow: none;">
 <div style="background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(95, 191, 138, 0.15);">
 <div class="program-card__image" style="aspect-ratio: 21/9;">
@@ -1137,28 +1172,28 @@ Quiero tener mi programa
 </div>
 </div>
 </div>
-`;
+\`;
 let htmlContent = newContentHTML;
-htmlContent += programs.map(p => `
+htmlContent += programs.map(p => \`
 <div class="program-card">
 <div class="program-card__image">
-<img src="${p.image}" alt="${p.title}" loading="lazy" />
+<img src="\${p.image}" alt="\${p.title}" loading="lazy" />
 <div class="program-card__image-overlay"></div>
-<span class="program-card__icon-badge">${p.icon}</span>
+<span class="program-card__icon-badge">\${p.icon}</span>
 </div>
 <div class="program-card__content">
-<span class="program-card__category">${p.category}</span>
-<h3 class="program-card__title">${p.title}</h3>
+<span class="program-card__category">\${p.category}</span>
+<h3 class="program-card__title">\${p.title}</h3>
 <div class="program-card__meta">
 <span class="program-card__time">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-${p.time} · ${p.days}
+\${p.time} · \${p.days}
 </span>
 </div>
-<p class="program-card__host">${p.host}</p>
+<p class="program-card__host">\${p.host}</p>
 </div>
 </div>
-`).join('');
+\`).join('');
 gridContainer.innerHTML = htmlContent;
 }
 renderPrograms();

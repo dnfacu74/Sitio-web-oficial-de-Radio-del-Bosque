@@ -997,131 +997,18 @@ document.body.style.overflow = '';
 }
 });
 
-/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE CON AUTORECONEXIÓN */
+/* ABRIR REPRODUCTOR EN VENTANA POPUP INDEPENDIENTE */
 const btnOpenPlayer = document.getElementById('btnOpenPlayer');
 btnOpenPlayer.addEventListener('click', () => {
-    // URL del stream con timestamp anti-caché
-    const streamUrl = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_684679610&t=' + Date.now();
-    const logoUrl = 'images/logo_radio.png';
-
-    // Contenido HTML de la ventana popup MEJORADO Y LIMPIO
-    const playerWindowContent = `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio del Bosque LP - En Vivo</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-font-family: 'Inter', sans-serif;
-background: linear-gradient(135deg, #0f1a14, #142218);
-color: #f5f0e8;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-padding: 20px;
-}
-.container { text-align: center; max-width: 400px; width: 100%; }
-.logo {
-width: 100px; height: 100px; border-radius: 50%;
-border: 3px solid #d4a574; margin-bottom: 20px;
-box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
-}
-.title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; color: #f5f0e8; }
-.subtitle { font-size: 0.9rem; color: #b8b0a0; margin-bottom: 24px; }
-audio { width: 100%; max-width: 360px; border-radius: 12px; outline: none; }
-.hint { font-size: 0.8rem; color: #7a7568; margin-top: 16px; font-style: italic; }
-.status { font-size: 0.8rem; color: #5fbf8a; margin-top: 8px; min-height: 1.2em; }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-</head>
-<body>
-<div class="container">
-<img src="${logoUrl}" alt="Radio del Bosque LP" class="logo" />
-<h1 class="title">Radio del Bosque LP</h1>
-<p class="subtitle">Transmisión 24/7 desde La Plata</p>
-<audio id="streamAudio" controls preload="none">
-<source src="${streamUrl}" type="audio/mpeg">
-Tu navegador no soporta audio HTML5.
-</audio>
-<div id="statusText" class="status">Conectando...</div>
-<p class="hint">💡 Podés minimizar esta ventana y seguir navegando</p>
-</div>
-
-<script>
-(function() {
-    const audio = document.getElementById('streamAudio');
-    const statusText = document.getElementById('statusText');
-    let retryInterval = null;
-    
-    // Función para intentar reproducir
-    function tryPlay() {
-        audio.load();
-        const playPromise = audio.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                statusText.textContent = '▶ Reproduciendo en vivo';
-                clearInterval(retryInterval);
-            }).catch(error => {
-                statusText.textContent = '⏸ Click en Play para iniciar';
-                console.log('Autoplay bloqueado, esperando interacción');
-            });
-        }
-    }
-
-    // Intentar autoplay al cargar
-    window.addEventListener('load', tryPlay);
-    
-    // Si el usuario hace click en cualquier lado, intentamos reproducir
-    document.addEventListener('click', () => {
-        if(audio.paused) tryPlay();
-    }, { once: true });
-
-    // Sistema de reconexión automática
-    audio.addEventListener('stalled', () => {
-        statusText.textContent = '⚠ Reconectando...';
-    });
-    
-    audio.addEventListener('error', () => {
-        statusText.textContent = ' Señal interrumpida. Reintentando...';
-        if (!retryInterval) {
-            retryInterval = setInterval(() => {
-                audio.load();
-                audio.play().catch(() => {});
-            }, 5000); // Reintenta cada 5 segundos
-        }
-    });
-    
-    audio.addEventListener('playing', () => {
-        statusText.textContent = '▶ Reproduciendo en vivo';
-        if (retryInterval) {
-            clearInterval(retryInterval);
-            retryInterval = null;
-        }
-    });
-})();
-<\/script>
-</body>
-</html>
-`;
-
-    // Abrir ventana popup con dimensiones específicas
+    // Abrimos player.html directamente. Esto NUNCA falla porque es una navegación real, no un document.write
     const playerWindow = window.open(
-        '',
-        'RadioDelBosquePlayer',
-        'width=450,height=400,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
+        'player.html', 
+        'RadioDelBosquePlayer', 
+        'width=450,height=420,left=100,top=100,resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no'
     );
     
-    if (playerWindow) {
-        playerWindow.document.write(playerWindowContent);
-        playerWindow.document.close();
-    } else {
-        alert('Por favor, permití las ventanas emergentes (popups) para escuchar la radio.');
+    if (!playerWindow) {
+        alert('Por favor, habilita las ventanas emergentes para escuchar la radio.');
     }
 });
 

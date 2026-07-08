@@ -215,148 +215,23 @@ width: 2px; height: 40px;
 background: linear-gradient(to bottom, var(--green-accent), transparent);
 animation: float 2s ease-in-out infinite;
 }
-/* --- REPRODUCTOR DE RADIO OPTIMIZADO --- */
-.radio-player-widget {
+/* --- CONTENEDOR REPRODUCTOR CASTER.FM --- */
+.radio-player-container {
 background: rgba(15, 26, 20, 0.85);
 backdrop-filter: blur(12px);
 -webkit-backdrop-filter: blur(12px);
 border: 1px solid rgba(95, 191, 138, 0.3);
 border-radius: var(--radius-lg);
-padding: 20px 24px;
+padding: 24px;
 margin: 0 auto 32px;
 max-width: 500px;
 width: 100%;
-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
-display: flex;
-flex-direction: column;
-gap: 16px;
-position: relative;
-overflow: hidden;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 transition: all var(--transition-normal);
 }
-.radio-player-widget:hover {
+.radio-player-container:hover {
 border-color: var(--green-accent);
 box-shadow: 0 8px 40px rgba(95, 191, 138, 0.15);
-}
-.rp-status-bar {
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-size: 0.75rem;
-text-transform: uppercase;
-letter-spacing: 0.1em;
-font-weight: 600;
-}
-.rp-status-indicator {
-display: flex;
-align-items: center;
-gap: 6px;
-color: var(--text-muted);
-transition: color var(--transition-fast);
-}
-.rp-status-dot {
-width: 8px;
-height: 8px;
-border-radius: 50%;
-background-color: var(--text-muted);
-transition: background-color var(--transition-fast);
-}
-.rp-status-indicator.live { color: var(--red-live); }
-.rp-status-indicator.live .rp-status-dot {
-background-color: var(--red-live);
-box-shadow: 0 0 8px var(--red-live);
-animation: pulse 1.5s infinite;
-}
-.rp-status-indicator.loading { color: var(--gold); }
-.rp-status-indicator.loading .rp-status-dot {
-background-color: var(--gold);
-animation: spin 1s linear infinite;
-}
-.rp-volume-control {
-display: flex;
-align-items: center;
-gap: 8px;
-color: var(--text-secondary);
-}
-.rp-volume-slider {
--webkit-appearance: none;
-width: 80px;
-height: 4px;
-background: rgba(255,255,255,0.2);
-border-radius: 2px;
-outline: none;
-cursor: pointer;
-}
-.rp-volume-slider::-webkit-slider-thumb {
--webkit-appearance: none;
-width: 12px;
-height: 12px;
-border-radius: 50%;
-background: var(--green-accent);
-cursor: pointer;
-transition: transform 0.2s;
-}
-.rp-main-controls {
-display: flex;
-align-items: center;
-gap: 20px;
-}
-.rp-play-btn {
-width: 64px;
-height: 64px;
-border-radius: 50%;
-background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
-border: none;
-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-box-shadow: 0 4px 15px rgba(95, 191, 138, 0.4);
-transition: all var(--transition-normal);
-flex-shrink: 0;
-}
-.rp-play-btn:hover {
-transform: scale(1.05);
-box-shadow: 0 6px 20px rgba(95, 191, 138, 0.6);
-}
-.rp-play-btn svg {
-width: 28px;
-height: 28px;
-fill: currentColor;
-}
-.rp-info {
-display: flex;
-flex-direction: column;
-justify-content: center;
-overflow: hidden;
-}
-.rp-station-name {
-font-family: var(--font-display);
-font-size: 1.4rem;
-font-weight: 700;
-color: var(--text-primary);
-margin-bottom: 4px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-.rp-stream-label {
-font-size: 0.85rem;
-color: var(--green-accent);
-font-weight: 500;
-letter-spacing: 0.05em;
-}
-.rp-error-msg {
-background: rgba(230, 57, 70, 0.15);
-border: 1px solid var(--red-live);
-color: #ffcccc;
-padding: 10px;
-border-radius: var(--radius-sm);
-font-size: 0.85rem;
-text-align: center;
-display: none;
-margin-top: 10px;
 }
 @keyframes spin {
 0% { transform: rotate(0deg); }
@@ -377,9 +252,7 @@ to { opacity: 1; transform: translateY(0); }
 100% { transform: translateY(0px); }
 }
 @media (max-width: 768px) {
-.radio-player-widget { padding: 16px; margin-bottom: 24px; }
-.rp-play-btn { width: 56px; height: 56px; }
-.rp-station-name { font-size: 1.2rem; }
+.radio-player-container { padding: 16px; margin-bottom: 24px; }
 .header__nav { display: none; }
 .header__toggle { display: flex; }
 .about-grid, .audios-preview, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -468,32 +341,15 @@ EN VIVO AHORA
 </h1>
 <p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
 <p class="hero__studio">Desde el Estudio Marta Navarro</p>
-<!-- REPRODUCTOR HTML5 OPTIMIZADO -->
-<div class="radio-player-widget" id="player">
-<div class="rp-status-bar">
-<div class="rp-status-indicator" id="statusIndicator">
-<span class="rp-status-dot"></span>
-<span id="statusText">CONECTAR</span>
+
+<!-- NUEVO REPRODUCTOR CASTER.FM -->
+<div class="radio-player-container">
+    <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="574521f0-f26c-47c6-b2e5-84ab1fd97b96" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
+        <a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>
+    </div>
+    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 </div>
-<div class="rp-volume-control">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-<input type="range" class="rp-volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8">
-</div>
-</div>
-<div class="rp-main-controls">
-<button class="rp-play-btn" id="playPauseBtn" aria-label="Reproducir">
-<svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-<svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-</button>
-<div class="rp-info">
-<div class="rp-station-name">Radio del Bosque</div>
-<div class="rp-stream-label">Streaming en vivo</div>
-</div>
-</div>
-<div class="rp-error-msg" id="errorMsg">
-⚠️ El servidor no está disponible temporalmente. Reconectando...
-</div>
-</div>
+
 <!-- BOTÓN DESCARGAR APK -->
 <div class="apk-download-container">
 <button class="btn-apk" id="btnDescargarApk">
@@ -672,200 +528,47 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <a href="https://drive.usercontent.google.com/download?id=1-EGxiqn34DlMczmPVoXtC-I8M34jrG8b&export=download" class="apk-modal__download-btn" download>DESCARGAR APK AHORA</a>
 </div>
 </div>
-<!-- SCRIPTS OPTIMIZADOS -->
+<!-- SCRIPTS -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const STREAM_URL = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_480087796';
-    let audio = null;
-    let isPlaying = false;
-    let reconnectTimer = null;
-    let isReconnecting = false;
-
-    const playBtn = document.getElementById('playPauseBtn');
-    const iconPlay = document.getElementById('iconPlay');
-    const iconPause = document.getElementById('iconPause');
-    const statusIndicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const errorMsg = document.getElementById('errorMsg');
-
-    function initAudio() {
-        if (audio) {
-            audio.pause();
-            audio.src = '';
-            audio.load();
-            audio = null;
-        }
-        
-        audio = new Audio();
-        audio.src = STREAM_URL;
-        audio.preload = 'none';
-        audio.crossOrigin = 'anonymous';
-        
-        audio.addEventListener('playing', () => updateUI('playing'));
-        audio.addEventListener('pause', () => updateUI('paused'));
-        audio.addEventListener('waiting', () => updateUI('loading'));
-        audio.addEventListener('error', handleAudioError);
-        audio.addEventListener('stalled', handleAudioError);
-        
-        // Sincronizar volumen inicial
-        audio.volume = volumeSlider.value;
-    }
-
-    function updateUI(state) {
-        statusIndicator.classList.remove('live', 'loading');
-        errorMsg.style.display = 'none';
-        
-        switch(state) {
-            case 'playing':
-                iconPlay.style.display = 'none';
-                iconPause.style.display = 'block';
-                statusIndicator.classList.add('live');
-                statusText.textContent = 'EN VIVO';
-                isPlaying = true;
-                updateMediaSession();
-                break;
-            case 'paused':
-                iconPlay.style.display = 'block';
-                iconPause.style.display = 'none';
-                statusText.textContent = 'PAUSADO';
-                isPlaying = false;
-                break;
-            case 'loading':
-                statusIndicator.classList.add('loading');
-                statusText.textContent = 'CARGANDO...';
-                break;
-            case 'error':
-                iconPlay.style.display = 'block';
-                iconPause.style.display = 'none';
-                statusText.textContent = 'ERROR';
-                errorMsg.style.display = 'block';
-                isPlaying = false;
-                break;
-        }
-    }
-
-    async function togglePlay() {
-        if (!audio) initAudio();
-        
-        if (isPlaying) {
-            audio.pause();
-            // Para ahorrar memoria y evitar delay al reconectar, limpiamos el src
-            audio.src = ''; 
-            audio.load();
-            audio = null;
-            updateUI('paused');
-        } else {
-            try {
-                if (!audio || audio.src === '') initAudio();
-                updateUI('loading');
-                await audio.play();
-            } catch (err) {
-                console.error('Error al reproducir:', err);
-                updateUI('error');
-            }
-        }
-    }
-
-    function handleAudioError() {
-        if (isPlaying && !isReconnecting) {
-            isReconnecting = true;
-            updateUI('loading');
-            statusText.textContent = 'RECONECTANDO...';
-            
-            if (reconnectTimer) clearTimeout(reconnectTimer);
-            reconnectTimer = setTimeout(() => {
-                console.log('Intentando reconexión...');
-                initAudio();
-                audio.play().then(() => {
-                    isReconnecting = false;
-                }).catch(() => {
-                    isReconnecting = false;
-                    handleAudioError(); // Reintentar
-                });
-            }, 3000);
-        }
-    }
-
-    // Media Session API para control desde pantalla de bloqueo
-    function updateMediaSession() {
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: 'Radio del Bosque LP',
-                artist: 'En Vivo',
-                album: 'La Plata, Argentina',
-                artwork: [
-                    { src: 'images/logo_radio.png', sizes: '512x512', type: 'image/png' }
-                ]
-            });
-
-            navigator.mediaSession.setActionHandler('play', () => togglePlay());
-            navigator.mediaSession.setActionHandler('pause', () => togglePlay());
-            navigator.mediaSession.setActionHandler('stop', () => {
-                if (audio) {
-                    audio.pause();
-                    updateUI('paused');
-                }
-            });
-        }
-    }
-
-    // Event Listeners
-    playBtn.addEventListener('click', togglePlay);
-    
-    volumeSlider.addEventListener('input', (e) => {
-        if (audio) audio.volume = e.target.value;
-    });
-
-    // Detección de conexión a internet
-    window.addEventListener('online', () => {
-        if (isPlaying) {
-            statusText.textContent = 'CONECTADO';
-            handleAudioError();
-        }
-    });
-
-    window.addEventListener('offline', () => {
-        statusText.textContent = 'SIN CONEXIÓN';
-        updateUI('error');
-    });
-
     // Lógica Modal APK
     const btnApk = document.getElementById('btnDescargarApk');
     const modal = document.getElementById('apkModal');
     const closeBtn = document.getElementById('apkModalClose');
 
-    btnApk.onclick = () => modal.classList.add('active');
-    closeBtn.onclick = () => modal.classList.remove('active');
+    if(btnApk) btnApk.onclick = () => modal.classList.add('active');
+    if(closeBtn) closeBtn.onclick = () => modal.classList.remove('active');
     window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
-    // Programación dinámica (ejemplo simplificado basado en el diseño)
+    // Programación dinámica
     const progGrid = document.getElementById('programmingGrid');
     const programas = [
         { title: 'Bichos de Radio', time: '10:00 - 12:00', days: 'Lun a Vie', host: 'Equipo Radio del Bosque', img: 'images/bichos-5.jpg' },
         { title: 'Carrusel', time: '14:00 - 16:00', days: 'Lun a Vie', host: 'Variedades y Música', img: 'images/martita.png' }
     ];
 
-    programas.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'program-card';
-        card.innerHTML = `
-            <div class="program-card__image">
-                <img src="${p.img}" alt="${p.title}" loading="lazy">
-                <div class="program-card__image-overlay"></div>
-            </div>
-            <div class="program-card__content">
-                <span class="program-card__category">Programa</span>
-                <h3 class="program-card__title">${p.title}</h3>
-                <div class="program-card__meta">
-                    <div class="program-card__time">🕒 ${p.time}</div>
-                    <div class="program-card__days">📅 ${p.days}</div>
+    if(progGrid) {
+        programas.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'program-card';
+            card.innerHTML = `
+                <div class="program-card__image">
+                    <img src="${p.img}" alt="${p.title}" loading="lazy">
+                    <div class="program-card__image-overlay"></div>
                 </div>
-                <p class="program-card__host">${p.host}</p>
-            </div>
-        `;
-        progGrid.appendChild(card);
-    });
+                <div class="program-card__content">
+                    <span class="program-card__category">Programa</span>
+                    <h3 class="program-card__title">${p.title}</h3>
+                    <div class="program-card__meta">
+                        <div class="program-card__time">🕒 ${p.time}</div>
+                        <div class="program-card__days">📅 ${p.days}</div>
+                    </div>
+                    <p class="program-card__host">${p.host}</p>
+                </div>
+            `;
+            progGrid.appendChild(card);
+        });
+    }
 });
 </script>
 </body>

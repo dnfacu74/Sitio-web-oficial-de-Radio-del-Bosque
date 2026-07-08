@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0T7H98V9L"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-L0T7H98V9L');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<meta name="description" content="Radio del Bosque LP - Emisora digital independiente de La Plata, Buenos Aires, Argentina." />
+<title>Radio del Bosque LP — La Plata · Buenos Aires · Argentina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+:root {
+--bg-primary: #0a0f0d;
+--bg-secondary: #0f1a14;
+--bg-tertiary: #142218;
+--green-dark: #1a3d2e;
+--green-mid: #2d5a3f;
+--green-light: #4a8b6a;
+--green-accent: #5fbf8a;
+--gold: #d4a574;
+--gold-light: #e8c49a;
+--orange: #c97b3a;
+--orange-light: #e89850;
+--text-primary: #f5f0e8;
+--text-secondary: #b8b0a0;
+--text-muted: #7a7568;
+--red-live: #e63946;
+--font-display: 'Playfair Display', serif;
+--font-body: 'Inter', sans-serif;
+--font-title: 'Bebas Neue', sans-serif;
+--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+--shadow-glow: 0 0 20px rgba(95, 191, 138, 0.3);
+--radius-sm: 8px;
+--radius-md: 12px;
+--radius-lg: 20px;
+--radius-full: 9999px;
+--transition-fast: 0.2s ease;
+--transition-normal: 0.3s ease;
+--transition-slow: 0.5s ease;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+font-family: var(--font-body);
+background: var(--bg-primary);
+color: var(--text-primary);
+line-height: 1.6;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section-title {
+font-family: var(--font-title);
+font-size: clamp(2rem, 5vw, 3.5rem);
+color: var(--text-primary);
+text-align: center;
+letter-spacing: 0.15em;
+margin-bottom: 16px;
+text-transform: uppercase;
+}
+.section-subtitle {
+font-size: clamp(0.9rem, 2vw, 1.1rem);
+color: var(--text-secondary);
+text-align: center;
+max-width: 600px;
+margin: 0 auto 48px;
+font-weight: 300;
+}
+.divider {
+width: 80px; height: 3px;
+background: linear-gradient(90deg, var(--green-accent), var(--gold));
+margin: 0 auto 32px;
+border-radius: var(--radius-full);
+}
+.text-accent { color: var(--green-accent); }
+.text-gold { color: var(--gold); }
+.btn {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 14px 28px; border: none; border-radius: var(--radius-full);
+font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+cursor: pointer; transition: all var(--transition-normal);
+text-decoration: none; letter-spacing: 0.05em;
+}
+.btn-primary {
+background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+color: white; box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(95, 191, 138, 0.5); }
+.btn-secondary {
+background: transparent; color: var(--text-primary);
+border: 2px solid var(--green-accent);
+}
+.btn-secondary:hover { background: var(--green-accent); color: var(--bg-primary); }
+.btn-gold {
+background: linear-gradient(135deg, var(--gold), var(--orange));
+color: var(--bg-primary);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4); }
+/* HEADER */
+.header {
+position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+padding: 20px 0; transition: all var(--transition-normal);
+background: rgba(10, 15, 13, 0.95);
+backdrop-filter: blur(20px);
+}
+.header__container { display: flex; align-items: center; justify-content: space-between; }
+.header__brand {
+display: flex; align-items: center; gap: 12px;
+text-decoration: none; color: var(--text-primary);
+}
+.header__logo {
+width: 48px; height: 48px; border-radius: 50%;
+border: 2px solid var(--green-accent);
+transition: transform var(--transition-normal);
+}
+.header__brand:hover .header__logo { transform: rotate(360deg); }
+.header__brand-text { display: flex; flex-direction: column; }
+.header__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+.header__location { font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 0.05em; }
+.header__nav { display: flex; align-items: center; gap: 8px; }
+.header__link {
+color: var(--text-primary); text-decoration: none;
+font-size: 0.9rem; font-weight: 500;
+padding: 8px 16px; border-radius: var(--radius-full);
+transition: all var(--transition-fast);
+}
+.header__link:hover { background: rgba(95, 191, 138, 0.15); color: var(--green-accent); }
+.header__whatsapp {
+display: inline-flex; align-items: center; gap: 8px;
+background: #25d366; color: white; padding: 10px 20px;
+border-radius: var(--radius-full); text-decoration: none;
+font-weight: 600; font-size: 0.9rem; margin-left: 12px;
+transition: all var(--transition-normal);
+}
+.header__whatsapp:hover { background: #128c7e; transform: translateY(-2px); }
+.header__toggle {
+display: none; flex-direction: column; gap: 5px;
+background: none; border: none; cursor: pointer; padding: 8px;
+}
+.header__toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: all var(--transition-normal); }
+/* HERO */
+.hero {
+position: relative; min-height: 100vh;
+display: flex; align-items: center; justify-content: center;
+overflow: hidden; padding: 120px 0 80px;
+}
+.hero__background {
+position: absolute; inset: 0;
+background: linear-gradient(135deg, rgba(10, 15, 13, 0.85) 0%, rgba(26, 61, 46, 0.6) 100%),
+url('images/bichos-5.jpg') center/cover no-repeat;
+z-index: 0;
+}
+.hero__overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 0%, var(--bg-primary) 100%); }
+.hero__vignette { position: absolute; inset: 0; box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.8); }
+.hero__content { position: relative; z-index: 1; text-align: center; max-width: 900px; animation: fadeInUp 1s ease; }
+.hero__logo-top {
+width: 180px; height: 180px;
+margin: 24px auto;
+border-radius: 50%;
+border: 3px solid var(--gold);
+box-shadow: 0 0 40px rgba(212, 165, 116, 0.4);
+animation: float 3s ease-in-out infinite;
+object-fit: cover;
+background: var(--bg-secondary);
+}
+.hero__badge {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 8px 20px; background: rgba(230, 57, 70, 0.2);
+border: 1px solid var(--red-live); border-radius: var(--radius-full);
+font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+color: var(--red-live); margin-bottom: 24px;
+animation: pulse 2s ease-in-out infinite;
+}
+.hero__live-dot { width: 8px; height: 8px; background: var(--red-live); border-radius: 50%; box-shadow: 0 0 10px var(--red-live); }
+.hero__title {
+font-family: var(--font-title);
+font-size: clamp(3rem, 12vw, 8rem);
+line-height: 0.95; letter-spacing: 0.05em;
+margin-bottom: 24px; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.hero__title-line { display: block; color: var(--text-primary); }
+.hero__title-line--accent {
+background: linear-gradient(135deg, var(--green-accent), var(--gold));
+-webkit-background-clip: text; background-clip: text;
+-webkit-text-fill-color: transparent; color: transparent;
+}
+.hero__subtitle {
+font-size: clamp(1rem, 2.5vw, 1.3rem);
+color: var(--text-secondary); letter-spacing: 0.2em;
+text-transform: uppercase; margin-bottom: 16px; font-weight: 300;
+}
+.hero__studio {
+font-family: var(--font-display);
+font-size: clamp(1rem, 2vw, 1.2rem);
+color: var(--gold); font-style: italic; margin-bottom: 48px;
+}
+.hero__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.hero__scroll {
+position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+display: flex; flex-direction: column; align-items: center; gap: 8px;
+color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.2em;
+}
+.hero__scroll-indicator {
+width: 2px; height: 40px;
+background: linear-gradient(to bottom, var(--green-accent), transparent);
+animation: float 2s ease-in-out infinite;
+}
+/* --- REPRODUCTOR DE RADIO OPTIMIZADO --- */
+.radio-player-widget {
+background: rgba(15, 26, 20, 0.85);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(95, 191, 138, 0.3);
+border-radius: var(--radius-lg);
+padding: 20px 24px;
+margin: 0 auto 32px;
+max-width: 500px;
+width: 100%;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
+display: flex;
+flex-direction: column;
+gap: 16px;
+position: relative;
+overflow: hidden;
+transition: all var(--transition-normal);
+}
+.radio-player-widget:hover {
+border-color: var(--green-accent);
+box-shadow: 0 8px 40px rgba(95, 191, 138, 0.15);
+}
+.rp-status-bar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.75rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+font-weight: 600;
+}
+.rp-status-indicator {
+display: flex;
+align-items: center;
+gap: 6px;
+color: var(--text-muted);
+transition: color var(--transition-fast);
+}
+.rp-status-dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: var(--text-muted);
+transition: background-color var(--transition-fast);
+}
+.rp-status-indicator.live { color: var(--red-live); }
+.rp-status-indicator.live .rp-status-dot {
+background-color: var(--red-live);
+box-shadow: 0 0 8px var(--red-live);
+animation: pulse 1.5s infinite;
+}
+.rp-status-indicator.loading { color: var(--gold); }
+.rp-status-indicator.loading .rp-status-dot {
+background-color: var(--gold);
+animation: spin 1s linear infinite;
+}
+.rp-volume-control {
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--text-secondary);
+}
+.rp-volume-slider {
+-webkit-appearance: none;
+width: 80px;
+height: 4px;
+background: rgba(255,255,255,0.2);
+border-radius: 2px;
+outline: none;
+cursor: pointer;
+}
+.rp-volume-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: var(--green-accent);
+cursor: pointer;
+transition: transform 0.2s;
+}
+.rp-main-controls {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+.rp-play-btn {
+width: 64px;
+height: 64px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+border: none;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(95, 191, 138, 0.4);
+transition: all var(--transition-normal);
+flex-shrink: 0;
+}
+.rp-play-btn:hover {
+transform: scale(1.05);
+box-shadow: 0 6px 20px rgba(95, 191, 138, 0.6);
+}
+.rp-play-btn svg {
+width: 28px;
+height: 28px;
+fill: currentColor;
+}
+.rp-info {
+display: flex;
+flex-direction: column;
+justify-content: center;
+overflow: hidden;
+}
+.rp-station-name {
+font-family: var(--font-display);
+font-size: 1.4rem;
+font-weight: 700;
+color: var(--text-primary);
+margin-bottom: 4px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.rp-stream-label {
+font-size: 0.85rem;
+color: var(--green-accent);
+font-weight: 500;
+letter-spacing: 0.05em;
+}
+.rp-error-msg {
+background: rgba(230, 57, 70, 0.15);
+border: 1px solid var(--red-live);
+color: #ffcccc;
+padding: 10px;
+border-radius: var(--radius-sm);
+font-size: 0.85rem;
+text-align: center;
+display: none;
+margin-top: 10px;
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+@keyframes pulse {
+0% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.2); opacity: 0.7; }
+100% { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+0% { transform: translateY(0px); }
+50% { transform: translateY(-10px); }
+100% { transform: translateY(0px); }
+}
+@media (max-width: 768px) {
+.radio-player-widget { padding: 16px; margin-bottom: 24px; }
+.rp-play-btn { width: 56px; height: 56px; }
+.rp-station-name { font-size: 1.2rem; }
+.header__nav { display: none; }
+.header__toggle { display: flex; }
+.about-grid, .audios-preview, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+.gallery-category-cards { grid-template-columns: 1fr; }
+.audios-preview { padding: 32px; }
+}
+/* --- ESTILOS BOTÓN APK Y MODAL --- */
+.apk-download-container { text-align: center; margin-top: 16px; }
+.btn-apk {
+background: transparent; border: 2px solid var(--gold); color: var(--gold);
+font-weight: 800; text-transform: uppercase; font-size: 0.9rem;
+padding: 12px 24px; border-radius: var(--radius-full); cursor: pointer;
+transition: all var(--transition-normal); display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-apk:hover { background: var(--gold); color: var(--bg-primary); box-shadow: 0 0 20px rgba(212, 165, 116, 0.4); }
+.apk-modal {
+position: fixed; inset: 0; z-index: 10000; background: rgba(0, 0, 0, 0.9);
+backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center;
+opacity: 0; pointer-events: none; transition: opacity var(--transition-normal); padding: 20px;
+}
+.apk-modal.active { opacity: 1; pointer-events: all; }
+.apk-modal__content {
+background: var(--bg-secondary); padding: 40px; border-radius: var(--radius-lg);
+max-width: 500px; width: 100%; position: relative; border: 1px solid rgba(212, 165, 116, 0.3);
+}
+.apk-modal__close {
+position: absolute; top: 15px; right: 15px; background: none; border: none;
+color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;
+}
+.apk-modal__title { font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); margin-bottom: 20px; text-align: center; }
+.apk-modal__steps { list-style: none; counter-reset: step-counter; margin-bottom: 24px; }
+.apk-modal__steps li { position: relative; padding-left: 40px; margin-bottom: 16px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+.apk-modal__steps li::before {
+counter-increment: step-counter; content: counter(step-counter);
+position: absolute; left: 0; top: 0; width: 28px; height: 28px;
+background: var(--green-dark); color: var(--green-accent); border-radius: 50%;
+text-align: center; line-height: 28px; font-weight: 700; font-size: 0.85rem; border: 1px solid var(--green-accent);
+}
+.apk-modal__download-btn {
+display: block; width: 100%; background: var(--green-accent); color: var(--bg-primary);
+text-align: center; padding: 14px; border-radius: var(--radius-full);
+text-decoration: none; font-weight: 700; font-size: 1rem; transition: background 0.3s;
+}
+.apk-modal__download-btn:hover { background: var(--gold); }
+</style>
+</head>
+<body>
+<header class="header" id="header">
+<div class="container header__container">
+<a href="#" class="header__brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="header__logo" width="48" height="48" />
+<div class="header__brand-text">
+<span class="header__name">Radio del Bosque</span>
+<span class="header__location">La Plata · Argentina</span>
+</div>
+</a>
+<nav class="header__nav">
+<a href="#inicio" class="header__link">Inicio</a>
+<a href="#nosotros" class="header__link">Nosotros</a>
+<a href="#programacion" class="header__link">Programación</a>
+<a href="#galeria" class="header__link">Galería</a>
+<a href="#contacto" class="header__link">Contacto</a>
+<a href="https://wa.me/5492216023878" target="_blank" class="header__whatsapp">
+<span>WhatsApp</span>
+</a>
+</nav>
+<button class="header__toggle" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+<main>
+<section id="inicio" class="hero">
+<div class="hero__background"></div>
+<div class="hero__overlay"></div>
+<div class="hero__vignette"></div>
+<div class="hero__content">
+<img src="images/logo_radio.png" alt="Radio del Bosque" class="hero__logo-top" />
+<div class="hero__badge">
+<span class="hero__live-dot"></span>
+EN VIVO AHORA
+</div>
+<h1 class="hero__title">
+<span class="hero__title-line">RADIO DEL</span>
+<span class="hero__title-line hero__title-line--accent">BOSQUE LP</span>
+</h1>
+<p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
+<p class="hero__studio">Desde el Estudio Marta Navarro</p>
+
+<!-- REPRODUCTOR HTML5 OPTIMIZADO -->
+<div class="radio-player-widget" id="player">
+<div class="rp-status-bar">
+<div class="rp-status-indicator" id="statusIndicator">
+<span class="rp-status-dot"></span>
+<span id="statusText">CONECTAR</span>
+</div>
+<div class="rp-volume-control">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+<input type="range" class="rp-volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8">
+</div>
+</div>
+<div class="rp-main-controls">
+<button class="rp-play-btn" id="playPauseBtn" aria-label="Reproducir">
+<svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+<svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+<div class="rp-info">
+<div class="rp-station-name">Radio del Bosque</div>
+<div class="rp-stream-label">Streaming en vivo</div>
+</div>
+</div>
+<div class="rp-error-msg" id="errorMsg">
+⚠️ El servidor no está disponible temporalmente. Reconectando...
+</div>
+</div>
+
+<!-- BOTÓN DESCARGAR APK -->
+<div class="apk-download-container">
+<button class="btn-apk" id="btnDescargarApk">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+DESCARGAR APP
+</button>
+</div>
+<div class="hero__scroll">
+<div class="hero__scroll-indicator"></div>
+</div>
+</div>
+</section>
+<!-- LIVE SECTION -->
+<section class="live-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Mirá<span class="text-accent">nos</span> en Vivo</h2>
+<div class="divider"></div>
+<p class="section-subtitle">Transmitimos en vivo desde el Estudio Marta Navarro en La Plata</p>
+</div>
+<div class="live-grid">
+<div class="live-video">
+<div class="live-video__header">
+<div class="live-video__badge">
+<span class="live-video__dot"></span>
+EN VIVO
+</div>
+<span class="live-video__platform">Kick · radiodelbosquelp</span>
+</div>
+<div class="live-video__container">
+<iframe src="https://player.kick.com/radiodelbosquelp" allowfullscreen scrolling="no"></iframe>
+</div>
+<div class="live-video__description">
+Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra señal de video en vivo a través de Kick.
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ABOUT -->
+<section id="nosotros" class="about-section">
+<div class="container">
+<div class="about-grid">
+<div class="about-content">
+<span class="about-label">NUESTRA HISTORIA</span>
+<h2 class="about-title">Donde cada voz<br/><span class="text-accent">encuentra su lugar</span></h2>
+<p class="about-text">Radio del Bosque es una emisora digital independiente nacida en La Plata, Buenos Aires, Argentina. Nuestro proyecto surge de la necesidad de crear un espacio de comunicación comunitario, independiente y sustentable.</p>
+<p class="about-text">Transmitimos las 24 horas llevando música, cultura, información y entretenimiento. Estamos construyendo nuestro estudio con materiales reciclados, demostrando que es posible crear oportunidades a partir de recursos recuperados.</p>
+<div class="about-stats">
+<div class="about-stat"><span class="about-stat__value">2016</span><span class="about-stat__label">Año de Fundación</span></div>
+<div class="about-stat"><span class="about-stat__value">24/7</span><span class="about-stat__label">Transmisión Continua</span></div>
+<div class="about-stat"><span class="about-stat__value">100%</span><span class="about-stat__label">Digital e Independiente</span></div>
+</div>
+<button id="btnColaborar" class="btn btn-gold">❤️ Colaborá con nosotros</button>
+</div>
+<div class="about-image">
+<div class="about-image__frame">
+<img src="images/martita.png" alt="Estudio Marta Navarro" loading="lazy" />
+<div class="about-image__caption">Estudio Marta Navarro</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PROGRAMMING -->
+<section id="programacion" class="programming-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Escuchá nuestros <span class="text-accent">Programas</span></h2>
+<div class="divider"></div>
+<p class="section-subtitle">Una grilla pensada para acompañarte en cada momento del día</p>
+</div>
+<div class="programming-grid" id="programmingGrid"></div>
+</div>
+</section>
+<!-- GALLERY -->
+<section id="galeria" class="gallery-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Galería de <span class="text-accent">Fotos</span></h2>
+<div class="divider"></div>
+<p class="section-subtitle">Explorá los momentos detrás de escena y en el aire</p>
+</div>
+<div class="gallery-category-cards">
+<a href="bichos-radio.html" target="_blank" class="gallery-category-card">
+<div class="gallery-category-card__icon">🎙️</div>
+<h3 class="gallery-category-card__title">Bichos de Radio</h3>
+<p class="gallery-category-card__desc">Nuestros conductores y equipos en plena transmisión, la esencia del aire.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
+<a href="carrusel.html" target="_blank" class="gallery-category-card">
+<div class="gallery-category-card__icon">🎠</div>
+<h3 class="gallery-category-card__title">Carrusel</h3>
+<p class="gallery-category-card__desc">Imágenes dinámicas del día a día en el estudio y en cabina.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
+<a href="encuentros-en-el-bosque.html" target="_blank" class="gallery-category-card">
+<div class="gallery-category-card__icon">🌳</div>
+<h3 class="gallery-category-card__title">Encuentros en el Bosque</h3>
+<p class="gallery-category-card__desc">Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
+<span class="gallery-category-card__link">Ver galería →</span>
+</a>
+</div>
+</div>
+</section>
+<!-- CONTACT -->
+<section id="contacto" class="contact-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Contacto</h2>
+<div class="divider"></div>
+<p class="section-subtitle">Escribinos por cualquier consulta.</p>
+</div>
+<div class="contact-grid">
+<a href="https://wa.me/5492216023878" target="_blank" class="contact-card">
+<div class="contact-card__icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</div>
+<div class="contact-card__info">
+<span class="contact-card__label">WhatsApp</span>
+<span class="contact-card__value">+54 9 221 602-3878</span>
+</div>
+</a>
+<a href="https://instagram.com/radiodelbosque.ok" target="_blank" class="contact-card">
+<div class="contact-card__icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+</div>
+<div class="contact-card__info">
+<span class="contact-card__label">Instagram</span>
+<span class="contact-card__value">@radiodelbosque.ok</span>
+</div>
+</a>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<img src="images/logo_radio.png" alt="Radio del Bosque LP" class="footer__logo" />
+<h3 class="footer__name">Radio del Bosque LP</h3>
+<p class="footer__desc">Emisora digital independiente de La Plata, Buenos Aires, Argentina.</p>
+</div>
+<div class="footer-links">
+<h4 class="footer__title">Accesos Rápidos</h4>
+<ul class="footer__list">
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#nosotros">Nosotros</a></li>
+<li><a href="#programacion">Programación</a></li>
+<li><a href="#galeria">Galería</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h4 class="footer__title">Contacto</h4>
+<ul class="footer__list">
+<li>📍 La Plata, Argentina</li>
+<li>📱 +54 9 221 6023878</li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<!-- MODAL INSTRUCCIONES APK -->
+<div class="apk-modal" id="apkModal">
+<div class="apk-modal__content">
+<button class="apk-modal__close" id="apkModalClose">✕</button>
+<h3 class="apk-modal__title">Instalación de la App</h3>
+<ol class="apk-modal__steps">
+<li>Abrir Ajustes del teléfono.</li>
+<li>Ingresar en Seguridad o Aplicaciones.</li>
+<li>Buscar "Instalar aplicaciones desconocidas".</li>
+<li>Seleccionar Chrome o su gestor de archivos.</li>
+<li>Activar "Permitir desde esta fuente".</li>
+<li>Instalar el archivo .apk descargado.</li>
+</ol>
+<a href="https://drive.usercontent.google.com/download?id=1-EGxiqn34DlMczmPVoXtC-I8M34jrG8b&export=download" class="apk-modal__download-btn" download>DESCARGAR APK AHORA</a>
+</div>
+</div>
+<!-- SCRIPTS OPTIMIZADOS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const STREAM_URL = 'https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_150559650';
+    let audio = null;
+    let isPlaying = false;
+    let reconnectTimer = null;
+    let isReconnecting = false;
+
+    const playBtn = document.getElementById('playPauseBtn');
+    const iconPlay = document.getElementById('iconPlay');
+    const iconPause = document.getElementById('iconPause');
+    const statusIndicator = document.getElementById('statusIndicator');
+    const statusText = document.getElementById('statusText');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const errorMsg = document.getElementById('errorMsg');
+
+    function initAudio() {
+        if (audio) {
+            audio.pause();
+            audio.src = '';
+            audio.load();
+            audio = null;
+        }
+        
+        audio = new Audio();
+        audio.src = STREAM_URL;
+        audio.preload = 'none';
+        audio.crossOrigin = 'anonymous';
+        
+        audio.addEventListener('playing', () => {
+            updateUI('playing');
+            isReconnecting = false;
+        });
+        audio.addEventListener('pause', () => updateUI('paused'));
+        audio.addEventListener('waiting', () => updateUI('loading'));
+        audio.addEventListener('error', handleAudioError);
+        audio.addEventListener('stalled', handleAudioError);
+        
+        audio.volume = volumeSlider.value;
+    }
+
+    function updateUI(state) {
+        statusIndicator.classList.remove('live', 'loading');
+        errorMsg.style.display = 'none';
+        
+        switch(state) {
+            case 'playing':
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+                statusIndicator.classList.add('live');
+                statusText.textContent = 'EN VIVO';
+                isPlaying = true;
+                updateMediaSession();
+                break;
+            case 'paused':
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                statusText.textContent = 'PAUSADO';
+                isPlaying = false;
+                break;
+            case 'loading':
+                statusIndicator.classList.add('loading');
+                statusText.textContent = 'CARGANDO...';
+                break;
+            case 'error':
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                statusText.textContent = 'ERROR';
+                errorMsg.style.display = 'block';
+                isPlaying = false;
+                break;
+        }
+    }
+
+    async function togglePlay() {
+        if (!audio) initAudio();
+        
+        if (isPlaying) {
+            audio.pause();
+            audio.src = ''; 
+            audio.load();
+            audio = null;
+            updateUI('paused');
+        } else {
+            try {
+                if (!audio || audio.src === '') initAudio();
+                updateUI('loading');
+                await audio.play();
+            } catch (err) {
+                console.error('Error al reproducir:', err);
+                handleAudioError();
+            }
+        }
+    }
+
+    function handleAudioError() {
+        if (!isReconnecting) {
+            isReconnecting = true;
+            updateUI('loading');
+            statusText.textContent = 'RECONECTANDO...';
+            
+            if (reconnectTimer) clearTimeout(reconnectTimer);
+            reconnectTimer = setTimeout(() => {
+                console.log('Intentando reconexión...');
+                initAudio();
+                audio.play().then(() => {
+                    isReconnecting = false;
+                    isPlaying = true;
+                }).catch(() => {
+                    isReconnecting = false;
+                    handleAudioError(); 
+                });
+            }, 3000);
+        }
+    }
+
+    function updateMediaSession() {
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: 'Radio del Bosque LP',
+                artist: 'En Vivo',
+                album: 'La Plata, Argentina',
+                artwork: [
+                    { src: 'images/logo_radio.png', sizes: '512x512', type: 'image/png' }
+                ]
+            });
+
+            navigator.mediaSession.setActionHandler('play', () => togglePlay());
+            navigator.mediaSession.setActionHandler('pause', () => togglePlay());
+        }
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+    volumeSlider.addEventListener('input', (e) => {
+        if (audio) audio.volume = e.target.value;
+    });
+
+    window.addEventListener('online', () => {
+        if (isPlaying) handleAudioError();
+    });
+
+    window.addEventListener('offline', () => {
+        statusText.textContent = 'SIN CONEXIÓN';
+        updateUI('error');
+    });
+
+    // Lógica Modal APK
+    const btnApk = document.getElementById('btnDescargarApk');
+    const modal = document.getElementById('apkModal');
+    const closeBtn = document.getElementById('apkModalClose');
+    if(btnApk) btnApk.onclick = () => modal.classList.add('active');
+    if(closeBtn) closeBtn.onclick = () => modal.classList.remove('active');
+    window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+
+    // Programación dinámica
+    const progGrid = document.getElementById('programmingGrid');
+    const programas = [
+        { title: 'Bichos de Radio', time: '10:00 - 12:00', days: 'Lun a Vie', host: 'Equipo Radio del Bosque', img: 'images/bichos-5.jpg' },
+        { title: 'Carrusel', time: '14:00 - 16:00', days: 'Lun a Vie', host: 'Variedades y Música', img: 'images/martita.png' }
+    ];
+    if(progGrid) {
+        programas.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'program-card';
+            card.innerHTML = `
+                <div class="program-card__image"><img src="${p.img}" alt="${p.title}" loading="lazy"><div class="program-card__image-overlay"></div></div>
+                <div class="program-card__content">
+                    <span class="program-card__category">Programa</span>
+                    <h3 class="program-card__title">${p.title}</h3>
+                    <div class="program-card__meta"><div class="program-card__time">🕒 ${p.time}</div><div class="program-card__days">📅 ${p.days}</div></div>
+                    <p class="program-card__host">${p.host}</p>
+                </div>`;
+            progGrid.appendChild(card);
+        });
+    }
+});
+</script>
+</body>
+</html>

@@ -1,9 +1,3 @@
-Aquí tienes un archivo `README.md` optimizado específicamente para **Radio del Bosque La Plata**. Este documento está diseñado para mejorar el SEO (Search Engine Optimization) y ayudar a que tu sitio web aparezca en los primeros resultados de búsqueda, así como en las sugerencias de YouTube, Instagram y Facebook.
-
-Copia y pega este contenido en un archivo llamado `README.md` en la raíz de tu proyecto o repositorio.
-
-***
-
 # Radio del Bosque La Plata | 107.3 FM & Streaming Online
 
 **Radio del Bosque** es una emisora líder en La Plata, Buenos Aires, dedicada a ofrecer contenido de calidad, música seleccionada y la mejor compañía durante todo el día. Escuchanos en vivo desde cualquier parte del mundo a través de nuestra web o aplicaciones móviles.

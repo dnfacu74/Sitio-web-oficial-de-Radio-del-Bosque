@@ -215,240 +215,343 @@ width: 2px; height: 40px;
 background: linear-gradient(to bottom, var(--green-accent), transparent);
 animation: float 2s ease-in-out infinite;
 }
-
 /* --- NUEVO ESTILO: REPRODUCTOR DE RADIO HTML5 --- */
 .radio-player-widget {
-    background: rgba(15, 26, 20, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(95, 191, 138, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 20px 24px;
-    margin: 0 auto 32px;
-    max-width: 500px;
-    width: 100%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: all var(--transition-normal);
+background: rgba(15, 26, 20, 0.85);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(95, 191, 138, 0.3);
+border-radius: var(--radius-lg);
+padding: 20px 24px;
+margin: 0 auto 32px;
+max-width: 500px;
+width: 100%;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
+display: flex;
+flex-direction: column;
+gap: 16px;
+position: relative;
+overflow: hidden;
+transition: all var(--transition-normal);
 }
-
 .radio-player-widget:hover {
-    border-color: var(--green-accent);
-    box-shadow: 0 8px 40px rgba(95, 191, 138, 0.15);
+border-color: var(--green-accent);
+box-shadow: 0 8px 40px rgba(95, 191, 138, 0.15);
 }
-
 /* Barra superior de estado */
 .rp-status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.75rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+font-weight: 600;
 }
-
 .rp-status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-muted);
-    transition: color var(--transition-fast);
+display: flex;
+align-items: center;
+gap: 6px;
+color: var(--text-muted);
+transition: color var(--transition-fast);
 }
-
 .rp-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--text-muted);
-    transition: background-color var(--transition-fast);
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: var(--text-muted);
+transition: background-color var(--transition-fast);
 }
-
 /* Estados del indicador */
 .rp-status-indicator.live { color: var(--red-live); }
-.rp-status-indicator.live .rp-status-dot { 
-    background-color: var(--red-live); 
-    box-shadow: 0 0 8px var(--red-live);
-    animation: pulse 1.5s infinite;
+.rp-status-indicator.live .rp-status-dot {
+background-color: var(--red-live);
+box-shadow: 0 0 8px var(--red-live);
+animation: pulse 1.5s infinite;
 }
-
 .rp-status-indicator.loading { color: var(--gold); }
-.rp-status-indicator.loading .rp-status-dot { 
-    background-color: var(--gold);
-    animation: spin 1s linear infinite; /* Definido más abajo */
+.rp-status-indicator.loading .rp-status-dot {
+background-color: var(--gold);
+animation: spin 1s linear infinite; /* Definido más abajo */
 }
-
 .rp-volume-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-secondary);
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--text-secondary);
 }
-
 .rp-volume-slider {
-    -webkit-appearance: none;
-    width: 80px;
-    height: 4px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
+-webkit-appearance: none;
+width: 80px;
+height: 4px;
+background: rgba(255,255,255,0.2);
+border-radius: 2px;
+outline: none;
+cursor: pointer;
 }
-
 .rp-volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--green-accent);
-    cursor: pointer;
-    transition: transform 0.2s;
+-webkit-appearance: none;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: var(--green-accent);
+cursor: pointer;
+transition: transform 0.2s;
 }
-
 .rp-volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+transform: scale(1.2);
 }
-
 /* Controles principales */
 .rp-main-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+display: flex;
+align-items: center;
+gap: 20px;
 }
-
 .rp-play-btn {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
-    border: none;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(95, 191, 138, 0.4);
-    transition: all var(--transition-normal);
-    flex-shrink: 0;
+width: 64px;
+height: 64px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+border: none;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(95, 191, 138, 0.4);
+transition: all var(--transition-normal);
+flex-shrink: 0;
 }
-
 .rp-play-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(95, 191, 138, 0.6);
+transform: scale(1.05);
+box-shadow: 0 6px 20px rgba(95, 191, 138, 0.6);
 }
-
 .rp-play-btn:active {
-    transform: scale(0.95);
+transform: scale(0.95);
 }
-
 .rp-play-btn svg {
-    width: 28px;
-    height: 28px;
-    fill: currentColor;
+width: 28px;
+height: 28px;
+fill: currentColor;
 }
-
 .rp-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: center;
+overflow: hidden;
 }
-
 .rp-station-name {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+font-family: var(--font-display);
+font-size: 1.4rem;
+font-weight: 700;
+color: var(--text-primary);
+margin-bottom: 4px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
-
 .rp-stream-label {
-    font-size: 0.85rem;
-    color: var(--green-accent);
-    font-weight: 500;
-    letter-spacing: 0.05em;
+font-size: 0.85rem;
+color: var(--green-accent);
+font-weight: 500;
+letter-spacing: 0.05em;
 }
-
 /* Mensaje de error */
 .rp-error-msg {
-    background: rgba(230, 57, 70, 0.15);
-    border: 1px solid var(--red-live);
-    color: #ffcccc;
-    padding: 10px;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    text-align: center;
-    display: none; /* Oculto por defecto */
-    margin-top: 10px;
+background: rgba(230, 57, 70, 0.15);
+border: 1px solid var(--red-live);
+color: #ffcccc;
+padding: 10px;
+border-radius: var(--radius-sm);
+font-size: 0.85rem;
+text-align: center;
+display: none; /* Oculto por defecto */
+margin-top: 10px;
 }
-
 /* Fallback para Autoplay Bloqueado */
 .rp-autoplay-fallback {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 15, 13, 0.95);
-    backdrop-filter: blur(5px);
-    display: flex;
-    flex-direction: column;
+position: absolute;
+inset: 0;
+background: rgba(10, 15, 13, 0.95);
+backdrop-filter: blur(5px);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+z-index: 10;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s;
+}
+.rp-autoplay-fallback.visible {
+opacity: 1;
+pointer-events: all;
+}
+.rp-fallback-btn {
+background: var(--green-accent);
+color: var(--bg-primary);
+border: none;
+padding: 12px 24px;
+border-radius: var(--radius-full);
+font-weight: 700;
+font-size: 1rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+transition: transform 0.2s;
+}
+.rp-fallback-btn:hover {
+transform: scale(1.05);
+background: var(--gold);
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+@media (max-width: 768px) {
+.radio-player-widget {
+padding: 16px;
+margin-bottom: 24px;
+}
+.rp-play-btn {
+width: 56px;
+height: 56px;
+}
+.rp-station-name {
+font-size: 1.2rem;
+}
+}
+/* --- FIN ESTILOS REPRODUCTOR --- */
+
+/* --- ESTILOS BOTÓN APK Y MODAL INSTRUCCIONES --- */
+.apk-download-container {
+    text-align: center;
+    margin-top: 16px;
+}
+.btn-apk {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-weight: 800; /* Negrita extra */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    z-index: 10;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
+    gap: 8px;
+}
+.btn-apk:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.4);
 }
 
-.rp-autoplay-fallback.visible {
+/* Modal de Instrucciones APK */
+.apk-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000; /* Por encima de todo */
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+    padding: 20px;
+}
+.apk-modal.active {
     opacity: 1;
     pointer-events: all;
 }
-
-.rp-fallback-btn {
+.apk-modal__content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--green-accent);
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    width: 100%;
+    padding: 32px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(95, 191, 138, 0.2);
+    transform: translateY(20px);
+    transition: transform var(--transition-normal);
+}
+.apk-modal.active .apk-modal__content {
+    transform: translateY(0);
+}
+.apk-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.apk-modal__close:hover {
+    color: var(--text-primary);
+}
+.apk-modal__title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-align: center;
+}
+.apk-modal__steps {
+    list-style: none;
+    counter-reset: step-counter;
+    margin-bottom: 24px;
+}
+.apk-modal__steps li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 16px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.apk-modal__steps li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--green-dark);
+    color: var(--green-accent);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: 1px solid var(--green-accent);
+}
+.apk-modal__download-btn {
+    display: block;
+    width: 100%;
     background: var(--green-accent);
     color: var(--bg-primary);
-    border: none;
-    padding: 12px 24px;
+    text-align: center;
+    padding: 14px;
     border-radius: var(--radius-full);
+    text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s;
+    transition: background 0.3s;
 }
-
-.rp-fallback-btn:hover {
-    transform: scale(1.05);
+.apk-modal__download-btn:hover {
     background: var(--gold);
 }
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@media (max-width: 768px) {
-    .radio-player-widget {
-        padding: 16px;
-        margin-bottom: 24px;
-    }
-    .rp-play-btn {
-        width: 56px;
-        height: 56px;
-    }
-    .rp-station-name {
-        font-size: 1.2rem;
-    }
-}
-/* --- FIN ESTILOS REPRODUCTOR --- */
+/* --- FIN ESTILOS APK --- */
 
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
@@ -865,57 +968,60 @@ grid-template-columns: 1fr;
 </h1>
 <p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
 <p class="hero__studio">Estudio Marta Navarro</p>
-
 <!-- INICIO REPRODUCTOR HTML5 -->
 <div class="radio-player-widget" id="radioPlayerWidget">
-    <!-- Elemento de Audio Oculto -->
-    <audio
-        id="radioPlayer"
-        preload="auto"
-        src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_480087796">
-        Tu navegador no soporta audio HTML5.
-    </audio>
-
-    <!-- Overlay para Autoplay Bloqueado -->
-    <div class="rp-autoplay-fallback" id="autoplayFallback">
-        <button class="rp-fallback-btn" id="fallbackBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            Escuchar en vivo
-        </button>
-    </div>
-
-    <!-- Barra de Estado Superior -->
-    <div class="rp-status-bar">
-        <div class="rp-status-indicator loading" id="statusIndicator">
-            <div class="rp-status-dot"></div>
-            <span id="statusText">Cargando...</span>
-        </div>
-        <div class="rp-volume-control">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-            <input type="range" min="0" max="1" step="0.1" value="1" class="rp-volume-slider" id="volumeSlider">
-        </div>
-    </div>
-
-    <!-- Controles Principales -->
-    <div class="rp-main-controls">
-        <button class="rp-play-btn" id="playPauseBtn" aria-label="Reproducir">
-            <!-- Icono Play (visible por defecto) -->
-            <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <!-- Icono Pause (oculto por defecto) -->
-            <svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
-        <div class="rp-info">
-            <div class="rp-station-name">Radio del Bosque</div>
-            <div class="rp-stream-label">Streaming en vivo</div>
-        </div>
-    </div>
-
-    <!-- Mensaje de Error -->
-    <div class="rp-error-msg" id="errorMsg">
-        ⚠️ El servidor no está disponible temporalmente. Intenta nuevamente.
-    </div>
+<!-- Elemento de Audio Oculto -->
+<audio
+id="radioPlayer"
+preload="auto"
+src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_8707_stream_480087796">
+Tu navegador no soporta audio HTML5.
+</audio>
+<!-- Overlay para Autoplay Bloqueado -->
+<div class="rp-autoplay-fallback" id="autoplayFallback">
+<button class="rp-fallback-btn" id="fallbackBtn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+Escuchar en vivo
+</button>
+</div>
+<!-- Barra de Estado Superior -->
+<div class="rp-status-bar">
+<div class="rp-status-indicator loading" id="statusIndicator">
+<div class="rp-status-dot"></div>
+<span id="statusText">Cargando...</span>
+</div>
+<div class="rp-volume-control">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+<input type="range" min="0" max="1" step="0.1" value="1" class="rp-volume-slider" id="volumeSlider">
+</div>
+</div>
+<!-- Controles Principales -->
+<div class="rp-main-controls">
+<button class="rp-play-btn" id="playPauseBtn" aria-label="Reproducir">
+<!-- Icono Play (visible por defecto) -->
+<svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+<!-- Icono Pause (oculto por defecto) -->
+<svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+<div class="rp-info">
+<div class="rp-station-name">Radio del Bosque</div>
+<div class="rp-stream-label">Streaming en vivo</div>
+</div>
+</div>
+<!-- Mensaje de Error -->
+<div class="rp-error-msg" id="errorMsg">
+⚠️ El servidor no está disponible temporalmente. Intenta nuevamente.
+</div>
 </div>
 <!-- FIN REPRODUCTOR HTML5 -->
+
+<!-- BOTÓN DESCARGAR APK -->
+<div class="apk-download-container">
+    <button class="btn-apk" id="btnDescargarApk">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+        DESCARGAR
+    </button>
+</div>
 
 <div class="hero__actions">
 </div>
@@ -1173,145 +1279,3 @@ Enviar mensaje por WhatsApp
 <h4 class="footer__title">Seguinos</h4>
 <div class="footer__social-links">
 <a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-<a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
-<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
-<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
-</div>
-</div>
-</footer>
-<!-- MODAL DONACIÓN -->
-<div class="donate-modal" id="donateModal">
-<button class="donate-modal__close" id="donateClose" aria-label="Cerrar">✕</button>
-<div class="donate-modal__inner">
-<img src="images/promo.png" alt="Ayudanos a mantener viva Radio del Bosque - Escaneá el código QR para colaborar" />
-<p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
-</div>
-</div>
-<script src="script.js"></script>
-
-<!-- SCRIPT REPRODUCTOR DE RADIO -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const player = document.getElementById('radioPlayer');
-    const playBtn = document.getElementById('playPauseBtn');
-    const iconPlay = document.getElementById('iconPlay');
-    const iconPause = document.getElementById('iconPause');
-    const statusIndicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const errorMsg = document.getElementById('errorMsg');
-    const autoplayFallback = document.getElementById('autoplayFallback');
-    const fallbackBtn = document.getElementById('fallbackBtn');
-
-    let isPlaying = false;
-
-    // Función para actualizar la UI según el estado
-    function updateUI(state) {
-        // Resetear clases
-        statusIndicator.classList.remove('live', 'loading');
-        errorMsg.style.display = 'none';
-
-        if (state === 'playing') {
-            iconPlay.style.display = 'none';
-            iconPause.style.display = 'block';
-            statusIndicator.classList.add('live');
-            statusText.textContent = 'EN VIVO';
-            autoplayFallback.classList.remove('visible');
-            isPlaying = true;
-        } else if (state === 'paused') {
-            iconPlay.style.display = 'block';
-            iconPause.style.display = 'none';
-            statusIndicator.classList.remove('live');
-            statusText.textContent = 'Pausado';
-            isPlaying = false;
-        } else if (state === 'loading') {
-            statusIndicator.classList.add('loading');
-            statusText.textContent = 'Cargando...';
-        } else if (state === 'error') {
-            iconPlay.style.display = 'block';
-            iconPause.style.display = 'none';
-            statusText.textContent = 'Error';
-            errorMsg.style.display = 'block';
-            isPlaying = false;
-        }
-    }
-
-    // Intentar reproducir automáticamente
-    function attemptAutoPlay() {
-        updateUI('loading');
-        const playPromise = player.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                // Autoplay funcionó
-                updateUI('playing');
-            }).catch(error => {
-                // Autoplay bloqueado o error de carga
-                console.log("Autoplay bloqueado o falló:", error);
-                updateUI('paused');
-                // Mostrar botón grande si fue bloqueado por política del navegador
-                if (error.name === 'NotAllowedError') {
-                    autoplayFallback.classList.add('visible');
-                }
-            });
-        }
-    }
-
-    // Controlador del botón Play/Pause principal
-    playBtn.addEventListener('click', function() {
-        if (player.paused) {
-            updateUI('loading');
-            player.play().then(() => {
-                updateUI('playing');
-            }).catch(e => {
-                updateUI('error');
-            });
-        } else {
-            player.pause();
-            updateUI('paused');
-        }
-    });
-
-    // Controlador del botón de fallback (Autoplay bloqueado)
-    fallbackBtn.addEventListener('click', function() {
-        updateUI('loading');
-        player.play().then(() => {
-            updateUI('playing');
-        }).catch(e => {
-            updateUI('error');
-        });
-    });
-
-    // Control de Volumen
-    volumeSlider.addEventListener('input', function() {
-        player.volume = this.value;
-    });
-
-    // Eventos del elemento Audio
-    player.addEventListener('playing', function() {
-        updateUI('playing');
-    });
-
-    player.addEventListener('pause', function() {
-        updateUI('paused');
-    });
-
-    player.addEventListener('waiting', function() {
-        updateUI('loading');
-    });
-
-    player.addEventListener('error', function() {
-        updateUI('error');
-    });
-
-    // Iniciar intento de autoplay al cargar
-    attemptAutoPlay();
-});
-</script>
-</body>
-</html>

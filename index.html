@@ -1279,3 +1279,179 @@ Enviar mensaje por WhatsApp
 <h4 class="footer__title">Seguinos</h4>
 <div class="footer__social-links">
 <a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+<a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 Radio del Bosque LP. Todos los derechos reservados.</p>
+<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
+</div>
+</div>
+</footer>
+<!-- MODAL DONACIÓN -->
+<div class="donate-modal" id="donateModal">
+<button class="donate-modal__close" id="donateClose" aria-label="Cerrar">✕</button>
+<div class="donate-modal__inner">
+<img src="images/promo.png" alt="Ayudanos a mantener viva Radio del Bosque - Escaneá el código QR para colaborar" />
+<p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
+</div>
+</div>
+
+<!-- MODAL INSTRUCCIONES APK -->
+<div class="apk-modal" id="apkModal">
+    <div class="apk-modal__content">
+        <button class="apk-modal__close" id="apkModalClose">✕</button>
+        <h3 class="apk-modal__title">Instalación de la App</h3>
+        <ol class="apk-modal__steps">
+            <li>Abrir Ajustes del teléfono.</li>
+            <li>Ingresar en Seguridad o Aplicaciones (el nombre puede variar según la marca del dispositivo).</li>
+            <li>Buscar la opción Instalar aplicaciones desconocidas.</li>
+            <li>Seleccionar la aplicación desde donde se abrirá la APK (por ejemplo, Chrome, Archivos o un gestor de archivos).</li>
+            <li>Activar Permitir desde esta fuente.</li>
+            <li>Descargar o abrir el archivo .apk e iniciar la instalación.</li>
+        </ol>
+        <a href="https://drive.usercontent.google.com/download?id=1-EGxiqn34DlMczmPVoXtC-I8M34jrG8b&export=download&authuser=0&confirm=t&uuid=09b891eb-dfa3-4d56-b871-c7ebed459847&at=ABswASZ3GYTKCWCdoDK9tObQZXd_%3A1783504821074" class="apk-modal__download-btn" download>
+            DESCARGAR APK AHORA
+        </a>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<!-- SCRIPT REPRODUCTOR DE RADIO -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const player = document.getElementById('radioPlayer');
+const playBtn = document.getElementById('playPauseBtn');
+const iconPlay = document.getElementById('iconPlay');
+const iconPause = document.getElementById('iconPause');
+const statusIndicator = document.getElementById('statusIndicator');
+const statusText = document.getElementById('statusText');
+const volumeSlider = document.getElementById('volumeSlider');
+const errorMsg = document.getElementById('errorMsg');
+const autoplayFallback = document.getElementById('autoplayFallback');
+const fallbackBtn = document.getElementById('fallbackBtn');
+let isPlaying = false;
+// Función para actualizar la UI según el estado
+function updateUI(state) {
+// Resetear clases
+statusIndicator.classList.remove('live', 'loading');
+errorMsg.style.display = 'none';
+if (state === 'playing') {
+iconPlay.style.display = 'none';
+iconPause.style.display = 'block';
+statusIndicator.classList.add('live');
+statusText.textContent = 'EN VIVO';
+autoplayFallback.classList.remove('visible');
+isPlaying = true;
+} else if (state === 'paused') {
+iconPlay.style.display = 'block';
+iconPause.style.display = 'none';
+statusIndicator.classList.remove('live');
+statusText.textContent = 'Pausado';
+isPlaying = false;
+} else if (state === 'loading') {
+statusIndicator.classList.add('loading');
+statusText.textContent = 'Cargando...';
+} else if (state === 'error') {
+iconPlay.style.display = 'block';
+iconPause.style.display = 'none';
+statusText.textContent = 'Error';
+errorMsg.style.display = 'block';
+isPlaying = false;
+}
+}
+// Intentar reproducir automáticamente
+function attemptAutoPlay() {
+updateUI('loading');
+const playPromise = player.play();
+if (playPromise !== undefined) {
+playPromise.then(_ => {
+// Autoplay funcionó
+updateUI('playing');
+}).catch(error => {
+// Autoplay bloqueado o error de carga
+console.log("Autoplay bloqueado o falló:", error);
+updateUI('paused');
+// Mostrar botón grande si fue bloqueado por política del navegador
+if (error.name === 'NotAllowedError') {
+autoplayFallback.classList.add('visible');
+}
+});
+}
+}
+// Controlador del botón Play/Pause principal
+playBtn.addEventListener('click', function() {
+if (player.paused) {
+updateUI('loading');
+player.play().then(() => {
+updateUI('playing');
+}).catch(e => {
+updateUI('error');
+});
+} else {
+player.pause();
+updateUI('paused');
+}
+});
+// Controlador del botón de fallback (Autoplay bloqueado)
+fallbackBtn.addEventListener('click', function() {
+updateUI('loading');
+player.play().then(() => {
+updateUI('playing');
+}).catch(e => {
+updateUI('error');
+});
+});
+// Control de Volumen
+volumeSlider.addEventListener('input', function() {
+player.volume = this.value;
+});
+// Eventos del elemento Audio
+player.addEventListener('playing', function() {
+updateUI('playing');
+});
+player.addEventListener('pause', function() {
+updateUI('paused');
+});
+player.addEventListener('waiting', function() {
+updateUI('loading');
+});
+player.addEventListener('error', function() {
+updateUI('error');
+});
+// Iniciar intento de autoplay al cargar
+attemptAutoPlay();
+
+// --- LÓGICA MODAL APK ---
+const btnDescargarApk = document.getElementById('btnDescargarApk');
+const apkModal = document.getElementById('apkModal');
+const apkModalClose = document.getElementById('apkModalClose');
+
+if(btnDescargarApk && apkModal) {
+    btnDescargarApk.addEventListener('click', function() {
+        apkModal.classList.add('active');
+    });
+}
+
+if(apkModalClose && apkModal) {
+    apkModalClose.addEventListener('click', function() {
+        apkModal.classList.remove('active');
+    });
+}
+
+// Cerrar modal al hacer clic fuera del contenido
+if(apkModal) {
+    apkModal.addEventListener('click', function(e) {
+        if (e.target === apkModal) {
+            apkModal.classList.remove('active');
+        }
+    });
+}
+// --- FIN LÓGICA MODAL APK ---
+
+});
+</script>
+</body>
+</html>

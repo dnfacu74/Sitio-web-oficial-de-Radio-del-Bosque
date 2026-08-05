@@ -592,15 +592,15 @@ color: var(--text-primary); font-family: var(--font-display); font-style: italic
 }
 /* PROGRAMMING */
 .programming-section { padding: 100px 0; background: var(--bg-primary); }
-.programming-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+.programming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .program-card {
 background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
 border: 1px solid rgba(95, 191, 138, 0.15); border-radius: var(--radius-md);
 overflow: hidden; transition: all var(--transition-normal); cursor: pointer;
 }
 .program-card:hover { transform: translateY(-4px); border-color: var(--green-accent); box-shadow: var(--shadow-md); }
-.program-card__image { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-.program-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+.program-card__image { position: relative; aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); }
+.program-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); display: block; }
 .program-card:hover .program-card__image img { transform: scale(1.05); }
 .program-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); }
 .program-card__icon-badge {
@@ -610,12 +610,52 @@ background: rgba(95, 191, 138, 0.9);
 display: flex; align-items: center; justify-content: center;
 font-size: 1.2rem; color: white; backdrop-filter: blur(4px);
 }
+.program-card__soon-badge {
+position: absolute; top: 16px; left: 16px; z-index: 2;
+padding: 6px 14px; border-radius: var(--radius-full);
+background: linear-gradient(135deg, var(--gold), var(--orange));
+color: var(--bg-primary); font-size: 0.7rem; font-weight: 700;
+letter-spacing: 0.1em; text-transform: uppercase;
+}
 .program-card__content { padding: 24px; }
 .program-card__category { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; display: block; }
 .program-card__title { font-family: var(--font-display); font-size: 1.4rem; color: var(--text-primary); margin-bottom: 12px; }
 .program-card__meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .program-card__time, .program-card__days { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+.program-card__desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
 .program-card__host { font-size: 0.95rem; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px; font-style: italic; }
+.programs-cta {
+margin-top: 56px;
+background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+border: 1px solid rgba(212, 165, 116, 0.3);
+border-radius: var(--radius-lg);
+padding: 48px;
+text-align: center;
+}
+.programs-cta__title {
+font-family: var(--font-display);
+font-size: 1.8rem;
+color: var(--gold);
+margin-bottom: 16px;
+}
+.programs-cta__text {
+font-size: 1rem;
+color: var(--text-secondary);
+max-width: 620px;
+margin: 0 auto 28px;
+}
+.programs-cta__link {
+display: inline-block;
+background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+color: white;
+padding: 16px 32px;
+border-radius: 999px;
+text-decoration: none;
+font-weight: 700;
+letter-spacing: 0.02em;
+transition: transform var(--transition-normal);
+}
+.programs-cta__link:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
 /* GALLERY SECTION */
 .gallery-section {
 padding: 100px 0;
@@ -887,6 +927,7 @@ box-shadow: var(--shadow-lg); align-items: stretch;
 .header__whatsapp { margin-left: 0; margin-top: 16px; justify-content: center; }
 .header__toggle { display: flex; }
 .live-grid { grid-template-columns: 1fr; }
+.programming-grid { grid-template-columns: repeat(2, 1fr); }
 .about-grid { grid-template-columns: 1fr; gap: 40px; }
 .about-stats { grid-template-columns: 1fr; gap: 16px; }
 .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -1094,7 +1135,120 @@ Transmitimos en vivo desde el Estudio Marta Navarro en La Plata. Mirá nuestra s
 <div class="divider"></div>
 <p class="section-subtitle">Una grilla pensada para acompañarte en cada momento del día</p>
 </div>
-<div class="programming-grid" id="programmingGrid"></div>
+<div class="programming-grid" id="programmingGrid">
+<!-- 1. DESAYUNO EN EL BOSQUE -->
+<div class="program-card">
+<div class="program-card__image">
+<img src="images/programa-desayuno-en-el-bosque.png" alt="Desayuno en el Bosque con Facundo DN" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">☀️</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Mañana</span>
+<h3 class="program-card__title">Desayuno en el Bosque</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 Lunes a Viernes</span>
+<span class="program-card__time">🕐 9:00 a 10:00 hs</span>
+</div>
+<p class="program-card__desc">La mejor compañía para arrancar el día, con música, humor y la actualidad del Bosque.</p>
+<p class="program-card__host">Con Facundo DN</p>
+</div>
+</div>
+<!-- 2. EL CAMINO CORRECTO -->
+<div class="program-card">
+<div class="program-card__image">
+<img src="images/programa-el-camino-correcto.png" alt="El Camino Correcto" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">🧭</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Noche</span>
+<h3 class="program-card__title">El Camino Correcto</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 Martes y Jueves</span>
+<span class="program-card__time">🕐 19:00 a 20:00 hs</span>
+</div>
+<p class="program-card__desc">Charlas, reflexiones y consejos para ayudarte a encontrar el rumbo.</p>
+</div>
+</div>
+<!-- 3. MÁS ALLÁ DEL BOSQUE -->
+<div class="program-card">
+<div class="program-card__image">
+<img src="images/programa-mas-alla-del-bosque.png" alt="Más Allá del Bosque con Cristina Navarro" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">🔮</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Noche</span>
+<h3 class="program-card__title">Más Allá del Bosque</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 Martes y Jueves</span>
+<span class="program-card__time">🕐 20:00 a 21:00 hs</span>
+</div>
+<p class="program-card__desc">Descubrí los secretos del mundo esotérico con la conducción de Cristina Navarro.</p>
+<p class="program-card__host">Con Cristina Navarro</p>
+</div>
+</div>
+<!-- 4. TERROR EN EL BOSQUE (MUY PRONTO) -->
+<div class="program-card">
+<div class="program-card__image">
+<span class="program-card__soon-badge">Muy pronto</span>
+<img src="images/programa-terror-en-el-bosque.png" alt="Terror en el Bosque" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">👻</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Noche</span>
+<h3 class="program-card__title">Terror en el Bosque</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 Lunes, Miércoles y Viernes</span>
+<span class="program-card__time">🕐 21:00 a 00:00 hs</span>
+</div>
+<p class="program-card__desc">Relatos, historias y suspenso para las noches más oscuras del Bosque.</p>
+</div>
+</div>
+<!-- 5. NOCHE DE HADAS -->
+<div class="program-card">
+<div class="program-card__image">
+<img src="images/programa-noche-de-hadas.png" alt="Noche de Hadas con Juan Mastromarino" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">🧚</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Madrugada</span>
+<h3 class="program-card__title">Noche de Hadas</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 Lunes a Lunes</span>
+<span class="program-card__time">🕐 00:00 a 6:30 hs</span>
+</div>
+<p class="program-card__desc">Compañía para los noctámbulos de la madrugada que trabajan, estudian o no pueden dormir.</p>
+<p class="program-card__host">Con Juan Mastromarino</p>
+</div>
+</div>
+<!-- 6. PRÓXIMO PROGRAMA (ESPACIO LIBRE) -->
+<div class="program-card">
+<div class="program-card__image">
+<span class="program-card__soon-badge">Próximamente</span>
+<img src="images/programa-proximamente.png" alt="Próximo programa" loading="lazy" />
+<div class="program-card__image-overlay"></div>
+<div class="program-card__icon-badge" aria-hidden="true">✨</div>
+</div>
+<div class="program-card__content">
+<span class="program-card__category">Próximamente</span>
+<h3 class="program-card__title">Nuevo Programa</h3>
+<div class="program-card__meta">
+<span class="program-card__days">📅 A confirmar</span>
+<span class="program-card__time">🕐 A confirmar</span>
+</div>
+<p class="program-card__desc">Muy pronto se suma una nueva propuesta a la grilla del Bosque.</p>
+</div>
+</div>
+</div>
+<div class="programs-cta">
+<h3 class="programs-cta__title">¿Siempre soñaste con tener tu propio programa de radio?</h3>
+<p class="programs-cta__text">Abrimos nuestra programación a nuevas propuestas: en vivo o grabadas, de música, cultura, actualidad, deportes o entretenimiento. No cobramos espacio de aire, solo pedimos una colaboración voluntaria. Tu idea y tus ganas de comunicar son lo que más importa.</p>
+<a href="programas.html" class="programs-cta__link">Quiero tener mi programa →</a>
+</div>
 </div>
 </section>
 <!-- GALLERY -->
@@ -1286,6 +1440,7 @@ Enviar mensaje por WhatsApp
 <ul class="footer__list">
 <li><a href="#player">En Vivo</a></li>
 <li><a href="#programacion">Programación</a></li>
+<li><a href="programas.html">Tu Propio Programa</a></li>
 <li><a href="novedades.html">Novedades</a></li>
 <li><a href="#galeria">Galería</a></li>
 <li><a href="encuentros-en-el-bosque-audios.html">Audios</a></li>

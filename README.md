@@ -1,4 +1,4 @@
-# Radio del Bosque La Plata | 107.3 FM & Streaming Online
+# Radio del Bosque - Patagonia Argentina | Villa La Angostura FM & Streaming Online
 
 **Radio del Bosque** es una emisora líder en La Patagonia, Argentina dedicada a ofrecer contenido de calidad, música seleccionada y la mejor compañía durante todo el día. Escuchanos en vivo desde cualquier parte del mundo a través de nuestra web o aplicaciones móviles.
 

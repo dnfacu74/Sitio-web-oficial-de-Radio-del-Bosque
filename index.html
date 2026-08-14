@@ -846,6 +846,64 @@ color: white; flex-shrink: 0;
 .contact-card__value { font-size: 1rem; font-weight: 600; color: var(--text-primary); word-break: break-word; }
 .contact-cta { text-align: center; }
 .btn--large { padding: 18px 36px; font-size: 1.05rem; }
+/* STAFF */
+.staff-section {
+background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+padding: 96px 0 88px;
+position: relative;
+overflow: hidden;
+}
+.staff-section::before {
+content: '';
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at 50% 25%, rgba(95, 191, 138, 0.12), transparent 48%);
+pointer-events: none;
+}
+.staff-section .container { position: relative; z-index: 1; }
+.staff-card {
+max-width: 760px;
+margin: 0 auto;
+padding: 48px 32px 40px;
+text-align: center;
+background: rgba(15, 26, 20, 0.72);
+border: 1px solid rgba(212, 165, 116, 0.32);
+border-radius: var(--radius-lg);
+box-shadow: var(--shadow-lg), 0 0 36px rgba(95, 191, 138, 0.08);
+}
+.staff-intro {
+font-family: var(--font-display);
+font-size: clamp(1.05rem, 2vw, 1.3rem);
+font-style: italic;
+color: var(--gold-light);
+margin: -4px auto 28px;
+}
+.staff-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 14px;
+margin: 0 auto;
+max-width: 420px;
+}
+.staff-list li {
+font-family: var(--font-display);
+font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+color: var(--text-primary);
+padding-bottom: 12px;
+border-bottom: 1px solid rgba(95, 191, 138, 0.18);
+}
+
+.staff-logo {
+display: block;
+width: 150px;
+height: 150px;
+object-fit: contain;
+margin: 42px auto 0;
+filter: drop-shadow(0 0 20px rgba(212, 165, 116, 0.28));
+transition: transform var(--transition-normal);
+}
+.staff-logo:hover { transform: scale(1.05); }
 /* FOOTER */
 .footer { background: var(--bg-primary); border-top: 1px solid rgba(95, 191, 138, 0.2); padding: 80px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
@@ -961,7 +1019,9 @@ grid-template-columns: 1fr;
 @media (max-width: 640px) {
 .footer-grid { grid-template-columns: 1fr; gap: 32px; }
 .footer-brand { align-items: center; text-align: center; }
-.footer__desc { max-width: 100%; }
+.footer__desc { max-width: 320px; }
+.staff-card { padding: 36px 20px 32px; }
+.staff-logo { width: 125px; height: 125px; margin-top: 34px; }
 }
 </style>
 </head>
@@ -982,6 +1042,7 @@ grid-template-columns: 1fr;
 <a href="#galeria" class="header__link">Galería</a>
 <a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
 <a href="#nosotros" class="header__link">Sobre Nosotros</a>
+<a href="#staff" class="header__link">STAFF</a>
 <a href="#contacto" class="header__link">Contacto</a>
 <a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
 </nav>
@@ -1124,6 +1185,28 @@ Transmitimos en vivo desde el Estudio Marta Navarro en Patagonia. Mirá nuestra 
 <div class="about-image__caption">Estudio Marta Navarro</div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<!-- STAFF -->
+<section id="staff" class="staff-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Nuestro <span class="text-accent">STAFF</span></h2>
+<div class="divider"></div>
+<p class="section-subtitle">Las voces y las personas que hacen crecer Radio del Bosque cada día.</p>
+</div>
+<div class="staff-card">
+<p class="staff-intro">EQUIPO ESTABLE</p>
+<ul class="staff-list">
+<li>Marisa Waters</li>
+<li>Juan Mastromarino</li>
+<li>Marta Navarro</li>
+<li>Cristina Navarro</li>
+<li>Viviana Leiva</li>
+<li>Mirta Cecis</li>
+</ul>
+<img src="images/archivologo_radio.PNG" alt="Logo de Radio del Bosque" class="staff-logo" loading="lazy" />
 </div>
 </div>
 </section>

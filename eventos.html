@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1f14" />
-  <meta name="description" content="Galería de eventos de Radio del Bosque, Patagonia Argentina." />
+  <meta name="description" content="Eventos de Radio del Bosque, Patagonia Argentina." />
   <title>Eventos | Radio del Bosque</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -176,6 +176,19 @@
       border-color: var(--green-accent);
       box-shadow: 0 10px 30px rgba(95, 191, 138, 0.15);
       transform: translateY(-5px);
+    }
+
+    .event-card--empty {
+      min-height: 300px;
+      background: rgba(15, 26, 20, 0.28);
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    .event-card--empty:hover {
+      border-color: rgba(95, 191, 138, 0.2);
+      box-shadow: none;
+      transform: none;
     }
 
     .event-card__button {
@@ -378,6 +391,16 @@
       white-space: pre-line;
     }
 
+    .modal__link {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--green-accent);
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .modal__link:hover { color: var(--gold-light); }
+
     .footer {
       padding: 28px 0;
       border-top: 1px solid rgba(95, 191, 138, 0.18);
@@ -423,66 +446,46 @@
         <div class="divider" aria-hidden="true"></div>
       </section>
 
-      <section class="events-grid" aria-label="Galerías de eventos">
+      <section class="events-grid" aria-label="Eventos">
         <article class="event-card">
-          <button class="event-card__button" type="button" data-title="Quallys Digital" data-description="En Quallys Digital desarrollamos estrategias de comunicación y difusión pensadas para que tu proyecto llegue a más personas, fortalezca su presencia digital y genere nuevas oportunidades.&#10;&#10;Trabajamos en:&#10;• Gestión de redes sociales&#10;• Publicidad y campañas digitales&#10;• Producción audiovisual&#10;• Promoción de artistas y eventos&#10;• Diseño y desarrollo web&#10;• Marketing, comunicación y prensa&#10;&#10;Ya sea que tengas una marca, un emprendimiento, un evento, un proyecto artístico o una empresa, diseñamos una estrategia de comunicación adaptada a tus objetivos.&#10;&#10;Convertimos ideas en comunicación, presencia digital y difusión.&#10;&#10;Contacto por WhatsApp: 221 364 3200&#10;Web: www.quallysdigital.com.ar" data-image="images/quallys_logo.png" data-alt="Quallys" aria-label="Abrir descripción de la galería Quallys">
+          <button class="event-card__button" type="button" data-title="Quallys Digital" data-description="En Quallys Digital desarrollamos estrategias de comunicación y difusión pensadas para que tu proyecto llegue a más personas, fortalezca su presencia digital y genere nuevas oportunidades.&#10;&#10;Trabajamos en:&#10;• Gestión de redes sociales&#10;• Publicidad y campañas digitales&#10;• Producción audiovisual&#10;• Promoción de artistas y eventos&#10;• Diseño y desarrollo web&#10;• Marketing, comunicación y prensa&#10;&#10;Ya sea que tengas una marca, un emprendimiento, un evento, un proyecto artístico o una empresa, diseñamos una estrategia de comunicación adaptada a tus objetivos.&#10;&#10;Convertimos ideas en comunicación, presencia digital y difusión.&#10;&#10;Contacto por WhatsApp: 221 364 3200&#10;Web: www.quallysdigital.com.ar" data-image="images/quallys_logo.png" data-alt="Quallys" aria-label="Abrir descripción de Quallys Digital">
             <img class="event-card__image" src="images/quallys_logo.png" alt="Quallys" loading="lazy" decoding="async" />
             <span class="event-card__zoom" aria-hidden="true">⌕</span>
           </button>
           <div class="event-card__content">
-            <span class="event-card__number">Galería 01</span>
+            <span class="event-card__number">01</span>
             <h2>Quallys Digital</h2>
             <p>Hacé clic en la miniatura para ver la descripción del evento.</p>
           </div>
         </article>
 
         <article class="event-card">
-          <button class="event-card__button" type="button" data-title="Juning Desfile" data-description="Para participar, es necesario inscribirse a través del link al pie de esta nota.&#10;&#10;Hay varias maneras de sumarse. La única condición es tener un emprendimiento o una producción en la zona que incluye las localidades de Pilolil, Junín de los Andes, San Martín de los Andes, Villa Traful y Villa La Angostura.&#10;&#10;El gran día es el 3 de octubre, en el salón del Instituto María Auxiliadora de Junín de los Andes.&#10;&#10;Cierre de inscripción: 06 de septiembre de 2026.&#10;&#10;Se puede participar en dos modalidades:&#10;• Muestra y venta en stand&#10;• Desfile en pasarela&#10;&#10;Una vez recibida la solicitud, la organización se comunicará para informar los detalles y requisitos.&#10;&#10;La organización ofrece visibilidad, venta directa y notas de prensa." data-image="images/juning_desfile.png" data-alt="Juning Desfile" aria-label="Abrir descripción de la galería Juning Desfile">
-            <img class="event-card__image" src="images/juning_desfile.png" alt="Juning Desfile" loading="lazy" decoding="async" />
+          <button class="event-card__button" type="button" data-title="JUNIN DE LOS ANDES - DESFILE" data-description="Para participar, es necesario inscribirse a través del link al pie de esta nota.&#10;&#10;Hay varias maneras de sumarse. La única condición es tener un emprendimiento o una producción en la zona que incluye las localidades de Pilolil, Junín de los Andes, San Martín de los Andes, Villa Traful y Villa La Angostura.&#10;&#10;El gran día es el 3 de octubre, en el salón del Instituto María Auxiliadora de Junín de los Andes.&#10;&#10;Cierre de inscripción: 06 de septiembre de 2026.&#10;&#10;Se puede participar en dos modalidades:&#10;• Muestra y venta en stand&#10;• Desfile en pasarela&#10;&#10;Una vez recibida la solicitud, la organización se comunicará para informar los detalles y requisitos.&#10;&#10;La organización ofrece visibilidad, venta directa y notas de prensa." data-image="images/juning_desfile.png" data-alt="JUNIN DE LOS ANDES - DESFILE" aria-label="Abrir descripción de JUNIN DE LOS ANDES - DESFILE">
+            <img class="event-card__image" src="images/juning_desfile.png" alt="JUNIN DE LOS ANDES - DESFILE" loading="lazy" decoding="async" />
             <span class="event-card__zoom" aria-hidden="true">⌕</span>
           </button>
           <div class="event-card__content">
-            <span class="event-card__number">Galería 02</span>
-            <h2>Juning Desfile</h2>
+            <span class="event-card__number">02</span>
+            <h2>JUNIN DE LOS ANDES - DESFILE</h2>
             <p>Un registro visual de este desfile y de sus protagonistas.</p>
           </div>
         </article>
 
         <article class="event-card">
-          <button class="event-card__button" type="button" data-title="Fiesta en el Bosque" data-description="Una celebración compartida en el Bosque, con música, encuentro y la energía de nuestra comunidad." data-image="images/fiesta_bosque.png" data-alt="Fiesta en el Bosque" aria-label="Abrir descripción de la galería Fiesta en el Bosque">
+          <button class="event-card__button" type="button" data-title="Fiesta en el Bosque" data-description="Te esperamos por streaming todos los viernes de 21:00 a 00:00 hs en" data-stream-url="https://kick.com/radiodelbosquelp" data-image="images/fiesta_bosque.png" data-alt="Fiesta en el Bosque" aria-label="Abrir descripción de Fiesta en el Bosque">
             <img class="event-card__image" src="images/fiesta_bosque.png" alt="Fiesta en el Bosque" loading="lazy" decoding="async" />
             <span class="event-card__zoom" aria-hidden="true">⌕</span>
           </button>
           <div class="event-card__content">
-            <span class="event-card__number">Galería 03</span>
+            <span class="event-card__number">03</span>
             <h2>Fiesta en el Bosque</h2>
             <p>Los momentos más destacados de nuestra fiesta comunitaria.</p>
           </div>
         </article>
 
-        <article class="event-card">
-          <button class="event-card__button" type="button" data-title="Próximamente" data-description="Estamos preparando una nueva galería de eventos. Muy pronto vas a poder conocer todos sus detalles." data-placeholder="true" aria-label="Abrir descripción de la galería próximamente">
-            <span class="event-card__image event-card__image--placeholder">Próximamente</span>
-            <span class="event-card__badge">Próximamente</span>
-          </button>
-          <div class="event-card__content">
-            <span class="event-card__number">Galería 04</span>
-            <h2>Próximamente</h2>
-            <p>Este espacio queda reservado para un nuevo evento.</p>
-          </div>
-        </article>
+        <article class="event-card event-card--empty" aria-hidden="true"></article>
 
-        <article class="event-card">
-          <button class="event-card__button" type="button" data-title="Próximamente" data-description="Estamos preparando otra galería de eventos. Muy pronto vas a poder ver sus imágenes y su descripción." data-placeholder="true" aria-label="Abrir descripción de la segunda galería próximamente">
-            <span class="event-card__image event-card__image--placeholder">Próximamente</span>
-            <span class="event-card__badge">Próximamente</span>
-          </button>
-          <div class="event-card__content">
-            <span class="event-card__number">Galería 05</span>
-            <h2>Próximamente</h2>
-            <p>Un segundo espacio preparado para futuros eventos.</p>
-          </div>
-        </article>
+        <article class="event-card event-card--empty" aria-hidden="true"></article>
       </section>
     </div>
   </main>
@@ -508,6 +511,16 @@
       const modalTitle = document.getElementById('modalTitle');
       const modalDescription = document.getElementById('modalDescription');
       const modalClose = document.getElementById('modalClose');
+      let modalStreamLink = document.getElementById('modalStreamLink');
+
+      if (!modalStreamLink) {
+        modalStreamLink = document.createElement('a');
+        modalStreamLink.id = 'modalStreamLink';
+        modalStreamLink.className = 'modal__link';
+        modalStreamLink.target = '_blank';
+        modalStreamLink.rel = 'noopener noreferrer';
+        modalDescription.insertAdjacentElement('afterend', modalStreamLink);
+      }
       const cards = document.querySelectorAll('.event-card__button');
       let lastFocusedElement = null;
 
@@ -515,6 +528,9 @@
         lastFocusedElement = card;
         modalTitle.textContent = card.dataset.title || 'Evento';
         modalDescription.textContent = card.dataset.description || '';
+        modalStreamLink.textContent = card.dataset.streamUrl || '';
+        modalStreamLink.href = card.dataset.streamUrl || '#';
+        modalStreamLink.style.display = card.dataset.streamUrl ? 'inline-block' : 'none';
 
         if (card.dataset.placeholder === 'true') {
           modalImage.style.display = 'none';

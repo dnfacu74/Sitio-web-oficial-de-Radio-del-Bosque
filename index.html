@@ -909,7 +909,7 @@ grid-template-columns: 1fr;
 <span class="header__location">Patagonia · Argentina</span>
 </div>
 </a>
-<nav class="header__nav" id="nav">
+<nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
 <a href="#programacion" class="header__link">Programación</a>
 <a href="novedades.html" class="header__link">Novedades</a>
 <a href="marcas.html" class="header__link">MARCAS</a>
@@ -921,7 +921,7 @@ grid-template-columns: 1fr;
 <a href="#contacto" class="header__link">Contacto</a>
 <a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
 </nav>
-<button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav">
+<button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="siteMenu">
 <span class="header__toggle-icon" aria-hidden="true">☰</span><span>MENU</span>
 </button>
 </div>
@@ -1446,6 +1446,22 @@ updateUI('error');
 attemptAutoPlay();
 
 });
+</script>
+<script>
+(() => {
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('siteMenu');
+  if (!toggle || !menu) return;
+  const setMenu = (open) => {
+    menu.classList.toggle('header__nav--open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+  };
+  toggle.addEventListener('click', (event) => { event.stopPropagation(); setMenu(!menu.classList.contains('header__nav--open')); });
+  menu.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
+  document.addEventListener('click', (event) => { if (!menu.contains(event.target) && event.target !== toggle) setMenu(false); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+})();
 </script>
 </body>
 </html>

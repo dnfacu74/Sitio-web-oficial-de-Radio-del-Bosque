@@ -100,7 +100,7 @@ body {
       <img src="images/logo_radio.png" alt="Radio del Bosque" class="header__logo" />
       <span class="header__brand-text"><span class="header__name">Radio del Bosque</span><span class="header__location">Patagonia · Argentina</span></span>
     </a>
-    <nav class="header__nav" id="nav" aria-label="Navegación principal">
+    <nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
       <a href="index.html#programacion" class="header__link">Programación</a>
       <a href="novedades.html" class="header__link">Novedades</a>
       <a href="eventos.html" class="header__link">Eventos</a>
@@ -112,7 +112,7 @@ body {
       <a href="marcas.html" class="header__link" aria-current="page">MARCAS</a>
       <a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
     </nav>
-    <button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav"><span class="header__toggle-icon" aria-hidden="true">☰</span><span>MENU</span></button>
+    <button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="siteMenu"><span class="header__toggle-icon" aria-hidden="true">☰</span><span>MENU</span></button>
   </div>
 </header>
 <main class="page">
@@ -171,12 +171,16 @@ lightbox.addEventListener('click', (event) => { if (event.target === lightbox) c
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox(); });
 
 const menuToggle = document.getElementById('menuToggle');
-const nav = document.getElementById('nav');
-const closeMenu = () => { nav.classList.remove('header__nav--open'); menuToggle.setAttribute('aria-expanded', 'false'); };
-menuToggle.addEventListener('click', (event) => { event.stopPropagation(); const open = nav.classList.toggle('header__nav--open'); menuToggle.setAttribute('aria-expanded', String(open)); });
-nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-document.addEventListener('click', (event) => { if (!nav.contains(event.target) && event.target !== menuToggle) closeMenu(); });
-document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+const nav = document.getElementById('siteMenu');
+const setMenu = (open) => {
+  nav.classList.toggle('header__nav--open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+};
+menuToggle.addEventListener('click', (event) => { event.stopPropagation(); setMenu(!nav.classList.contains('header__nav--open')); });
+nav.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
+document.addEventListener('click', (event) => { if (!nav.contains(event.target) && event.target !== menuToggle) setMenu(false); });
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 </script>
 </body>
 </html>

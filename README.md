@@ -95,3 +95,10 @@ Nuestro sitio web está desarrollado para ofrecer la mejor experiencia de usuari
 ---
 
 *© 2026 Radio del Bosque Villa La Angostura. Todos los derechos reservados.*
+
+
+## Reproductor persistente
+
+La entrada `index.html` funciona como contenedor permanente del sitio. Mantiene el reproductor HTML5 activo en una barra inferior y carga las páginas internas dentro de un iframe llamado `radio-content`. De esta forma, la navegación entre las secciones no destruye el elemento de audio.
+
+El comportamiento común está en `js/radio-persistente.js`. Las páginas secundarias cargan este archivo para redirigir accesos directos al contenedor principal y para enviar los enlaces internos al iframe. El usuario debe iniciar la reproducción con una acción explícita, ya que los navegadores bloquean el autoplay no solicitado.

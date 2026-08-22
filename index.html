@@ -215,6 +215,13 @@ font-family: var(--font-display);
 font-size: clamp(1rem, 2vw, 1.2rem);
 color: var(--gold); font-style: italic; margin-bottom: 48px;
 }
+.hero__brands-title {
+display: block; margin: 24px auto 0; color: var(--gold-light);
+font-family: var(--font-display); font-size: clamp(1.35rem, 3vw, 2rem);
+font-weight: 700; text-decoration: none; letter-spacing: .04em;
+transition: color var(--transition-normal), transform var(--transition-normal);
+}
+.hero__brands-title:hover { color: var(--green-accent); transform: translateY(-2px); }
 .hero__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .hero__scroll {
 position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
@@ -538,6 +545,30 @@ letter-spacing: 0.02em;
 transition: transform var(--transition-normal);
 }
 .programs-cta__link:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+/* CONOCE NUESTRO ESTUDIO */
+.studio-section {
+padding: 100px 0; background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.studio-thumbs {
+display: flex; justify-content: center; align-items: center; gap: 24px;
+margin-top: 44px; flex-wrap: wrap;
+}
+.studio-thumb {
+width: 220px; height: 165px; padding: 5px; border: 1px solid var(--gold);
+border-radius: 12px; background: var(--bg-tertiary); cursor: pointer;
+box-shadow: 0 6px 20px rgba(0,0,0,.35); transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+.studio-thumb:hover { transform: translateY(-5px); border-color: var(--gold-light); box-shadow: 0 10px 28px rgba(212,165,116,.25); }
+.studio-thumb:focus-visible { outline: 3px solid var(--green-accent); outline-offset: 4px; }
+.studio-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; display: block; }
+.studio-lightbox { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.88); opacity: 0; pointer-events: none; transition: opacity var(--transition-normal); }
+.studio-lightbox.active { opacity: 1; pointer-events: auto; }
+.studio-lightbox__box { position: relative; display: flex; flex-direction: column; align-items: center; width: min(760px, 100%); max-height: 90vh; padding: 22px; border: 1px solid var(--gold); border-radius: var(--radius-lg); background: var(--bg-secondary); box-shadow: var(--shadow-lg); }
+.studio-lightbox__image { display: block; width: 100%; max-height: 62vh; object-fit: contain; border-radius: var(--radius-sm); background: var(--bg-primary); }
+.studio-lightbox__title { margin-top: 18px; color: var(--gold-light); font-family: var(--font-display); font-size: 1.7rem; text-align: center; letter-spacing: .06em; }
+.studio-lightbox__description { max-width: 620px; margin-top: 8px; color: var(--text-secondary); line-height: 1.6; text-align: center; }
+.studio-lightbox__close { position: absolute; top: 10px; right: 12px; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: var(--text-primary); background: rgba(0,0,0,.45); font-size: 1.4rem; cursor: pointer; }
+.studio-lightbox__close:hover { color: var(--bg-primary); background: var(--gold); }
 /* GALLERY SECTION */
 .gallery-section {
 padding: 100px 0;
@@ -866,6 +897,8 @@ z-index: 10;
 .hero__logo-top { width: 140px; height: 140px; }
 }
 @media (max-width: 768px) {
+.studio-section { padding: 72px 0; }
+.studio-thumb { width: min(100%, 200px); height: 150px; }
 .container { padding: 0 16px; }
 .hero { padding: 100px 0 60px; }
 .hero__actions { flex-direction: column; align-items: center; }
@@ -912,9 +945,8 @@ grid-template-columns: 1fr;
 <nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
 <a href="#programacion" class="header__link">Programación</a>
 <a href="novedades.html" class="header__link">Novedades</a>
-<a href="marcas.html" class="header__link">MARCAS</a>
 <a href="eventos.html" class="header__link">Eventos</a>
-<a href="#galeria" class="header__link">Galería</a>
+<a href="#estudio" class="header__link">Conoce nuestro estudio</a>
 <a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
 <a href="#nosotros" class="header__link">Sobre Nosotros</a>
 <a href="#staff" class="header__link">STAFF</a>
@@ -991,6 +1023,7 @@ Escuchar en vivo
 </div>
 </div>
 <!-- FIN REPRODUCTOR HTML5 -->
+<a href="marcas.html" class="hero__brands-title">Confían en Nosotros</a>
 
 <div class="hero__actions">
 </div>
@@ -1201,44 +1234,35 @@ Transmitimos en vivo desde el Estudio Marta Navarro en Patagonia. Mirá nuestra 
 </div>
 </div>
 </section>
-<!-- GALLERY -->
-<section id="galeria" class="gallery-section">
+<!-- CONOCE NUESTRO ESTUDIO -->
+<section id="estudio" class="studio-section">
 <div class="container">
 <div class="section-header">
-<h2 class="section-title">Galería de <span class="text-accent">Fotos</span></h2>
+<h2 class="section-title">CONOCE NUESTRO <span class="text-accent">ESTUDIO</span></h2>
 <div class="divider"></div>
-<p class="section-subtitle">Explorá los momentos detrás de escena y en el aire</p>
+<p class="section-subtitle">Un recorrido visual por los espacios de Radio del Bosque.</p>
 </div>
-<div class="gallery-category-cards">
-<a href="bichos-radio.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Bichos de Radio">
-<div class="gallery-category-card__icon" aria-hidden="true">🎙️</div>
-<h3 class="gallery-category-card__title">Bichos de Radio</h3>
-<p class="gallery-category-card__desc">Nuestros conductores y equipos en plena transmisión, la esencia del aire.</p>
-<span class="gallery-category-card__link">Ver galería →</span>
-</a>
-<a href="carrusel.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Carrusel">
-<div class="gallery-category-card__icon" aria-hidden="true">🎠</div>
-<h3 class="gallery-category-card__title">Carrusel</h3>
-<p class="gallery-category-card__desc">Imágenes dinámicas del día a día en el estudio y en cabina.</p>
-<span class="gallery-category-card__link">Ver galería →</span>
-</a>
-<a href="encuentros-en-el-bosque.html" target="_blank" rel="noopener noreferrer" class="gallery-category-card" aria-label="Ver galería Encuentros en el Bosque">
-<div class="gallery-category-card__icon" aria-hidden="true">🌳</div>
-<h3 class="gallery-category-card__title">Encuentros en el Bosque</h3>
-<p class="gallery-category-card__desc">Momentos especiales, visitas y encuentros que dejan huella en la radio.</p>
-<span class="gallery-category-card__link">Ver galería →</span>
-</a>
-<a href="https://www.youtube.com/watch?v=UCwJf7LWf4I" target="_blank" rel="noopener noreferrer" class="gallery-category-card gallery-category-card--image" aria-label="Ver Video Institucional">
-<img src="images/portada_video.jpg" alt="Video Institucional" class="gallery-category-card__bg" loading="lazy" />
-<div class="gallery-category-card__content">
-<h3 class="gallery-category-card__title">Video Institucional</h3>
-<p class="gallery-category-card__desc">Conocé más sobre nuestra historia y propuesta en este video especial.</p>
-<span class="gallery-category-card__link">Ver video →</span>
-</div>
-</a>
+<div class="studio-thumbs" aria-label="Imágenes de nuestro estudio">
+<button class="studio-thumb" type="button" data-image="images/estudio1.png" data-title="ESTUDIO 1" data-description="Nuestro espacio de estudio, producción y transmisión en Radio del Bosque." aria-label="Ver imagen del estudio 1">
+<img src="images/estudio1.png" alt="ESTUDIO 1" loading="lazy" />
+</button>
+<button class="studio-thumb" type="button" data-image="images/estudio2.png" data-title="ESTUDIO 2" data-description="Otro ángulo de nuestro espacio de trabajo y transmisión radial." aria-label="Ver imagen del estudio 2">
+<img src="images/estudio2.png" alt="ESTUDIO 2" loading="lazy" />
+</button>
+<button class="studio-thumb" type="button" data-image="images/estudio3.png" data-title="ESTUDIO 3" data-description="Una vista más de las instalaciones que forman parte de Radio del Bosque." aria-label="Ver imagen del estudio 3">
+<img src="images/estudio3.png" alt="ESTUDIO 3" loading="lazy" />
+</button>
 </div>
 </div>
 </section>
+<div class="studio-lightbox" id="studioLightbox" role="dialog" aria-modal="true" aria-labelledby="studioLightboxTitle" aria-hidden="true">
+<div class="studio-lightbox__box">
+<button class="studio-lightbox__close" id="studioLightboxClose" type="button" aria-label="Cerrar imagen ampliada">×</button>
+<img class="studio-lightbox__image" id="studioLightboxImage" src="" alt="" />
+<h3 class="studio-lightbox__title" id="studioLightboxTitle"></h3>
+<p class="studio-lightbox__description" id="studioLightboxDescription"></p>
+</div>
+</div>
 <!-- CONTACT -->
 <section id="contacto" class="contact-section">
 <div class="container">
@@ -1301,7 +1325,7 @@ Enviar mensaje por WhatsApp
 <li><a href="programas.html">Tu Propio Programa</a></li>
 <li><a href="novedades.html">Novedades</a></li>
 <li><a href="eventos.html">Eventos</a></li>
-<li><a href="#galeria">Galería</a></li>
+<li><a href="#estudio">Conoce nuestro estudio</a></li>
 <li><a href="encuentros-en-el-bosque-audios.html">Audios</a></li>
 <li><a href="#nosotros">Sobre Nosotros</a></li>
 <li><a href="#contacto">Contacto</a></li>
@@ -1461,6 +1485,30 @@ attemptAutoPlay();
   menu.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
   document.addEventListener('click', (event) => { if (!menu.contains(event.target) && event.target !== toggle) setMenu(false); });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+})();
+</script>
+<script>
+(() => {
+  const lightbox = document.getElementById('studioLightbox');
+  const image = document.getElementById('studioLightboxImage');
+  const title = document.getElementById('studioLightboxTitle');
+  const description = document.getElementById('studioLightboxDescription');
+  const close = document.getElementById('studioLightboxClose');
+  if (!lightbox || !image || !title || !description || !close) return;
+  const closeBox = () => { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden', 'true'); };
+  document.querySelectorAll('.studio-thumb').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      image.src = thumb.dataset.image;
+      image.alt = thumb.dataset.title;
+      title.textContent = thumb.dataset.title;
+      description.textContent = thumb.dataset.description;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+    });
+  });
+  close.addEventListener('click', closeBox);
+  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeBox(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeBox(); });
 })();
 </script>
 </body>

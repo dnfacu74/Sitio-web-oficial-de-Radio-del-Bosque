@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1f14" />
+<meta name="description" content="Marcas y auspiciantes que confían en Radio del Bosque." />
+<title>Marcas | Radio del Bosque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg-primary: #0a0f0d;
+  --bg-secondary: #0f1a14;
+  --bg-tertiary: #142218;
+  --green-dark: #1a3d2e;
+  --green-mid: #2d5a3f;
+  --green-accent: #5fbf8a;
+  --gold: #d4a574;
+  --gold-light: #e8c49a;
+  --text-primary: #f5f0e8;
+  --text-secondary: #b8b0a0;
+  --text-muted: #7a7568;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-title: 'Bebas Neue', sans-serif;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: radial-gradient(circle at top, #142218 0%, var(--bg-primary) 52%);
+  -webkit-font-smoothing: antialiased;
+}
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.header {
+  position: sticky; top: 0; z-index: 10; padding: 16px 0;
+  background: rgba(10, 15, 13, .95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(95, 191, 138, .15);
+}
+.header__container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.header__brand { display: flex; align-items: center; gap: 12px; color: var(--text-primary); text-decoration: none; }
+.header__logo { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--green-accent); object-fit: cover; }
+.header__brand-text { display: flex; flex-direction: column; }
+.header__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+.header__location { color: var(--text-secondary); font-size: .75rem; letter-spacing: .05em; }
+.header__nav { position: absolute; top: calc(100% + 12px); right: 24px; display: none; flex-direction: column; align-items: stretch; gap: 4px; min-width: 250px; padding: 12px; background: rgba(15, 26, 20, .98); border: 1px solid rgba(95, 191, 138, .3); border-radius: var(--radius-md); box-shadow: 0 12px 35px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
+.header__nav--open { display: flex; }
+.header__link { color: var(--text-primary); text-decoration: none; font-size: .9rem; padding: 12px 16px; border-radius: 8px; transition: .25s ease; }
+.header__link:hover, .header__link[aria-current="page"] { color: var(--green-accent); background: rgba(95, 191, 138, .15); }
+.header__whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; padding: 10px 20px; border-radius: 999px; color: white; background: #25d366; text-decoration: none; font-weight: 600; }
+.header__toggle { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid rgba(95,191,138,.45); border-radius: 999px; color: var(--text-primary); background: rgba(95,191,138,.12); font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .08em; cursor: pointer; }
+.header__toggle:hover, .header__toggle[aria-expanded="true"] { color: var(--bg-primary); background: var(--green-accent); }
+.header__toggle-icon { font-size: 1.1rem; line-height: 1; }
+.page { padding: 88px 0 100px; }
+.page__eyebrow { color: var(--gold); text-align: center; font-size: .8rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 14px; }
+.page__title { margin-bottom: 34px; font-family: var(--font-title); text-align: center; font-size: clamp(3rem, 8vw, 6rem); letter-spacing: .12em; line-height: 1; }
+.page__title span { color: var(--green-accent); }
+.page__intro { max-width: 680px; margin: 22px auto 58px; color: var(--text-secondary); text-align: center; font-size: 1.05rem; line-height: 1.8; }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: 850px; margin: 0 auto; }
+.brand-card { overflow: hidden; border-radius: var(--radius-lg); background: transparent; transition: transform .3s ease; }
+.brand-card:hover { transform: translateY(-5px); }
+.brand-card__button { display: block; width: 100%; padding: 0; border: 0; color: inherit; background: transparent; cursor: pointer; }
+.brand-card__thumb { display: block; width: min(100%, 250px); aspect-ratio: 1 / 1; margin: 0 auto; padding: 6px; object-fit: contain; background: var(--bg-tertiary); border: 1px solid var(--gold); border-radius: 10px; box-shadow: 0 5px 18px rgba(0,0,0,.3); }
+.brand-card__button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.88); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.lightbox.is-open { opacity: 1; pointer-events: auto; }
+.lightbox__dialog { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); max-width: 1050px; width: 100%; max-height: 90vh; overflow: hidden; border: 1px solid rgba(212,165,116,.55); border-radius: var(--radius-lg); background: var(--bg-secondary); box-shadow: 0 20px 80px rgba(0,0,0,.65); }
+.lightbox__image { width: 100%; height: 100%; min-height: 340px; object-fit: contain; background: #070b09; }
+.lightbox__content { padding: 44px 32px 32px; overflow: auto; }
+.lightbox__tag { color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.lightbox__title { margin: 12px 0 16px; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.lightbox__description { color: var(--text-secondary); line-height: 1.8; }
+.lightbox__close { position: absolute; top: 12px; right: 14px; z-index: 2; width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; color: var(--text-primary); background: rgba(0,0,0,.35); font-size: 1.3rem; cursor: pointer; }
+.lightbox__close:hover { color: var(--bg-primary); background: var(--gold); }
+.footer { padding: 28px 24px; color: var(--text-muted); text-align: center; font-size: .85rem; border-top: 1px solid rgba(95,191,138,.12); }
+@media (max-width: 980px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .header__container { align-items: center; }
+  .gallery { grid-template-columns: 1fr; gap: 24px; }
+  .brand-card__thumb { width: min(100%, 230px); }
+  .header__nav { right: 16px; min-width: min(280px, calc(100vw - 32px)); }
+  .header__link { padding: 13px 16px; font-size: 1rem; }
+  .page { padding-top: 60px; }
+  .lightbox__dialog { grid-template-columns: 1fr; max-height: 92vh; overflow: auto; }
+  .lightbox__image { min-height: 240px; max-height: 48vh; }
+  .lightbox__content { padding: 24px; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header__container container">
+    <a href="index.html" class="header__brand">
+      <img src="images/logo_radio.png" alt="Radio del Bosque" class="header__logo" />
+      <span class="header__brand-text"><span class="header__name">Radio del Bosque</span><span class="header__location">Patagonia · Argentina</span></span>
+    </a>
+    <nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
+      <a href="index.html#programacion" class="header__link">Programación</a>
+      <a href="novedades.html" class="header__link">Novedades</a>
+      <a href="eventos.html" class="header__link">Eventos</a>
+      <a href="index.html#galeria" class="header__link">Galería</a>
+      <a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
+      <a href="index.html#nosotros" class="header__link">Sobre Nosotros</a>
+      <a href="index.html#staff" class="header__link">STAFF</a>
+      <a href="index.html#contacto" class="header__link">Contacto</a>
+      <a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
+    </nav>
+    <button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="siteMenu"><span class="header__toggle-icon" aria-hidden="true">☰</span><span>MENU</span></button>
+  </div>
+</header>
+<main class="page">
+  <div class="container">
+    <h1 class="page__title">Confían <span>en Nosotros</span></h1>
+    <section class="gallery" aria-label="Galería de auspiciantes">
+      <article class="brand-card">
+        <button class="brand-card__button" type="button" data-image="images/escuela.png" data-title="Escuela de Oratoria Moderna y Locución Profesional" data-description="Formación integral para comunicar con seguridad, claridad y presencia. La Escuela de Oratoria Moderna y Locución Profesional acompaña a quienes desean desarrollar su voz y potenciar su expresión." aria-label="Ver información de Escuela de Oratoria Moderna y Locución Profesional">
+          <img class="brand-card__thumb" src="images/escuela.png" alt="Escuela de Oratoria Moderna y Locución Profesional" />
+        </button>
+      </article>
+      <article class="brand-card">
+        <button class="brand-card__button" type="button" data-image="images/campaña.png" data-title="Equipo Austral" data-description="¿Buscás productos de perfumería, belleza y bienestar, o una oportunidad para emprender? Equipo Austral te acerca productos Bagués para disfrutar en tu hogar, con envíos a todo el país, y te acompaña para desarrollar tu propio proyecto. Pedí el catálogo o consultá cómo sumarte al equipo." aria-label="Ver información de Equipo Austral">
+          <img class="brand-card__thumb" src="images/campaña.png" alt="Equipo Austral" />
+        </button>
+      </article>
+      <article class="brand-card">
+        <button class="brand-card__button" type="button" data-image="images/diario.png" data-title="El Diario Guaraní" data-description="El Diario Guaraní es un medio de comunicación que informa, acompaña y conecta a la comunidad con las noticias y acontecimientos de la región." aria-label="Ver información de El Diario Guaraní">
+          <img class="brand-card__thumb" src="images/diario.png" alt="El Diario Guaraní" />
+        </button>
+      </article>
+      <article class="brand-card">
+        <button class="brand-card__button" type="button" data-image="images/rockefeller-seguridad.png" data-title="Rockefeller Seguridad" data-description="Rockefeller Seguridad acompaña a hogares, comercios y espacios de trabajo con soluciones de protección que integran alarmas, cámaras y monitoreo. Una propuesta orientada a la prevención, el control y la tranquilidad de cada comunidad." aria-label="Ver información de Rockefeller Seguridad">
+          <img class="brand-card__thumb" src="images/rockefeller-seguridad.png" alt="Rockefeller Seguridad: alarmas, cámaras y monitoreo" />
+        </button>
+      </article>
+    </section>
+  </div>
+</main>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true">
+  <div class="lightbox__dialog">
+    <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Cerrar imagen ampliada">×</button>
+    <img class="lightbox__image" id="lightboxImage" src="" alt="" />
+    <div class="lightbox__content"><p class="lightbox__tag">Marca que confía en nosotros</p><h2 class="lightbox__title" id="lightboxTitle"></h2><p class="lightbox__description" id="lightboxDescription"></p></div>
+  </div>
+</div>
+<footer class="footer">Radio del Bosque · Patagonia Argentina</footer>
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxDescription = document.getElementById('lightboxDescription');
+const closeLightbox = () => { lightbox.classList.remove('is-open'); lightbox.setAttribute('aria-hidden', 'true'); };
+document.querySelectorAll('.brand-card__button').forEach((button) => {
+  button.addEventListener('click', () => {
+    lightboxImage.src = button.dataset.image;
+    lightboxImage.alt = button.dataset.title;
+    lightboxTitle.textContent = button.dataset.title;
+    lightboxDescription.textContent = button.dataset.description;
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  });
+});
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox(); });
+
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('siteMenu');
+const setMenu = (open) => {
+  nav.classList.toggle('header__nav--open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+};
+menuToggle.addEventListener('click', (event) => { event.stopPropagation(); setMenu(!nav.classList.contains('header__nav--open')); });
+nav.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
+document.addEventListener('click', (event) => { if (!nav.contains(event.target) && event.target !== menuToggle) setMenu(false); });
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+</script>
+  <script src="js/radio-persistente.js"></script>
+</body>
+</html>

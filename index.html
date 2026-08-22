@@ -424,135 +424,6 @@ font-size: 1.2rem;
 }
 /* --- FIN ESTILOS REPRODUCTOR --- */
 
-/* --- ESTILOS BOTÓN APK Y MODAL INSTRUCCIONES --- */
-.apk-download-container {
-    text-align: center;
-    margin-top: 16px;
-}
-.btn-apk {
-    background: transparent;
-    border: 2px solid var(--gold);
-    color: var(--gold);
-    font-weight: 800; /* Negrita extra */
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    padding: 12px 24px;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-.btn-apk:hover {
-    background: var(--gold);
-    color: var(--bg-primary);
-    box-shadow: 0 0 20px rgba(212, 165, 116, 0.4);
-}
-
-/* Modal de Instrucciones APK */
-.apk-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 10000; /* Por encima de todo */
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-normal);
-    padding: 20px;
-}
-.apk-modal.active {
-    opacity: 1;
-    pointer-events: all;
-}
-.apk-modal__content {
-    background: var(--bg-secondary);
-    border: 1px solid var(--green-accent);
-    border-radius: var(--radius-lg);
-    max-width: 500px;
-    width: 100%;
-    padding: 32px;
-    position: relative;
-    box-shadow: 0 0 40px rgba(95, 191, 138, 0.2);
-    transform: translateY(20px);
-    transition: transform var(--transition-normal);
-}
-.apk-modal.active .apk-modal__content {
-    transform: translateY(0);
-}
-.apk-modal__close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-.apk-modal__close:hover {
-    color: var(--text-primary);
-}
-.apk-modal__title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--gold);
-    margin-bottom: 20px;
-    text-align: center;
-}
-.apk-modal__steps {
-    list-style: none;
-    counter-reset: step-counter;
-    margin-bottom: 24px;
-}
-.apk-modal__steps li {
-    position: relative;
-    padding-left: 40px;
-    margin-bottom: 16px;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-.apk-modal__steps li::before {
-    counter-increment: step-counter;
-    content: counter(step-counter);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 28px;
-    height: 28px;
-    background: var(--green-dark);
-    color: var(--green-accent);
-    border-radius: 50%;
-    text-align: center;
-    line-height: 28px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    border: 1px solid var(--green-accent);
-}
-.apk-modal__download-btn {
-    display: block;
-    width: 100%;
-    background: var(--green-accent);
-    color: var(--bg-primary);
-    text-align: center;
-    padding: 14px;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: background 0.3s;
-}
-.apk-modal__download-btn:hover {
-    background: var(--gold);
-}
-/* --- FIN ESTILOS APK --- */
-
 /* LIVE */
 .live-section { padding: 80px 0; background: var(--bg-primary); }
 .section-header { text-align: center; margin-bottom: 48px; }
@@ -1117,14 +988,6 @@ Escuchar en vivo
 </div>
 <!-- FIN REPRODUCTOR HTML5 -->
 
-<!-- BOTÓN DESCARGAR APK -->
-<div class="apk-download-container">
-    <button class="btn-apk" id="btnDescargarApk">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
-        DESCARGAR
-    </button>
-</div>
-
 <div class="hero__actions">
 </div>
 <div class="hero__scroll">
@@ -1472,25 +1335,6 @@ Enviar mensaje por WhatsApp
 </div>
 </div>
 
-<!-- MODAL INSTRUCCIONES APK -->
-<div class="apk-modal" id="apkModal">
-    <div class="apk-modal__content">
-        <button class="apk-modal__close" id="apkModalClose">✕</button>
-        <h3 class="apk-modal__title">Instalación de la App</h3>
-        <ol class="apk-modal__steps">
-            <li>Abrir Ajustes del teléfono.</li>
-            <li>Ingresar en Seguridad o Aplicaciones (el nombre puede variar según la marca del dispositivo).</li>
-            <li>Buscar la opción Instalar aplicaciones desconocidas.</li>
-            <li>Seleccionar la aplicación desde donde se abrirá la APK (por ejemplo, Chrome, Archivos o un gestor de archivos).</li>
-            <li>Activar Permitir desde esta fuente.</li>
-            <li>Descargar o abrir el archivo .apk e iniciar la instalación.</li>
-        </ol>
-        <a href="https://drive.usercontent.google.com/download?id=1-EGxiqn34DlMczmPVoXtC-I8M34jrG8b&export=download&authuser=0&confirm=t&uuid=09b891eb-dfa3-4d56-b871-c7ebed459847&at=ABswASZ3GYTKCWCdoDK9tObQZXd_%3A1783504821074" class="apk-modal__download-btn" download>
-            DESCARGAR APK AHORA
-        </a>
-    </div>
-</div>
-
 <script src="script.js"></script>
 <!-- SCRIPT REPRODUCTOR DE RADIO -->
 <script>
@@ -1596,33 +1440,6 @@ updateUI('error');
 });
 // Iniciar intento de autoplay al cargar
 attemptAutoPlay();
-
-// --- LÓGICA MODAL APK ---
-const btnDescargarApk = document.getElementById('btnDescargarApk');
-const apkModal = document.getElementById('apkModal');
-const apkModalClose = document.getElementById('apkModalClose');
-
-if(btnDescargarApk && apkModal) {
-    btnDescargarApk.addEventListener('click', function() {
-        apkModal.classList.add('active');
-    });
-}
-
-if(apkModalClose && apkModal) {
-    apkModalClose.addEventListener('click', function() {
-        apkModal.classList.remove('active');
-    });
-}
-
-// Cerrar modal al hacer clic fuera del contenido
-if(apkModal) {
-    apkModal.addEventListener('click', function(e) {
-        if (e.target === apkModal) {
-            apkModal.classList.remove('active');
-        }
-    });
-}
-// --- FIN LÓGICA MODAL APK ---
 
 });
 </script>

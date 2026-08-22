@@ -67,10 +67,10 @@ body {
 .brand-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 16px 42px rgba(0,0,0,.5); }
 .brand-card__button { display: block; width: 100%; padding: 0; border: 0; color: inherit; background: transparent; text-align: left; cursor: pointer; }
 .brand-card__thumb { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--bg-tertiary); }
-.brand-card__body { padding: 20px 22px 24px; }
-.brand-card__label { color: var(--gold); font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.brand-card__name { margin-top: 8px; font-family: var(--font-display); font-size: 1.3rem; }
-.brand-card__hint { margin-top: 10px; color: var(--text-muted); font-size: .85rem; }
+.brand-card__body { display: block; padding: 20px 22px 24px; }
+.brand-card__label { display: block; color: var(--gold); font-size: .72rem; font-weight: 700; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; }
+.brand-card__name { display: block; margin-top: 9px; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.25; overflow-wrap: anywhere; }
+.brand-card__hint { display: block; margin-top: 12px; color: var(--text-muted); font-size: .85rem; line-height: 1.45; }
 .lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.88); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 .lightbox.is-open { opacity: 1; pointer-events: auto; }
 .lightbox__dialog { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); max-width: 1050px; width: 100%; max-height: 90vh; overflow: hidden; border: 1px solid rgba(212,165,116,.55); border-radius: var(--radius-lg); background: var(--bg-secondary); box-shadow: 0 20px 80px rgba(0,0,0,.65); }

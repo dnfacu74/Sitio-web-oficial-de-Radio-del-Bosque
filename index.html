@@ -1,121 +1,27 @@
-<!DOCTYPE html>
-<html lang="es-AR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0a1f14" />
-<meta name="description" content="Radio del Bosque, Patagonia Argentina. Escuchá la radio mientras recorrés nuestro sitio." />
-<title>Radio del Bosque | Radio en vivo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<style>
-:root {
-  --bg: #080d0b;
-  --panel: rgba(15, 26, 20, .98);
-  --green: #5fbf8a;
-  --green-dark: #193b2d;
-  --gold: #d4a574;
-  --text: #f5f0e8;
-  --muted: #b8b0a0;
-  --bar-height: 84px;
-}
-* { box-sizing: border-box; }
-html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font-family: Inter, Arial, sans-serif; }
-.radio-shell { height: 100%; display: flex; flex-direction: column; }
-.radio-content { display: block; width: 100%; flex: 1 1 auto; min-height: 0; border: 0; background: var(--bg); }
-.radio-dock {
-  position: relative; z-index: 20; display: flex; align-items: center; gap: 16px;
-  min-height: var(--bar-height); padding: 10px clamp(16px, 4vw, 56px);
-  background: rgba(8, 13, 11, .98); border-top: 1px solid rgba(212,165,116,.38);
-  box-shadow: 0 -8px 28px rgba(0,0,0,.42);
-}
-.radio-dock__brand { display: flex; align-items: center; gap: 10px; min-width: 185px; }
-.radio-dock__logo { width: 42px; height: 42px; border: 1px solid var(--gold); border-radius: 50%; object-fit: cover; }
-.radio-dock__name { display: flex; flex-direction: column; gap: 2px; }
-.radio-dock__station { font-family: 'Playfair Display', serif; font-size: .98rem; font-weight: 700; }
-.radio-dock__state { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-.radio-dock__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
-.radio-dock.is-playing .radio-dock__dot { background: #e63946; box-shadow: 0 0 8px #e63946; animation: pulse 1.4s infinite; }
-.radio-dock.is-playing .radio-dock__state { color: #e63946; }
-.radio-dock__button { display: grid; place-items: center; width: 54px; height: 54px; flex: 0 0 auto; border: 0; border-radius: 50%; color: #fff; background: linear-gradient(135deg, var(--green), var(--green-dark)); cursor: pointer; box-shadow: 0 0 18px rgba(95,191,138,.32); transition: transform .2s ease, box-shadow .2s ease; }
-.radio-dock__button:hover { transform: scale(1.05); box-shadow: 0 0 26px rgba(95,191,138,.52); }
-.radio-dock__button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-.radio-dock__button svg { width: 23px; height: 23px; fill: currentColor; }
-.radio-dock__volume { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); }
-.radio-dock__volume input { width: 110px; accent-color: var(--green); cursor: pointer; }
-.radio-dock__hint { color: var(--muted); font-size: .8rem; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-@media (max-width: 680px) {
-  :root { --bar-height: 76px; }
-  .radio-dock { gap: 10px; padding: 8px 12px; }
-  .radio-dock__brand { min-width: 0; flex: 1 1 auto; }
-  .radio-dock__logo { width: 36px; height: 36px; }
-  .radio-dock__station { font-size: .86rem; }
-  .radio-dock__state { font-size: .58rem; }
-  .radio-dock__button { width: 46px; height: 46px; }
-  .radio-dock__volume { display: none; }
-  .radio-dock__hint { display: none; }
-}
-</style>
-</head>
-<body>
-<div class="radio-shell">
-  <iframe class="radio-content" id="radioContent" name="radio-content" src="home.html" title="Contenido de Radio del Bosque" allow="autoplay"></iframe>
-  <section class="radio-dock" id="radioDock" aria-label="Reproductor de Radio del Bosque">
-    <div class="radio-dock__brand">
-      <img class="radio-dock__logo" src="images/logo_radio.png" alt="Radio del Bosque" />
-      <div class="radio-dock__name"><span class="radio-dock__station">Radio del Bosque</span><span class="radio-dock__state"><span class="radio-dock__dot"></span><span id="radioStatus">Listo para escuchar</span></span></div>
-    </div>
-    <button class="radio-dock__button" id="radioToggle" type="button" aria-label="Reproducir radio">
-      <svg id="radioPlayIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-      <svg id="radioPauseIcon" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>
-    </button>
-    <span class="radio-dock__hint" id="radioHint">La radio continúa mientras navegás</span>
-    <label class="radio-dock__volume" aria-label="Volumen"><span aria-hidden="true">Vol</span><input id="radioVolume" type="range" min="0" max="1" step="0.05" value="1" /></label>
-    <audio id="persistentAudio" preload="none" src="https://radios.solumedia.com/6318/stream">Tu navegador no soporta audio HTML5.</audio>
-  </section>
-</div>
-<script>
-(() => {
-  const audio = document.getElementById('persistentAudio');
-  const content = document.getElementById('radioContent');
-  const allowedPages = ['home.html', 'marcas.html', 'novedades.html', 'eventos.html', 'programas.html', 'encuentros-en-el-bosque-audios.html'];
-  const requestedPage = new URLSearchParams(window.location.search).get('page');
-  if (content && allowedPages.includes(requestedPage)) content.src = requestedPage;
-  const dock = document.getElementById('radioDock');
-  const toggle = document.getElementById('radioToggle');
-  const playIcon = document.getElementById('radioPlayIcon');
-  const pauseIcon = document.getElementById('radioPauseIcon');
-  const status = document.getElementById('radioStatus');
-  const hint = document.getElementById('radioHint');
-  const volume = document.getElementById('radioVolume');
-  const savedVolume = localStorage.getItem('radioVolume');
-  if (savedVolume !== null) { audio.volume = Number(savedVolume); volume.value = savedVolume; }
-  const update = (playing, message) => {
-    dock.classList.toggle('is-playing', playing);
-    playIcon.style.display = playing ? 'none' : 'block';
-    pauseIcon.style.display = playing ? 'block' : 'none';
-    toggle.setAttribute('aria-label', playing ? 'Pausar radio' : 'Reproducir radio');
-    status.textContent = message || (playing ? 'En vivo' : 'Pausado');
-    hint.textContent = playing ? 'La radio continúa mientras navegás' : 'Presioná reproducir para escuchar';
-  };
-  toggle.addEventListener('click', () => {
-    if (audio.paused) {
-      update(false, 'Conectando...');
-      audio.play().then(() => update(true, 'En vivo')).catch(() => update(false, 'Presioná para escuchar'));
-    } else {
-      audio.pause();
-      update(false, 'Pausado');
-    }
-  });
-  volume.addEventListener('input', () => { audio.volume = Number(volume.value); localStorage.setItem('radioVolume', volume.value); });
-  audio.addEventListener('playing', () => update(true, 'En vivo'));
-  audio.addEventListener('pause', () => update(false, 'Pausado'));
-  audio.addEventListener('waiting', () => update(true, 'Conectando...'));
-  audio.addEventListener('error', () => update(false, 'No disponible temporalmente'));
-  update(false, 'Listo para escuchar');
-})();
-</script>
-</body>
+<!doctype html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Radio del Bosque — Patagonia Argentina</title>
+    <meta name="description" content="Radio del Bosque: compañía, cultura y conversación desde la Patagonia Argentina." />    
+    <!-- THIS IS THE START OF A COMMENT BLOCK, BLOCK TO BE DELETED: Google Fonts here, example:
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    THIS IS THE END OF A COMMENT BLOCK, BLOCK TO BE DELETED -->
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script
+      defer
+      src="%VITE_ANALYTICS_ENDPOINT%/umami"
+      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+  </body>
+
 </html>

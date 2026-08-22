@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
-<base href="https://radiodelbosquelp.com.ar/" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L0T7H98V9L"></script>
 <script>
@@ -223,8 +222,8 @@ font-weight: 700; text-decoration: none; letter-spacing: .04em;
 transition: color var(--transition-normal), transform var(--transition-normal);
 }
 .hero__brands-title:hover { color: var(--green-accent); transform: translateY(-2px); }
-.hero__brands-gallery { display: flex; justify-content: flex-start; align-items: center; gap: 18px; margin: 18px auto 0; width: min(100%, 850px); overflow-x: hidden; padding: 0 4px 12px; scroll-snap-type: none; scrollbar-width: none; -ms-overflow-style: none; } .hero__brands-gallery::-webkit-scrollbar { display: none; }
-.hero__brand-thumb { flex: 0 0 180px; scroll-snap-align: start; width: 180px; height: 122px; padding: 5px; border: 1px solid var(--gold); border-radius: 10px; background: rgba(15,26,20,.9); cursor: pointer; box-shadow: 0 5px 16px rgba(0,0,0,.35); transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
+.hero__brands-gallery { display: flex; justify-content: center; align-items: center; gap: 18px; margin: 18px auto 0; width: min(100%, 850px); flex-wrap: wrap; }
+.hero__brand-thumb { width: 180px; height: 122px; padding: 5px; border: 1px solid var(--gold); border-radius: 10px; background: rgba(15,26,20,.9); cursor: pointer; box-shadow: 0 5px 16px rgba(0,0,0,.35); transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
 .hero__brand-thumb:hover { transform: translateY(-4px); box-shadow: 0 9px 22px rgba(212,165,116,.3); }
 .hero__brand-thumb:focus-visible { outline: 3px solid var(--green-accent); outline-offset: 3px; }
 .hero__brand-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 6px; background: #fff; }
@@ -944,7 +943,6 @@ grid-template-columns: 1fr;
 .staff-card { padding: 36px 20px 32px; }
 .staff-logo { width: 125px; height: 125px; margin-top: 34px; }
 }
-.quallys-fallback::after { content: 'Quallys'; display: grid; place-items: center; height: 100%; color: var(--text-primary); font-family: var(--font-display); font-size: 1.4rem; }
 </style>
 </head>
 <body>
@@ -995,7 +993,6 @@ grid-template-columns: 1fr;
 <a href="marcas.html" class="hero__brands-title">Confían en Nosotros</a>
 <div class="hero__brands-gallery" aria-label="Marcas que confían en Radio del Bosque">
 <button class="hero__brand-thumb" type="button" data-image="images/escuela.png" data-title="Escuela de Oratoria Moderna y Locución Profesional" data-description="Formación integral para comunicar con seguridad, claridad y presencia."><img src="images/escuela.png" alt="Escuela de Oratoria Moderna y Locución Profesional" loading="lazy" /></button>
-<button class="hero__brand-thumb" type="button" data-image="images/quallys_logo.png" data-title="Quallys" data-description="Quallys forma parte de las marcas que confían en Radio del Bosque y acompañan nuestra comunidad de oyentes."><img src="images/quallys_logo.png" alt="Quallys" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('quallys-fallback');" /></button>
 <button class="hero__brand-thumb" type="button" data-image="images/diario.png" data-title="El Diario Guaraní" data-description="Un medio de comunicación que informa, acompaña y conecta a la comunidad con las noticias de la región."><img src="images/diario.png" alt="El Diario Guaraní" loading="lazy" /></button>
 <button class="hero__brand-thumb" type="button" data-image="images/campaña.png" data-title="Equipo Austral" data-description="¿Buscás productos de perfumería, belleza y bienestar, o una oportunidad para emprender? Equipo Austral te acerca productos Bagués para disfrutar en tu hogar, con envíos a todo el país, y te acompaña para desarrollar tu propio proyecto. Pedí el catálogo o consultá cómo sumarte al equipo."><img src="images/campaña.png" alt="Equipo Austral" loading="lazy" /></button>
 <button class="hero__brand-thumb" type="button" data-image="images/rockefeller-seguridad.png" data-title="Rockefeller Seguridad" data-description="Rockefeller Seguridad acompaña a hogares, comercios y espacios de trabajo con soluciones de protección que integran alarmas, cámaras y monitoreo. Una propuesta orientada a la prevención, el control y la tranquilidad de cada comunidad."><img src="images/rockefeller-seguridad.png" alt="Rockefeller Seguridad: alarmas, cámaras y monitoreo" loading="lazy" /></button>
@@ -1371,24 +1368,16 @@ Enviar mensaje por WhatsApp
 <script>
 (() => {
   const lightbox = document.getElementById('heroBrandsLightbox');
-  const gallery = document.querySelector('.hero__brands-gallery');
   const image = document.getElementById('heroBrandsImage');
   const title = document.getElementById('heroBrandsTitle');
   const description = document.getElementById('heroBrandsDescription');
   const close = document.getElementById('heroBrandsClose');
-  if (!lightbox || !gallery || !image || !title || !description || !close) return;
-  const closeBox = () => {
-    lightbox.classList.remove('active');
-    lightbox.setAttribute('aria-hidden', 'true');
-    gallery.resumeAutoScroll?.();
-  };
-  gallery.addEventListener('click', (event) => {
-    const thumb = event.target.closest('.hero__brand-thumb');
-    if (!thumb || !gallery.contains(thumb)) return;
-    gallery.pauseAutoScroll?.();
+  if (!lightbox || !image || !title || !description || !close) return;
+  const closeBox = () => { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden', 'true'); };
+  document.querySelectorAll('.hero__brand-thumb').forEach((thumb) => thumb.addEventListener('click', () => {
     image.src = thumb.dataset.image; image.alt = thumb.dataset.title; title.textContent = thumb.dataset.title; description.textContent = thumb.dataset.description;
     lightbox.classList.add('active'); lightbox.setAttribute('aria-hidden', 'false');
-  });
+  }));
   close.addEventListener('click', closeBox);
   lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeBox(); });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeBox(); });
@@ -1419,50 +1408,5 @@ Enviar mensaje por WhatsApp
 })();
 </script>
   <script src="js/radio-persistente.js"></script>
-<script>
-(() => {
-  const gallery = document.querySelector('.hero__brands-gallery');
-  if (!gallery) return;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const originalItems = Array.from(gallery.children);
-  const galleryGap = parseFloat(getComputedStyle(gallery).gap) || 0;
-  if (originalItems.length > 1 && !gallery.dataset.autoLoopReady) {
-    originalItems.forEach((item) => gallery.appendChild(item.cloneNode(true)));
-    gallery.dataset.loopWidth = String(originalItems.reduce((total, item) => total + item.offsetWidth, 0) + galleryGap * originalItems.length);
-    gallery.dataset.autoLoopReady = 'true';
-  }
-  let frameId = 0;
-  let paused = reduceMotion.matches;
-  let lastTime = 0;
-  const speed = 24;
-  const tick = (time) => {
-    if (!lastTime) lastTime = time;
-    const elapsed = Math.min(time - lastTime, 40);
-    lastTime = time;
-    if (!paused && gallery.scrollWidth > gallery.clientWidth) {
-      const loopWidth = Number(gallery.dataset.loopWidth) || 0;
-      gallery.scrollLeft += speed * elapsed / 1000;
-      if (loopWidth && gallery.scrollLeft >= loopWidth) gallery.scrollLeft -= loopWidth;
-    }
-    frameId = window.requestAnimationFrame(tick);
-  };
-  const pause = () => { paused = true; lastTime = 0; };
-  const resume = () => {
-    const lightbox = document.getElementById('heroBrandsLightbox');
-    if (!reduceMotion.matches && !lightbox?.classList.contains('active')) { paused = false; lastTime = 0; }
-  };
-  gallery.pauseAutoScroll = pause;
-  gallery.resumeAutoScroll = resume;
-  gallery.addEventListener('mouseenter', pause);
-  gallery.addEventListener('mouseleave', resume);
-  gallery.addEventListener('focusin', pause);
-  gallery.addEventListener('focusout', resume);
-  gallery.addEventListener('touchstart', pause, { passive: true });
-  gallery.addEventListener('touchend', () => window.setTimeout(resume, 1200), { passive: true });
-  reduceMotion.addEventListener?.('change', (event) => { paused = event.matches; });
-  frameId = window.requestAnimationFrame(tick);
-  window.addEventListener('pagehide', () => window.cancelAnimationFrame(frameId), { once: true });
-})();
-</script>
 </body>
 </html>

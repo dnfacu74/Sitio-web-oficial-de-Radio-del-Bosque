@@ -32,22 +32,22 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
   let reconnectTimer = null;
   let reconnectAttempts = 0;
   const styleText = `
-    .rb-player { width:min(90%,900px); margin:24px auto 34px; padding:20px 28px 18px; border:1px solid #5fbf8a; border-radius:28px; background:rgba(7,31,20,.78); color:#f5f0e8; font-family:Inter,Arial,sans-serif; box-shadow:0 0 25px rgba(95,191,138,.10); }
+    .rb-player { width:min(72%,520px); margin:10px auto 18px; padding:10px 14px 9px; border:1px solid #5fbf8a; border-radius:16px; background:rgba(7,31,20,.78); color:#f5f0e8; font-family:Inter,Arial,sans-serif; box-shadow:0 0 16px rgba(95,191,138,.10); }
     .rb-player * { box-sizing:border-box; }
-    .rb-player-head { display:flex; justify-content:space-between; align-items:center; gap:15px; color:#74d99c; font-size:15px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+    .rb-player-head { display:flex; justify-content:space-between; align-items:center; gap:10px; color:#74d99c; font-size:10px; font-weight:700; letter-spacing:.7px; text-transform:uppercase; }
     .rb-live { display:flex; align-items:center; gap:8px; }
-    .rb-live-dot { width:13px; height:13px; display:inline-block; border-radius:50%; background:#74d99c; box-shadow:0 0 10px #74d99c; }
-    .rb-volume { display:flex; align-items:center; gap:8px; color:#f5f0e8; font-size:20px; }
-    .rb-volume input { width:150px; accent-color:#5fbf8a; }
-    .rb-main { display:flex; align-items:center; gap:16px; padding:10px 12px 12px; }
-    .rb-button { width:58px; height:58px; flex:0 0 58px; border:0; border-radius:50%; display:grid; place-items:center; background:linear-gradient(145deg,#f2c57e,#b57935); color:#fff; cursor:pointer; box-shadow:0 0 14px rgba(212,165,116,.42); }
+    .rb-live-dot { width:8px; height:8px; display:inline-block; border-radius:50%; background:#74d99c; box-shadow:0 0 7px #74d99c; }
+    .rb-volume { display:flex; align-items:center; gap:5px; color:#f5f0e8; font-size:13px; }
+    .rb-volume input { width:72px; accent-color:#5fbf8a; }
+    .rb-main { display:flex; align-items:center; gap:11px; padding:7px 3px 8px; }
+    .rb-button { width:42px; height:42px; flex:0 0 42px; border:0; border-radius:50%; display:grid; place-items:center; background:linear-gradient(145deg,#f2c57e,#b57935); color:#fff; cursor:pointer; box-shadow:0 0 10px rgba(212,165,116,.42); }
     .rb-button:hover { filter:brightness(1.08); transform:scale(1.02); }
     .rb-button:focus-visible { outline:3px solid #d4a574; outline-offset:4px; }
-    .rb-button svg { width:25px; height:25px; fill:currentColor; }
-    .rb-title { margin:0 0 9px; font:700 clamp(22px,3vw,32px)/1.2 'Playfair Display',Georgia,serif; }
-    .rb-status { margin:0; color:#67d797; font-size:clamp(16px,2.2vw,22px); font-weight:600; }
+    .rb-button svg { width:18px; height:18px; fill:currentColor; }
+    .rb-title { margin:0 0 3px; font:700 clamp(15px,2vw,20px)/1.2 'Playfair Display',Georgia,serif; }
+    .rb-status { margin:0; color:#67d797; font-size:clamp(11px,1.5vw,14px); font-weight:600; }
     .rb-line { height:1px; background:rgba(95,191,138,.7); }
-    @media (max-width:600px) { .rb-player { width:88%; padding:18px 16px 16px; border-radius:24px; } .rb-player-head { font-size:12px; } .rb-volume { font-size:17px; } .rb-volume input { width:92px; } .rb-main { gap:16px; padding:13px 4px 20px; } .rb-button { width:54px; height:54px; flex-basis:54px; } .rb-button svg { width:23px; height:23px; } }
+    @media (max-width:600px) { .rb-player { width:82%; padding:9px 11px 8px; border-radius:14px; } .rb-player-head { font-size:9px; } .rb-volume { font-size:12px; } .rb-volume input { width:62px; } .rb-main { gap:9px; padding:6px 2px 7px; } .rb-button { width:38px; height:38px; flex-basis:38px; } .rb-button svg { width:16px; height:16px; } }
   `;
   function setState(button, status, playing, text) {
     button.querySelector('[data-play]').style.display = playing ? 'none' : 'block';

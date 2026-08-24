@@ -23,76 +23,161 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
   <iframe class="radio-content" id="radioContent" name="radio-content" src="home.html?v=2" title="Contenido de Radio del Bosque" allow="autoplay"></iframe>
   <audio id="persistentAudio" preload="none" src="https://radios.solumedia.com/6318/stream">Tu navegador no soporta audio HTML5.</audio>
 </div>
-<script>
-(() => {
-  'use strict';
-  const audio = document.getElementById('persistentAudio');
-  const frame = document.getElementById('radioContent');
-  const pages = new Set(['home.html','marcas.html','novedades.html','eventos.html','programas.html','encuentros-en-el-bosque-audios.html']);
-  let reconnectTimer = null;
-  let reconnectAttempts = 0;
-  const styleText = `
-    .rb-player { width:min(72%,520px); margin:10px auto 18px; padding:10px 14px 9px; border:1px solid #5fbf8a; border-radius:16px; background:rgba(7,31,20,.78); color:#f5f0e8; font-family:Inter,Arial,sans-serif; box-shadow:0 0 16px rgba(95,191,138,.10); }
-    .rb-player * { box-sizing:border-box; }
-    .rb-player-head { display:flex; justify-content:space-between; align-items:center; gap:10px; color:#74d99c; font-size:10px; font-weight:700; letter-spacing:.7px; text-transform:uppercase; }
-    .rb-live { display:flex; align-items:center; gap:8px; }
-    .rb-live-dot { width:8px; height:8px; display:inline-block; border-radius:50%; background:#74d99c; box-shadow:0 0 7px #74d99c; }
-    .rb-volume { display:flex; align-items:center; gap:5px; color:#f5f0e8; font-size:13px; }
-    .rb-volume input { width:72px; accent-color:#5fbf8a; }
-    .rb-main { display:flex; align-items:center; gap:11px; padding:7px 3px 8px; }
-    .rb-button { width:42px; height:42px; flex:0 0 42px; border:0; border-radius:50%; display:grid; place-items:center; background:linear-gradient(145deg,#f2c57e,#b57935); color:#fff; cursor:pointer; box-shadow:0 0 10px rgba(212,165,116,.42); }
-    .rb-button:hover { filter:brightness(1.08); transform:scale(1.02); }
-    .rb-button:focus-visible { outline:3px solid #d4a574; outline-offset:4px; }
-    .rb-button svg { width:18px; height:18px; fill:currentColor; }
-    .rb-title { margin:0 0 3px; font:700 clamp(15px,2vw,20px)/1.2 'Playfair Display',Georgia,serif; }
-    .rb-status { margin:0; color:#67d797; font-size:clamp(11px,1.5vw,14px); font-weight:600; }
-    .rb-line { height:1px; background:rgba(95,191,138,.7); }
-    @media (max-width:600px) { .rb-player { width:82%; padding:9px 11px 8px; border-radius:14px; } .rb-player-head { font-size:9px; } .rb-volume { font-size:12px; } .rb-volume input { width:62px; } .rb-main { gap:9px; padding:6px 2px 7px; } .rb-button { width:38px; height:38px; flex-basis:38px; } .rb-button svg { width:16px; height:16px; } }
-  `;
-  function setState(button, status, playing, text) {
-    button.querySelector('[data-play]').style.display = playing ? 'none' : 'block';
-    button.querySelector('[data-pause]').style.display = playing ? 'block' : 'none';
-    button.setAttribute('aria-label', playing ? 'Pausar radio' : 'Reproducir radio');
-    status.textContent = text || (playing ? 'Streaming en vivo' : 'Presioná para escuchar');
-  }
-  function reconnect(button, status) {
-    if (audio.paused || reconnectTimer) return;
-    const delay = Math.min(30000, 1200 * Math.pow(2, reconnectAttempts++));
-    status.textContent = 'Reconectando...';
-    reconnectTimer = setTimeout(() => { reconnectTimer=null; audio.load(); audio.play().catch(() => reconnect(button,status)); }, delay);
-  }
-  function addPlayer() {
-    try {
-      const doc = frame.contentDocument;
-      if (!doc || doc.getElementById('radioBosquePlayer')) return;
-      const css = doc.createElement('style'); css.id='radioBosquePlayerCss'; css.textContent=styleText; doc.head.appendChild(css);
-      const all = [...doc.querySelectorAll('h1,h2,h3,h4,p,span,div')];
-      const normalized = el => el.textContent.replace(/\s+/g,' ').trim().toLowerCase();
-      const study = all.find(el => normalized(el) === 'estudio marta navarro') || all.find(el => normalized(el).includes('estudio marta navarro'));
-      const player = doc.createElement('section'); player.id='radioBosquePlayer'; player.className='rb-player'; player.setAttribute('aria-label','Reproductor de Radio del Bosque');
-      player.innerHTML = `<div class="rb-player-head"><span class="rb-live"><span class="rb-live-dot"></span>EN VIVO</span><label class="rb-volume" aria-label="Volumen"><span aria-hidden="true">&#128266;</span><input type="range" min="0" max="1" step="0.05" value="1" data-volume></label></div><div class="rb-main"><button class="rb-button" type="button" aria-label="Reproducir radio"><svg data-play viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg><svg data-pause viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg></button><div><h2 class="rb-title">Radio del Bosque</h2><p class="rb-status">Streaming en vivo</p></div></div><div class="rb-line"></div>`;
-      if (study) { study.insertAdjacentElement('afterend', player); }
-      else { (doc.querySelector('main') || doc.body).appendChild(player); }
-      const button=player.querySelector('.rb-button'), status=player.querySelector('.rb-status'), volume=player.querySelector('[data-volume]');
-      const saved=localStorage.getItem('radioVolume'); if(saved!==null){ audio.volume=Number(saved); volume.value=saved; }
-      button.addEventListener('click', () => { if(audio.paused){ status.textContent='Conectando...'; audio.play().catch(()=>setState(button,status,false,'Presioná para escuchar')); } else { audio.pause(); clearTimeout(reconnectTimer); reconnectTimer=null; reconnectAttempts=0; } });
-      volume.addEventListener('input', () => { audio.volume=Number(volume.value); localStorage.setItem('radioVolume',volume.value); });
-      audio.addEventListener('playing',()=>setState(button,status,true,'Streaming en vivo'));
-      audio.addEventListener('pause',()=>setState(button,status,false,'Presioná para escuchar'));
-      audio.addEventListener('waiting',()=>reconnect(button,status));
-      audio.addEventListener('stalled',()=>reconnect(button,status));
-      audio.addEventListener('error',()=>reconnect(button,status));
-    } catch(e) { console.warn('No se pudo insertar el reproductor.',e); }
-  }
-  function go(url) {
-    const u=new URL(url,window.location.href); if(u.origin!==window.location.origin) return false;
-    const page=u.pathname.split('/').pop()||'index.html';
-    if(page==='index.html'||page===''){ frame.src='home.html'+u.hash; return true; }
-    if(pages.has(page)){ frame.src=page+u.search+u.hash; return true; }
-    return false;
-  }
-  frame.addEventListener('load',()=>{ addPlayer(); try { frame.contentDocument.addEventListener('click',e=>{ const a=e.target.closest&&e.target.closest('a[href]'); if(!a||a.target==='_blank')return; const h=a.getAttribute('href'); if(!h||h[0]==='#'||h.startsWith('mailto:')||h.startsWith('tel:'))return; if(go(new URL(h,frame.contentWindow.location.href).href))e.preventDefault(); },true); } catch(e){} });
-})();
-</script>
+  <script>
+  (() => {
+    'use strict';
+
+    const STREAM_URL = 'https://radios.solumedia.com/6318/stream';
+    const audio = document.getElementById('persistentAudio');
+    const frame = document.getElementById('radioContent');
+    const pages = new Set(['home.html','marcas.html','novedades.html','eventos.html','programas.html','encuentros-en-el-bosque-audios.html']);
+    let reconnectTimer = null;
+    let stallTimer = null;
+    let reconnectAttempts = 0;
+    let userPaused = true;
+    let currentUI = null;
+
+    const styleText = `
+      .rb-player { width:min(72%,520px); margin:10px auto 18px; padding:10px 14px 9px; border:1px solid #5fbf8a; border-radius:16px; background:rgba(7,31,20,.78); color:#f5f0e8; font-family:Inter,Arial,sans-serif; box-shadow:0 0 16px rgba(95,191,138,.10); }
+      .rb-player * { box-sizing:border-box; }
+      .rb-player-head { display:flex; justify-content:space-between; align-items:center; gap:10px; color:#74d99c; font-size:10px; font-weight:700; letter-spacing:.7px; text-transform:uppercase; }
+      .rb-live { display:flex; align-items:center; gap:8px; }
+      .rb-live-dot { width:8px; height:8px; display:inline-block; border-radius:50%; background:#74d99c; box-shadow:0 0 7px #74d99c; }
+      .rb-volume { display:flex; align-items:center; gap:5px; color:#f5f0e8; font-size:13px; }
+      .rb-volume input { width:72px; accent-color:#5fbf8a; }
+      .rb-main { display:flex; align-items:center; gap:11px; padding:7px 3px 8px; }
+      .rb-button { width:42px; height:42px; flex:0 0 42px; border:0; border-radius:50%; display:grid; place-items:center; background:linear-gradient(145deg,#f2c57e,#b57935); color:#fff; cursor:pointer; box-shadow:0 0 10px rgba(212,165,116,.42); }
+      .rb-button:hover { filter:brightness(1.08); transform:scale(1.02); }
+      .rb-button:focus-visible { outline:3px solid #d4a574; outline-offset:4px; }
+      .rb-button svg { width:18px; height:18px; fill:currentColor; }
+      .rb-title { margin:0 0 3px; font:700 clamp(15px,2vw,20px)/1.2 'Playfair Display',Georgia,serif; }
+      .rb-status { margin:0; color:#67d797; font-size:clamp(11px,1.5vw,14px); font-weight:600; }
+      .rb-line { height:1px; background:rgba(95,191,138,.7); }
+      @media (max-width:600px) { .rb-player { width:82%; padding:9px 11px 8px; border-radius:14px; } .rb-player-head { font-size:9px; } .rb-volume { font-size:12px; } .rb-volume input { width:62px; } .rb-main { gap:9px; padding:6px 2px 7px; } .rb-button { width:38px; height:38px; flex-basis:38px; } .rb-button svg { width:16px; height:16px; } }
+    `;
+
+    function setState(playing, text) {
+      if (!currentUI) return;
+      const { button, status } = currentUI;
+      button.querySelector('[data-play]').style.display = playing ? 'none' : 'block';
+      button.querySelector('[data-pause]').style.display = playing ? 'block' : 'none';
+      button.setAttribute('aria-label', playing ? 'Pausar radio' : 'Reproducir radio');
+      status.textContent = text || (playing ? 'Streaming en vivo' : 'Presioná para escuchar');
+    }
+
+    function clearReconnectTimers() {
+      clearTimeout(reconnectTimer);
+      clearTimeout(stallTimer);
+      reconnectTimer = null;
+      stallTimer = null;
+    }
+
+    function scheduleReconnect(reason) {
+      if (userPaused || reconnectTimer) return;
+      clearTimeout(stallTimer);
+      stallTimer = null;
+      const delay = Math.min(15000, 1000 * (2 ** Math.min(reconnectAttempts, 4)));
+      setState(false, 'Reconectando...');
+      reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        reconnectAttempts += 1;
+        audio.src = `${STREAM_URL}?reconnect=${Date.now()}`;
+        audio.load();
+        audio.play().catch(() => scheduleReconnect('play-failed'));
+      }, delay);
+      console.debug(`[Radio del Bosque] reconexión programada: ${reason}, ${delay} ms`);
+    }
+
+    function armStallWatch(reason) {
+      if (userPaused || stallTimer) return;
+      stallTimer = setTimeout(() => {
+        stallTimer = null;
+        if (!userPaused && audio.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) scheduleReconnect(reason);
+      }, 8000);
+    }
+
+    function addPlayer() {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc || doc.getElementById('radioBosquePlayer')) return;
+        const css = doc.createElement('style');
+        css.id = 'radioBosquePlayerCss';
+        css.textContent = styleText;
+        doc.head.appendChild(css);
+        const all = [...doc.querySelectorAll('h1,h2,h3,h4,p,span,div')];
+        const normalized = el => el.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+        const study = all.find(el => normalized(el) === 'estudio marta navarro') || all.find(el => normalized(el).includes('estudio marta navarro'));
+        const player = doc.createElement('section');
+        player.id = 'radioBosquePlayer';
+        player.className = 'rb-player';
+        player.setAttribute('aria-label', 'Reproductor de Radio del Bosque');
+        player.innerHTML = `<div class="rb-player-head"><span class="rb-live"><span class="rb-live-dot"></span>EN VIVO</span><label class="rb-volume" aria-label="Volumen"><span aria-hidden="true">&#128266;</span><input type="range" min="0" max="1" step="0.05" value="1" data-volume></label></div><div class="rb-main"><button class="rb-button" type="button" aria-label="Reproducir radio"><svg data-play viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg><svg data-pause viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg></button><div><h2 class="rb-title">Radio del Bosque</h2><p class="rb-status">Presioná para escuchar</p></div></div><div class="rb-line"></div>`;
+        if (study) study.insertAdjacentElement('afterend', player);
+        else (doc.querySelector('main') || doc.body).appendChild(player);
+
+        const button = player.querySelector('.rb-button');
+        const status = player.querySelector('.rb-status');
+        const volume = player.querySelector('[data-volume]');
+        const saved = localStorage.getItem('radioVolume');
+        if (saved !== null) { audio.volume = Number(saved); volume.value = saved; }
+        currentUI = { button, status };
+        setState(!audio.paused, audio.paused ? 'Presioná para escuchar' : 'Streaming en vivo');
+
+        button.addEventListener('click', () => {
+          if (audio.paused) {
+            userPaused = false;
+            reconnectAttempts = 0;
+            setState(false, 'Conectando...');
+            audio.play().catch(() => scheduleReconnect('play-failed'));
+          } else {
+            userPaused = true;
+            clearReconnectTimers();
+            reconnectAttempts = 0;
+            audio.pause();
+            setState(false, 'Presioná para escuchar');
+          }
+        });
+        volume.addEventListener('input', () => {
+          audio.volume = Number(volume.value);
+          localStorage.setItem('radioVolume', volume.value);
+        });
+      } catch (error) {
+        console.warn('No se pudo insertar el reproductor.', error);
+      }
+    }
+
+    audio.addEventListener('playing', () => {
+      reconnectAttempts = 0;
+      clearReconnectTimers();
+      setState(true, 'Streaming en vivo');
+    });
+    audio.addEventListener('pause', () => { if (userPaused) setState(false, 'Presioná para escuchar'); });
+    audio.addEventListener('waiting', () => armStallWatch('buffering'));
+    audio.addEventListener('stalled', () => armStallWatch('stalled'));
+    audio.addEventListener('error', () => scheduleReconnect('media-error'));
+
+    function go(url) {
+      const u = new URL(url, window.location.href);
+      if (u.origin !== window.location.origin) return false;
+      const page = u.pathname.split('/').pop() || 'index.html';
+      if (page === 'index.html' || page === '') { frame.src = 'home.html' + u.hash; return true; }
+      if (pages.has(page)) { frame.src = page + u.search + u.hash; return true; }
+      return false;
+    }
+
+    frame.addEventListener('load', () => {
+      addPlayer();
+      try {
+        frame.contentDocument.addEventListener('click', event => {
+          const link = event.target.closest && event.target.closest('a[href]');
+          if (!link || link.target === '_blank') return;
+          const href = link.getAttribute('href');
+          if (!href || href[0] === '#' || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+          if (go(new URL(href, frame.contentWindow.location.href).href)) event.preventDefault();
+        }, true);
+      } catch (_) {}
+    });
+  })();
+  </script>
 </body>
 </html>

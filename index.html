@@ -16,12 +16,16 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
 .radio-shell { width:100%; height:100%; position:relative; }
 .radio-content { display:block; width:100%; height:100%; border:0; background:var(--bg); }
 #persistentAudio { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+    #radioGestureTarget { position:fixed; display:none; z-index:20; padding:0; border:0; border-radius:50%; background:transparent; cursor:pointer; }
+    #radioGestureTarget.is-active { display:block; }
+    #radioGestureTarget:focus-visible { outline:3px solid #d4a574; outline-offset:3px; }
 </style>
 </head>
 <body>
 <div class="radio-shell">
   <iframe class="radio-content" id="radioContent" name="radio-content" src="home.html?v=2" title="Contenido de Radio del Bosque" allow="autoplay"></iframe>
-  <audio id="persistentAudio" preload="none" src="https://radios.solumedia.com/6318/stream">Tu navegador no soporta audio HTML5.</audio>
+  <audio id="persistentAudio" autoplay preload="auto" playsinline src="https://radios.solumedia.com/6318/stream">Tu navegador no soporta audio HTML5.</audio>
+  <button id="radioGestureTarget" type="button" aria-label="Reproducir radio" aria-hidden="true" tabindex="-1"></button>
 </div>
   <script>
   (() => {
@@ -30,11 +34,13 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
     const STREAM_URL = 'https://radios.solumedia.com/6318/stream';
     const audio = document.getElementById('persistentAudio');
     const frame = document.getElementById('radioContent');
+    const gestureTarget = document.getElementById('radioGestureTarget');
     const pages = new Set(['home.html','marcas.html','novedades.html','eventos.html','programas.html','encuentros-en-el-bosque-audios.html']);
     let reconnectTimer = null;
     let stallTimer = null;
     let reconnectAttempts = 0;
-    let userPaused = true;
+    let userPaused = false;
+    let autoplayBlocked = false;
     let currentUI = null;
 
     const styleText = `
@@ -56,6 +62,24 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
       @media (max-width:600px) { .rb-player { width:82%; padding:9px 11px 8px; border-radius:14px; } .rb-player-head { font-size:9px; } .rb-volume { font-size:12px; } .rb-volume input { width:62px; } .rb-main { gap:9px; padding:6px 2px 7px; } .rb-button { width:38px; height:38px; flex-basis:38px; } .rb-button svg { width:16px; height:16px; } }
     `;
 
+    function syncGestureTarget() {
+      if (!gestureTarget || !gestureTarget.classList.contains('is-active') || !currentUI?.button) return;
+      const frameRect = frame.getBoundingClientRect();
+      const buttonRect = currentUI.button.getBoundingClientRect();
+      gestureTarget.style.left = `${frameRect.left + buttonRect.left}px`;
+      gestureTarget.style.top = `${frameRect.top + buttonRect.top}px`;
+      gestureTarget.style.width = `${buttonRect.width}px`;
+      gestureTarget.style.height = `${buttonRect.height}px`;
+    }
+
+    function setGestureTarget(active) {
+      if (!gestureTarget) return;
+      gestureTarget.classList.toggle('is-active', active);
+      gestureTarget.setAttribute('aria-hidden', String(!active));
+      gestureTarget.tabIndex = active ? 0 : -1;
+      if (active) window.requestAnimationFrame(syncGestureTarget);
+    }
+
     function setState(playing, text) {
       if (!currentUI) return;
       const { button, status } = currentUI;
@@ -73,7 +97,8 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
     }
 
     function scheduleReconnect(reason) {
-      if (userPaused || reconnectTimer) return;
+      if (userPaused || autoplayBlocked || reconnectTimer) return;
+      setGestureTarget(false);
       clearTimeout(stallTimer);
       stallTimer = null;
       const delay = Math.min(15000, 1000 * (2 ** Math.min(reconnectAttempts, 4)));
@@ -83,9 +108,44 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
         reconnectAttempts += 1;
         audio.src = `${STREAM_URL}?reconnect=${Date.now()}`;
         audio.load();
-        audio.play().catch(() => scheduleReconnect('play-failed'));
+        playStream();
       }, delay);
       console.debug(`[Radio del Bosque] reconexión programada: ${reason}, ${delay} ms`);
+    }
+
+    function playStream({ fromUser = false } = {}) {
+      if (fromUser) {
+        userPaused = false;
+        autoplayBlocked = false;
+        reconnectAttempts = 0;
+      }
+      if (userPaused || !audio.paused || (!fromUser && autoplayBlocked)) return;
+      clearReconnectTimers();
+      setGestureTarget(false);
+      setState(false, fromUser ? 'Conectando...' : 'Iniciando transmisión...');
+      const promise = audio.play();
+      if (promise && typeof promise.catch === 'function') {
+        promise.catch(error => {
+          if (error?.name === 'NotAllowedError') {
+            autoplayBlocked = true;
+            setGestureTarget(true);
+            setState(false, 'Hacé clic para escuchar');
+            return;
+          }
+          scheduleReconnect(error?.name || 'play-failed');
+        });
+      }
+    }
+
+    function bindAutoplayUnlock(doc) {
+      if (!doc) return;
+      const events = ['pointerdown', 'keydown', 'touchstart'];
+      const unlock = () => {
+        events.forEach(type => doc.removeEventListener(type, unlock, true));
+        if (!userPaused && audio.paused) playStream({ fromUser: true });
+      };
+
+      events.forEach(type => doc.addEventListener(type, unlock, true));
     }
 
     function armStallWatch(reason) {
@@ -122,13 +182,15 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
         if (saved !== null) { audio.volume = Number(saved); volume.value = saved; }
         currentUI = { button, status };
         setState(!audio.paused, audio.paused ? 'Presioná para escuchar' : 'Streaming en vivo');
+        if (audio.paused && autoplayBlocked) setGestureTarget(true);
+        window.requestAnimationFrame(syncGestureTarget);
 
         button.addEventListener('click', () => {
           if (audio.paused) {
             userPaused = false;
             reconnectAttempts = 0;
             setState(false, 'Conectando...');
-            audio.play().catch(() => scheduleReconnect('play-failed'));
+            playStream({ fromUser: true });
           } else {
             userPaused = true;
             clearReconnectTimers();
@@ -148,13 +210,27 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
 
     audio.addEventListener('playing', () => {
       reconnectAttempts = 0;
+      autoplayBlocked = false;
+      setGestureTarget(false);
       clearReconnectTimers();
       setState(true, 'Streaming en vivo');
     });
-    audio.addEventListener('pause', () => { if (userPaused) setState(false, 'Presioná para escuchar'); });
+    audio.addEventListener('pause', () => {
+      if (userPaused) {
+        setGestureTarget(true);
+        setState(false, 'Presioná para escuchar');
+      }
+    });
     audio.addEventListener('waiting', () => armStallWatch('buffering'));
     audio.addEventListener('stalled', () => armStallWatch('stalled'));
     audio.addEventListener('error', () => scheduleReconnect('media-error'));
+
+    gestureTarget?.addEventListener('click', event => {
+      event.preventDefault();
+      playStream({ fromUser: true });
+    });
+    window.addEventListener('resize', syncGestureTarget);
+    window.addEventListener('scroll', syncGestureTarget, { passive: true });
 
     function go(url) {
       const u = new URL(url, window.location.href);
@@ -168,6 +244,10 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
     frame.addEventListener('load', () => {
       addPlayer();
       try {
+        bindAutoplayUnlock(frame.contentDocument);
+        frame.contentDocument.addEventListener('scroll', syncGestureTarget, { passive: true });
+      } catch (_) {}
+      try {
         frame.contentDocument.addEventListener('click', event => {
           const link = event.target.closest && event.target.closest('a[href]');
           if (!link || link.target === '_blank') return;
@@ -176,6 +256,12 @@ html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(-
           if (go(new URL(href, frame.contentWindow.location.href).href)) event.preventDefault();
         }, true);
       } catch (_) {}
+    });
+
+    // El intento ocurre después de insertar el widget para que el estado
+    // visible refleje si el navegador permitió o bloqueó el autoplay.
+    frame.addEventListener('load', () => {
+      window.setTimeout(() => playStream(), 0);
     });
   })();
   </script>

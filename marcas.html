@@ -100,7 +100,7 @@ body {
   <div class="header__container container">
     <a href="index.html" class="header__brand">
       <img src="images/logo_radio.png" alt="Radio del Bosque" class="header__logo" />
-      <span class="header__brand-text"><span class="header__name">Radio del Bosque</span><span class="header__location">Patagonia · Argentina</span></span>
+      <span class="header__brand-text"><span class="header__name">Radio del Bosque</span><span class="header__location">La Plata · Buenos Aires · Argentina</span></span>
     </a>
     <nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
       <a href="index.html#programacion" class="header__link">Programación</a>
@@ -126,18 +126,13 @@ body {
         </button>
       </article>
       <article class="brand-card">
-        <button class="brand-card__button" type="button" data-image="images/campaña.png" data-title="Equipo Austral" data-description="¿Buscás productos de perfumería, belleza y bienestar, o una oportunidad para emprender? Equipo Austral te acerca productos Bagués para disfrutar en tu hogar, con envíos a todo el país, y te acompaña para desarrollar tu propio proyecto. Pedí el catálogo o consultá cómo sumarte al equipo." aria-label="Ver información de Equipo Austral">
-          <img class="brand-card__thumb" src="images/campaña.png" alt="Equipo Austral" />
+        <button class="brand-card__button" type="button" data-image="images/campaña.png" data-title="Campaña" data-description="Una propuesta que cuenta con el acompañamiento de Radio del Bosque para acercar su mensaje a nuestra audiencia y fortalecer el vínculo con la comunidad." aria-label="Ver información de Campaña">
+          <img class="brand-card__thumb" src="images/campaña.png" alt="Campaña" />
         </button>
       </article>
       <article class="brand-card">
         <button class="brand-card__button" type="button" data-image="images/diario.png" data-title="El Diario Guaraní" data-description="El Diario Guaraní es un medio de comunicación que informa, acompaña y conecta a la comunidad con las noticias y acontecimientos de la región." aria-label="Ver información de El Diario Guaraní">
           <img class="brand-card__thumb" src="images/diario.png" alt="El Diario Guaraní" />
-        </button>
-      </article>
-      <article class="brand-card">
-        <button class="brand-card__button" type="button" data-image="images/rockefeller-seguridad.png" data-title="Rockefeller Seguridad" data-description="Rockefeller Seguridad acompaña a hogares, comercios y espacios de trabajo con soluciones de protección que integran alarmas, cámaras y monitoreo. Una propuesta orientada a la prevención, el control y la tranquilidad de cada comunidad." aria-label="Ver información de Rockefeller Seguridad">
-          <img class="brand-card__thumb" src="images/rockefeller-seguridad.png" alt="Rockefeller Seguridad: alarmas, cámaras y monitoreo" />
         </button>
       </article>
     </section>
@@ -150,7 +145,7 @@ body {
     <div class="lightbox__content"><p class="lightbox__tag">Marca que confía en nosotros</p><h2 class="lightbox__title" id="lightboxTitle"></h2><p class="lightbox__description" id="lightboxDescription"></p></div>
   </div>
 </div>
-<footer class="footer">Radio del Bosque · Patagonia Argentina</footer>
+<footer class="footer">Radio del Bosque · La Plata, Buenos Aires, Argentina</footer>
 <script>
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
@@ -183,6 +178,5 @@ nav.addEventListener('click', (event) => { if (event.target.closest('a')) setMen
 document.addEventListener('click', (event) => { if (!nav.contains(event.target) && event.target !== menuToggle) setMenu(false); });
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 </script>
-  <script src="js/radio-persistente.js"></script>
 </body>
 </html>

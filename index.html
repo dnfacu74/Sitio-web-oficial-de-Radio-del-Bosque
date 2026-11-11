@@ -937,108 +937,84 @@ grid-template-columns: 1fr;
 }
 
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+#radioPlayer { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .radio-shell-content { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--bg-primary); }
-.radio-player-widget { position: fixed; z-index: 20000; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(500px, calc(100vw - 24px)); max-height: calc(100vh - 28px); margin: 0; }
-@media (max-width: 768px) { .radio-player-widget { bottom: 8px; width: calc(100vw - 16px); margin: 0; } }
 </style>
 </head>
 <body>
 <iframe class="radio-shell-content" id="radioContent" name="radio-content" title="Sitio web de Radio del Bosque" allow="autoplay" src="radio-site.html"></iframe>
-<div class="radio-player-widget" id="radioPlayerWidget">
-<!-- Elemento de Audio Oculto -->
-<audio
-id="radioPlayer"
-preload="auto"
-src="https://radios.solumedia.com/6060/stream">
-Tu navegador no soporta audio HTML5.
-</audio>
-<!-- Overlay para Autoplay Bloqueado -->
-<div class="rp-autoplay-fallback" id="autoplayFallback">
-<button class="rp-fallback-btn" id="fallbackBtn">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-Escuchar en vivo
-</button>
-</div>
-<!-- Barra de Estado Superior -->
-<div class="rp-status-bar">
-<div class="rp-status-indicator loading" id="statusIndicator">
-<div class="rp-status-dot"></div>
-<span id="statusText">Cargando...</span>
-</div>
-<div class="rp-volume-control">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-<input type="range" min="0" max="1" step="0.1" value="1" class="rp-volume-slider" id="volumeSlider">
-</div>
-</div>
-<!-- Controles Principales -->
-<div class="rp-main-controls">
-<button class="rp-play-btn" id="playPauseBtn" aria-label="Reproducir">
-<!-- Icono Play (visible por defecto) -->
-<svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-<!-- Icono Pause (oculto por defecto) -->
-<svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-</button>
-<div class="rp-info">
-<div class="rp-station-name">Radio del Bosque</div>
-<div class="rp-stream-label">Streaming en vivo</div>
-</div>
-</div>
-<!-- Mensaje de Error -->
-<div class="rp-error-msg" id="errorMsg">
-La transmisión está fuera de línea por el momento. Se reconectará cuando vuelva la señal.
-</div>
-</div>
+<audio id="radioPlayer" preload="auto" src="https://radios.solumedia.com/6060/stream" aria-label="Transmisión de Radio del Bosque"></audio>
 <script>
 (() => {
   const player = document.getElementById('radioPlayer');
-  const playBtn = document.getElementById('playPauseBtn');
-  const iconPlay = document.getElementById('iconPlay');
-  const iconPause = document.getElementById('iconPause');
-  const statusIndicator = document.getElementById('statusIndicator');
-  const statusText = document.getElementById('statusText');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const errorMsg = document.getElementById('errorMsg');
-  const autoplayFallback = document.getElementById('autoplayFallback');
-  const fallbackBtn = document.getElementById('fallbackBtn');
-  if (!player || !playBtn || !iconPlay || !iconPause || !statusIndicator || !statusText || !volumeSlider || !errorMsg || !autoplayFallback || !fallbackBtn) return;
+  const frame = document.getElementById('radioContent');
+  if (!player || !frame) return;
 
   let userPaused = false;
   let attemptId = 0;
   let retryTimer = null;
-  const scheduleReconnect = () => {
-    if (userPaused || retryTimer !== null) return;
-    retryTimer = window.setTimeout(() => {
-      retryTimer = null;
-      startPlayback();
-    }, 15000);
-  };
-  const setState = (state, message) => {
-    statusIndicator.classList.remove('live', 'loading');
+  let playerState = 'loading';
+  let stateMessage = '';
+
+  const renderControls = () => {
+    let doc;
+    try { doc = frame.contentDocument; } catch (_) { return; }
+    if (!doc) return;
+    const widget = doc.getElementById('radioPlayerWidget');
+    if (!widget) return;
+    const playBtn = doc.getElementById('playPauseBtn');
+    const iconPlay = doc.getElementById('iconPlay');
+    const iconPause = doc.getElementById('iconPause');
+    const status = doc.getElementById('statusIndicator');
+    const statusText = doc.getElementById('statusText');
+    const volume = doc.getElementById('volumeSlider');
+    const errorMsg = doc.getElementById('errorMsg');
+    const fallback = doc.getElementById('autoplayFallback');
+    if (!playBtn || !iconPlay || !iconPause || !status || !statusText || !volume || !errorMsg || !fallback) return;
+
+    status.classList.remove('live', 'loading');
     errorMsg.style.display = 'none';
-    if (state === 'playing') {
-      if (retryTimer !== null) window.clearTimeout(retryTimer);
-      retryTimer = null;
-      iconPlay.style.display = 'none';
-      iconPause.style.display = 'block';
-      statusIndicator.classList.add('live');
-      statusText.textContent = 'EN VIVO';
-      autoplayFallback.classList.remove('visible');
-    } else if (state === 'loading') {
-      statusIndicator.classList.add('loading');
-      statusText.textContent = 'Conectando...';
-    } else if (state === 'paused') {
-      iconPlay.style.display = 'block';
-      iconPause.style.display = 'none';
-      statusText.textContent = message || 'Pausado';
-    } else if (state === 'error') {
-      iconPlay.style.display = 'block';
-      iconPause.style.display = 'none';
+    if (playerState === 'playing') {
+      iconPlay.style.display = 'none'; iconPause.style.display = 'block';
+      status.classList.add('live'); statusText.textContent = 'EN VIVO'; fallback.classList.remove('visible');
+    } else if (playerState === 'loading') {
+      iconPlay.style.display = 'block'; iconPause.style.display = 'none';
+      status.classList.add('loading'); statusText.textContent = 'Conectando...'; fallback.classList.remove('visible');
+    } else if (playerState === 'error') {
+      iconPlay.style.display = 'block'; iconPause.style.display = 'none';
       statusText.textContent = 'Sin conexión';
-      errorMsg.textContent = message || 'No se pudo conectar con la transmisión. Volvé a intentar.';
-      errorMsg.style.display = 'block';
+      errorMsg.textContent = stateMessage || 'La transmisión está fuera de línea por el momento. Se reconectará cuando vuelva la señal.';
+      errorMsg.style.display = 'block'; fallback.classList.remove('visible');
+    } else {
+      iconPlay.style.display = 'block'; iconPause.style.display = 'none';
+      statusText.textContent = stateMessage || 'Pausado';
+      if (stateMessage === 'Tocá para escuchar') fallback.classList.add('visible');
+      else fallback.classList.remove('visible');
     }
+    volume.value = String(player.volume);
+
+    if (playBtn.dataset.radioBound) return;
+    playBtn.dataset.radioBound = 'true';
+    playBtn.addEventListener('click', () => {
+      if (player.paused) startPlayback(true);
+      else {
+        userPaused = true; attemptId++;
+        if (retryTimer !== null) window.clearTimeout(retryTimer);
+        retryTimer = null; player.pause(); setState('paused', 'Pausado');
+      }
+    });
+    const fallbackBtn = doc.getElementById('fallbackBtn');
+    fallbackBtn?.addEventListener('click', () => startPlayback(true));
+    volume.addEventListener('input', () => { player.volume = Number(volume.value); });
   };
 
+  const setState = (state, message = '') => {
+    playerState = state; stateMessage = message; renderControls();
+  };
+  const scheduleReconnect = () => {
+    if (userPaused || retryTimer !== null) return;
+    retryTimer = window.setTimeout(() => { retryTimer = null; startPlayback(); }, 15000);
+  };
   const startPlayback = async (fromUserGesture = false) => {
     if (userPaused && !fromUserGesture) return;
     if (fromUserGesture) userPaused = false;
@@ -1049,41 +1025,21 @@ La transmisión está fuera de línea por el momento. Se reconectará cuando vue
       if (thisAttempt === attemptId) setState('playing');
     } catch (error) {
       if (thisAttempt !== attemptId || error.name === 'AbortError') return;
-      if (error.name === 'NotAllowedError') {
-        setState('paused', 'Tocá para escuchar');
-        autoplayFallback.classList.add('visible');
-      } else {
-        setState('error', 'La transmisión está fuera de línea o no responde. Se reintentará automáticamente.');
-        scheduleReconnect();
-      }
+      if (error.name === 'NotAllowedError') setState('paused', 'Tocá para escuchar');
+      else { setState('error', 'La transmisión está fuera de línea o no responde. Se reintentará automáticamente.'); scheduleReconnect(); }
     }
   };
 
-  playBtn.addEventListener('click', () => {
-    if (player.paused) startPlayback(true);
-    else {
-      userPaused = true;
-      attemptId++;
-      if (retryTimer !== null) window.clearTimeout(retryTimer);
-      retryTimer = null;
-      player.pause();
-      setState('paused');
-    }
-  });
-  fallbackBtn.addEventListener('click', () => startPlayback(true));
-  volumeSlider.addEventListener('input', () => { player.volume = Number(volumeSlider.value); });
+  frame.addEventListener('load', renderControls);
   player.addEventListener('playing', () => setState('playing'));
-  player.addEventListener('pause', () => { if (!player.ended) setState('paused'); });
+  player.addEventListener('pause', () => { if (!player.ended && userPaused) setState('paused', 'Pausado'); });
   player.addEventListener('waiting', () => setState('loading'));
   player.addEventListener('error', () => {
     if (userPaused) return;
     setState('error', 'La transmisión está fuera de línea o no responde. Se reintentará automáticamente.');
     scheduleReconnect();
   });
-  player.volume = Number(volumeSlider.value);
-
-  // Intento inmediato al entrar. Si el navegador lo bloquea, se muestra el botón
-  // de activación; la política del navegador no permite forzar audio con sonido.
+  renderControls();
   startPlayback();
 })();
 </script>

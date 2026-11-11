@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0T7H98V9L"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-L0T7H98V9L');
-</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#0a1f14" />
-<meta name="description" content="Radio del Bosque, La Plata, Buenos Aires, Argentina - Emisora digital independiente." />
+<meta name="description" content="Radio del Bosque, La Plata, Buenos Aires, Argentina - emisora digital independiente y transmisión en vivo." />
 <title>Radio del Bosque, La Plata, Buenos Aires, Argentina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -943,60 +935,21 @@ grid-template-columns: 1fr;
 .staff-card { padding: 36px 20px 32px; }
 .staff-logo { width: 125px; height: 125px; margin-top: 34px; }
 }
+
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+.radio-shell-content { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--bg-primary); }
+.radio-player-widget { position: fixed; z-index: 20000; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(500px, calc(100vw - 24px)); max-height: calc(100vh - 28px); margin: 0; }
+@media (max-width: 768px) { .radio-player-widget { bottom: 8px; width: calc(100vw - 16px); margin: 0; } }
 </style>
 </head>
 <body>
-<header class="header" id="header">
-<div class="header__container container">
-<a href="index.html" class="header__brand">
-<img src="images/logo_radio.png" alt="Radio del Bosque, La Plata, Buenos Aires, Argentina" class="header__logo" width="48" height="48" />
-<div class="header__brand-text">
-<span class="header__name">Radio del Bosque</span>
-<span class="header__location">La Plata · Buenos Aires · Argentina</span>
-</div>
-</a>
-<nav class="header__nav" id="siteMenu" aria-label="Navegación principal">
-<a href="#programacion" class="header__link">Programación</a>
-<a href="novedades.html" class="header__link">Novedades</a>
-<a href="eventos.html" class="header__link">Eventos</a>
-<a href="#estudio" class="header__link">Conoce nuestro estudio</a>
-<a href="encuentros-en-el-bosque-audios.html" class="header__link">Audios</a>
-<a href="#nosotros" class="header__link">Sobre Nosotros</a>
-<a href="#staff" class="header__link">STAFF</a>
-<a href="#contacto" class="header__link">Contacto</a>
-<a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="header__whatsapp">WhatsApp</a>
-</nav>
-<button class="header__toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="siteMenu">
-<span class="header__toggle-icon" aria-hidden="true">☰</span><span>MENU</span>
-</button>
-</div>
-</header>
-<main>
-<!-- HERO -->
-<section class="hero">
-<div class="hero__background">
-<div class="hero__overlay"></div>
-<div class="hero__vignette"></div>
-</div>
-<div class="hero__content container">
-<div class="hero__badge">
-<span class="hero__live-dot"></span>
-<span>TRANSMISIÓN ACTIVA 24/7</span>
-</div>
-<img src="images/logo_radio.png" alt="Radio del Bosque, La Plata, Buenos Aires, Argentina" class="hero__logo-top" />
-<h1 class="hero__title">
-<span class="hero__title-line">RADIO DEL</span>
-<span class="hero__title-line hero__title-line--accent">BOSQUE</span>
-</h1>
-<p class="hero__subtitle">La Plata · Buenos Aires · Argentina</p>
-<p class="hero__studio">Estudio Marta Navarro</p>
-<!-- INICIO REPRODUCTOR HTML5 -->
+<iframe class="radio-shell-content" id="radioContent" name="radio-content" title="Sitio web de Radio del Bosque" allow="autoplay" src="radio-site.html"></iframe>
 <div class="radio-player-widget" id="radioPlayerWidget">
 <!-- Elemento de Audio Oculto -->
 <audio
 id="radioPlayer"
 preload="auto"
-src="https://radios.solumedia.com:6060/stream?icy=http">
+src="https://radios.solumedia.com/6060/stream">
 Tu navegador no soporta audio HTML5.
 </audio>
 <!-- Overlay para Autoplay Bloqueado -->
@@ -1032,533 +985,114 @@ Escuchar en vivo
 </div>
 <!-- Mensaje de Error -->
 <div class="rp-error-msg" id="errorMsg">
-⚠️ El servidor no está disponible temporalmente. Intenta nuevamente.
+La transmisión está fuera de línea por el momento. Se reconectará cuando vuelva la señal.
 </div>
 </div>
-<!-- FIN REPRODUCTOR HTML5 -->
-<a href="marcas.html" class="hero__brands-title">Confían en Nosotros</a>
-<div class="hero__brands-gallery" aria-label="Marcas que confían en Radio del Bosque">
-<button class="hero__brand-thumb" type="button" data-image="images/escuela.png" data-title="Escuela de Oratoria Moderna y Locución Profesional" data-description="Formación integral para comunicar con seguridad, claridad y presencia."><img src="images/escuela.png" alt="Escuela de Oratoria Moderna y Locución Profesional" loading="lazy" /></button>
-<button class="hero__brand-thumb" type="button" data-image="images/diario.png" data-title="El Diario Guaraní" data-description="Un medio de comunicación que informa, acompaña y conecta a la comunidad con las noticias de la región."><img src="images/diario.png" alt="El Diario Guaraní" loading="lazy" /></button>
-<button class="hero__brand-thumb" type="button" data-image="images/campaña.png" data-title="Campaña" data-description="Una propuesta que cuenta con el acompañamiento de Radio del Bosque para acercar su mensaje a nuestra audiencia."><img src="images/campaña.png" alt="Campaña" loading="lazy" /></button>
-<button class="hero__brand-thumb" type="button" data-image="images/rockefeller-seguridad.png" data-title="Rockefeller Seguridad" data-description="Rockefeller Seguridad acompaña a hogares, comercios y espacios de trabajo con soluciones de protección que integran alarmas, cámaras y monitoreo. Una propuesta orientada a la prevención, el control y la tranquilidad de cada comunidad."><img src="images/rockefeller-seguridad.png" alt="Rockefeller Seguridad: alarmas, cámaras y monitoreo" loading="lazy" /></button>
-</div>
-<div class="hero-brands-lightbox" id="heroBrandsLightbox" role="dialog" aria-modal="true" aria-labelledby="heroBrandsTitle" aria-hidden="true">
-<div class="hero-brands-lightbox__box">
-<button class="hero-brands-lightbox__close" id="heroBrandsClose" type="button" aria-label="Cerrar imagen ampliada">×</button>
-<img class="hero-brands-lightbox__image" id="heroBrandsImage" src="" alt="" />
-<h3 class="hero-brands-lightbox__title" id="heroBrandsTitle"></h3>
-<p class="hero-brands-lightbox__description" id="heroBrandsDescription"></p>
-</div>
-</div>
-<div class="hero__actions">
-</div>
-<div class="hero__scroll">
-<div class="hero__scroll-indicator"></div>
-</div>
-</div>
-</section>
-<!-- LIVE -->
-<section class="live-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">Mirá<span class="text-accent">nos</span> en Vivo</h2>
-<div class="divider"></div>
-<p class="section-subtitle">Transmitimos en vivo desde el Estudio Marta Navarro en La Plata, Buenos Aires, Argentina</p>
-</div>
-<div class="live-grid">
-<div class="live-video">
-<div class="live-video__header">
-<div class="live-video__badge">
-<span class="live-video__dot"></span>
-EN VIVO
-</div>
-<span class="live-video__platform">Kick · radiodelbosquelp</span>
-</div>
-<div class="live-video__container">
-<iframe
-src="https://player.kick.com/radiodelbosquelp"
-allowfullscreen
-scrolling="no">
-</iframe>
-</div>
-<div class="live-video__description">
-Transmitimos en vivo desde el Estudio Marta Navarro en La Plata, Buenos Aires, Argentina. Mirá nuestra señal de video en vivo a través de Kick.
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ABOUT -->
-<section id="nosotros" class="about-section">
-<div class="container">
-<div class="about-grid">
-<div class="about-content">
-<span class="about-label">NUESTRA HISTORIA</span>
-<h2 class="about-title">Donde cada voz<br/><span class="text-accent">encuentra su lugar</span></h2>
-<p class="about-text">Radio del Bosque es una emisora digital independiente nacida en La Plata, Buenos Aires, Argentina. Nuestro proyecto surge de la necesidad de crear un espacio de comunicación comunitario, independiente y sustentable.</p>
-<p class="about-text">Transmitimos las 24 horas llevando música, cultura, información y entretenimiento. Estamos construyendo nuestro estudio con materiales reciclados, demostrando que es posible crear oportunidades a partir de recursos recuperados.</p>
-<div class="about-stats">
-<div class="about-stat"><span class="about-stat__value">2016</span><span class="about-stat__label">Año de Fundación</span></div>
-<div class="about-stat"><span class="about-stat__value">24/7</span><span class="about-stat__label">Transmisión Continua</span></div>
-<div class="about-stat"><span class="about-stat__value">100%</span><span class="about-stat__label">Digital e Independiente</span></div>
-</div>
-<button id="btnColaborar" class="btn btn-gold" style="border: none; cursor: pointer;">❤️ Colaborá con nosotros</button>
-</div>
-<div class="about-image">
-<div class="about-image__frame">
-<img src="images/martita.png" alt="Estudio Marta Navarro" loading="lazy" />
-<div class="about-image__caption">Estudio Marta Navarro</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- STAFF -->
-<section id="staff" class="staff-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">Nuestro <span class="text-accent">STAFF</span></h2>
-<div class="divider"></div>
-<p class="section-subtitle">Las voces y las personas que hacen crecer Radio del Bosque cada día.</p>
-</div>
-<div class="staff-card">
-<p class="staff-intro">EQUIPO ESTABLE</p>
-<ul class="staff-list">
-<li>Marisa Waters</li>
-<li>Juan Mastromarino</li>
-<li>Marta Navarro</li>
-<li>Cristina Navarro</li>
-<li>Viviana Leiva</li>
-<li>Mirta Cecis</li>
-</ul>
-<img src="images/logo_radio.png" alt="Logo de Radio del Bosque" class="staff-logo" loading="lazy" />
-</div>
-</div>
-</section>
-<!-- PROGRAMMING -->
-<section id="programacion" class="programming-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">Escuchá nuestros <span class="text-accent">Programas</span></h2>
-<div class="divider"></div>
-<p class="section-subtitle">Una grilla pensada para acompañarte en cada momento del día</p>
-</div>
-<div class="programming-grid" id="programmingGrid">
-<!-- 1. El FRABULLOSO DÍA -->
-<div class="program-card">
-<div class="program-card__image">
-<img src="images/programa-desayuno-en-el-bosque.png" alt="images/programa-desayuno-en-el-bosque.png" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">☀️</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Mañana</span>
-<h3 class="program-card__title">Desayuno en el Bosque</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 Lunes a Viernes</span>
-<span class="program-card__time">🕐 9:00 a 11:00 hs</span>
-</div>
-<p class="program-card__desc">La mejor compañía para arrancar el día, con música, humor y la actualidad del Bosque.</p>
-<p class="program-card__host">Con Facundo DN</p>
-</div>
-</div>
-<!-- 2. EL CAMINO CORRECTO -->
-<div class="program-card">
-<div class="program-card__image">
-<img src="images/programa-el-camino-correcto.png" alt="El Camino Correcto" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">🧭</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Noche</span>
-<h3 class="program-card__title">El Camino Correcto</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 Martes y Jueves</span>
-<span class="program-card__time">🕐 19:00 a 20:00 hs</span>
-</div>
-<p class="program-card__desc">Charlas, reflexiones y consejos para ayudarte a encontrar el rumbo.</p>
-</div>
-</div>
-<!-- 3. MÁS ALLÁ DEL BOSQUE -->
-<div class="program-card">
-<div class="program-card__image">
-<img src="images/programa-mas-alla-del-bosque.png" alt="Más Allá del Bosque con Cristina Navarro" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">🔮</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Noche</span>
-<h3 class="program-card__title">Más Allá del Bosque</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 Martes y Jueves</span>
-<span class="program-card__time">🕐 20:00 a 21:00 hs</span>
-</div>
-<p class="program-card__desc">Descubrí los secretos del mundo esotérico con la conducción de Cristina Navarro.</p>
-<p class="program-card__host">Con Cristina Navarro</p>
-</div>
-</div>
-<!-- 4. TERROR EN EL BOSQUE (MUY PRONTO) -->
-<div class="program-card">
-<div class="program-card__image">
-<span class="program-card__soon-badge">Muy pronto</span>
-<img src="images/programa-terror-en-el-bosque.png" alt="Terror en el Bosque" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">👻</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Noche</span>
-<h3 class="program-card__title">Terror en el Bosque</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 Lunes, Miércoles y Viernes</span>
-<span class="program-card__time">🕐 21:00 a 00:00 hs</span>
-</div>
-<p class="program-card__desc">Relatos, historias y suspenso para las noches más oscuras del Bosque.</p>
-</div>
-</div>
-<!-- 5. NOCHE DE HADAS -->
-<div class="program-card">
-<div class="program-card__image">
-<img src="images/programa-noche-de-hadas.png" alt="Noche de Hadas con Juan Mastromarino" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">🧚</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Madrugada</span>
-<h3 class="program-card__title">Noche de Hadas</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 Lunes a Lunes</span>
-<span class="program-card__time">🕐 00:00 a 6:30 hs</span>
-</div>
-<p class="program-card__desc">Compañía para los noctámbulos de la madrugada que trabajan, estudian o no pueden dormir.</p>
-<p class="program-card__host">Con Juan Mastromarino</p>
-</div>
-</div>
-<!-- 6. PRÓXIMO PROGRAMA (ESPACIO LIBRE) -->
-<div class="program-card">
-<div class="program-card__image">
-<span class="program-card__soon-badge">Próximamente</span>
-<img src="images/programa-proximamente.png" alt="Próximo programa" loading="lazy" />
-<div class="program-card__image-overlay"></div>
-<div class="program-card__icon-badge" aria-hidden="true">✨</div>
-</div>
-<div class="program-card__content">
-<span class="program-card__category">Próximamente</span>
-<h3 class="program-card__title">Nuevo Programa</h3>
-<div class="program-card__meta">
-<span class="program-card__days">📅 A confirmar</span>
-<span class="program-card__time">🕐 A confirmar</span>
-</div>
-<p class="program-card__desc">Muy pronto se suma una nueva propuesta a la grilla del Bosque.</p>
-</div>
-</div>
-</div>
-<div class="programs-cta">
-<h3 class="programs-cta__title">¿Siempre soñaste con tener tu propio programa de radio?</h3>
-<p class="programs-cta__text">Abrimos nuestra programación a nuevas propuestas: en vivo o grabadas, de música, cultura, actualidad, deportes o entretenimiento. No cobramos espacio de aire, solo pedimos una colaboración voluntaria. Tu idea y tus ganas de comunicar son lo que más importa.</p>
-<a href="programas.html" class="programs-cta__link">Quiero tener mi programa →</a>
-</div>
-</div>
-</section>
-<!-- CONOCE NUESTRO ESTUDIO -->
-<section id="estudio" class="studio-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">CONOCE NUESTRO <span class="text-accent">ESTUDIO</span></h2>
-<div class="divider"></div>
-<p class="section-subtitle">Un recorrido visual por los espacios de Radio del Bosque.</p>
-</div>
-<div class="studio-thumbs" aria-label="Imágenes de nuestro estudio">
-<button class="studio-thumb" type="button" data-image="images/estudio1.png" data-title="ESTUDIO 1" data-description="Nuestro espacio de estudio, producción y transmisión en Radio del Bosque." aria-label="Ver imagen del estudio 1">
-<img src="images/estudio1.png" alt="ESTUDIO 1" loading="lazy" />
-</button>
-<button class="studio-thumb" type="button" data-image="images/estudio2.png" data-title="ESTUDIO 2" data-description="Otro ángulo de nuestro espacio de trabajo y transmisión radial." aria-label="Ver imagen del estudio 2">
-<img src="images/estudio2.png" alt="ESTUDIO 2" loading="lazy" />
-</button>
-<button class="studio-thumb" type="button" data-image="images/estudio3.png" data-title="ESTUDIO 3" data-description="Una vista más de las instalaciones que forman parte de Radio del Bosque." aria-label="Ver imagen del estudio 3">
-<img src="images/estudio3.png" alt="ESTUDIO 3" loading="lazy" />
-</button>
-<button class="studio-thumb" type="button" data-image="images/control.png" data-title="CONTROL" data-description="La cabina de control desde donde se coordina el sonido y la transmisión de Radio del Bosque." aria-label="Ver imagen del control">
-<img src="images/control.png" alt="CONTROL" loading="lazy" />
-</button>
-<button class="studio-thumb" type="button" data-image="images/discoteca.png" data-title="DISCOTECA" data-description="El espacio donde se organiza la música y el material sonoro de nuestra programación." aria-label="Ver imagen de la discoteca">
-<img src="images/discoteca.png" alt="DISCOTECA" loading="lazy" />
-</button>
-</div>
-</div>
-</section>
-<div class="studio-lightbox" id="studioLightbox" role="dialog" aria-modal="true" aria-labelledby="studioLightboxTitle" aria-hidden="true">
-<div class="studio-lightbox__box">
-<button class="studio-lightbox__close" id="studioLightboxClose" type="button" aria-label="Cerrar imagen ampliada">×</button>
-<img class="studio-lightbox__image" id="studioLightboxImage" src="" alt="" />
-<h3 class="studio-lightbox__title" id="studioLightboxTitle"></h3>
-<p class="studio-lightbox__description" id="studioLightboxDescription"></p>
-</div>
-</div>
-<!-- CONTACT -->
-<section id="contacto" class="contact-section">
-<div class="container">
-<div class="section-header">
-<h2 class="section-title">Contacto</h2>
-<div class="divider"></div>
-<p class="section-subtitle">Escribinos por cualquier consulta.</p>
-</div>
-<div class="contact-grid">
-<a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" class="contact-card">
-<div class="contact-card__icon">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</div>
-<div class="contact-card__info">
-<span class="contact-card__label">WhatsApp</span>
-<span class="contact-card__value">+54 9 221 602-3878</span>
-</div>
-</a>
-<a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" class="contact-card">
-<div class="contact-card__icon">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-</div>
-<div class="contact-card__info">
-<span class="contact-card__label">Instagram</span>
-<span class="contact-card__value">@radiodelbosque.ok</span>
-</div>
-</a>
-<a href="https://www.youtube.com/@radiodelbosquepatagonia" target="_blank" rel="noopener noreferrer" class="contact-card">
-<div class="contact-card__icon">
-<img src="images/icon_youtube.png" alt="YouTube" style="width: 24px; height: 24px; object-fit: contain;" />
-</div>
-<div class="contact-card__info">
-<span class="contact-card__label">YouTube</span>
-<span class="contact-card__value">YouTube</span>
-</div>
-</a>
-</div>
-<div class="contact-cta">
-<a href="https://wa.me/5496023878?text=Hola!%20Quiero%20contactarme%20con%20Radio%20del%20Bosque" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn--large">
-Enviar mensaje por WhatsApp
-</a>
-</div>
-</div>
-</section>
-</main>
-<!-- FOOTER -->
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<div class="footer-brand">
-<img src="images/logo_radio.png" alt="Radio del Bosque, La Plata, Buenos Aires, Argentina" class="footer__logo" width="64" height="64" loading="lazy" />
-<h3 class="footer__name">Radio del Bosque, La Plata, Buenos Aires, Argentina</h3>
-<p class="footer__desc">Emisora digital independiente de La Plata, Buenos Aires, Argentina. Música, cultura, información y entretenimiento las 24 horas.</p>
-</div>
-<div class="footer-links">
-<h4 class="footer__title">Accesos Rápidos</h4>
-<ul class="footer__list">
-<li><a href="#player">En Vivo</a></li>
-<li><a href="#programacion">Programación</a></li>
-<li><a href="programas.html">Tu Propio Programa</a></li>
-<li><a href="novedades.html">Novedades</a></li>
-<li><a href="eventos.html">Eventos</a></li>
-<li><a href="#estudio">Conoce nuestro estudio</a></li>
-<li><a href="encuentros-en-el-bosque-audios.html">Audios</a></li>
-<li><a href="#nosotros">Sobre Nosotros</a></li>
-<li><a href="#contacto">Contacto</a></li>
-</ul>
-</div>
-<div class="footer-contact">
-<h4 class="footer__title">Contacto</h4>
-<ul class="footer__list">
-<li>📍 La Plata, Buenos Aires, Argentina</li>
-<li>📱 +54 9 221 6023878</li>
-<li> @radiodelbosque.ok</li>
-</ul>
-</div>
-<div class="footer-social">
-<h4 class="footer__title">Seguinos</h4>
-<div class="footer__social-links">
-<a href="https://instagram.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-<a href="https://wa.me/5492216023878" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
-<a href="https://facebook.com/radiodelbosque.ok" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2024 Radio del Bosque La Plata, Buenos Aires, Argentina. Todos los derechos reservados.</p>
-<p class="footer-bottom__sub">Emisora Digital Independiente · La Plata · Buenos Aires · Argentina</p>
-</div>
-</div>
-</footer>
-<!-- MODAL DONACIÓN -->
-<div class="donate-modal" id="donateModal">
-<button class="donate-modal__close" id="donateClose" aria-label="Cerrar">✕</button>
-<div class="donate-modal__inner">
-<img src="images/promo.png" alt="Ayudanos a mantener viva Radio del Bosque - Escaneá el código QR para colaborar" />
-<p class="donate-modal__hint">Escaneá el código QR con tu celular</p>
-</div>
-</div>
-
-<script src="script.js"></script>
-<!-- SCRIPT REPRODUCTOR DE RADIO -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-const player = document.getElementById('radioPlayer');
-const playBtn = document.getElementById('playPauseBtn');
-const iconPlay = document.getElementById('iconPlay');
-const iconPause = document.getElementById('iconPause');
-const statusIndicator = document.getElementById('statusIndicator');
-const statusText = document.getElementById('statusText');
-const volumeSlider = document.getElementById('volumeSlider');
-const errorMsg = document.getElementById('errorMsg');
-const autoplayFallback = document.getElementById('autoplayFallback');
-const fallbackBtn = document.getElementById('fallbackBtn');
-let isPlaying = false;
-// Función para actualizar la UI según el estado
-function updateUI(state) {
-// Resetear clases
-statusIndicator.classList.remove('live', 'loading');
-errorMsg.style.display = 'none';
-if (state === 'playing') {
-iconPlay.style.display = 'none';
-iconPause.style.display = 'block';
-statusIndicator.classList.add('live');
-statusText.textContent = 'EN VIVO';
-autoplayFallback.classList.remove('visible');
-isPlaying = true;
-} else if (state === 'paused') {
-iconPlay.style.display = 'block';
-iconPause.style.display = 'none';
-statusIndicator.classList.remove('live');
-statusText.textContent = 'Pausado';
-isPlaying = false;
-} else if (state === 'loading') {
-statusIndicator.classList.add('loading');
-statusText.textContent = 'Cargando...';
-} else if (state === 'error') {
-iconPlay.style.display = 'block';
-iconPause.style.display = 'none';
-statusText.textContent = 'Error';
-errorMsg.style.display = 'block';
-isPlaying = false;
-}
-}
-// Intentar reproducir automáticamente
-function attemptAutoPlay() {
-updateUI('loading');
-const playPromise = player.play();
-if (playPromise !== undefined) {
-playPromise.then(_ => {
-// Autoplay funcionó
-updateUI('playing');
-}).catch(error => {
-// Autoplay bloqueado o error de carga
-console.log("Autoplay bloqueado o falló:", error);
-updateUI('paused');
-// Mostrar botón grande si fue bloqueado por política del navegador
-if (error.name === 'NotAllowedError') {
-autoplayFallback.classList.add('visible');
-}
-});
-}
-}
-// Controlador del botón Play/Pause principal
-playBtn.addEventListener('click', function() {
-if (player.paused) {
-updateUI('loading');
-player.play().then(() => {
-updateUI('playing');
-}).catch(e => {
-updateUI('error');
-});
-} else {
-player.pause();
-updateUI('paused');
-}
-});
-// Controlador del botón de fallback (Autoplay bloqueado)
-fallbackBtn.addEventListener('click', function() {
-updateUI('loading');
-player.play().then(() => {
-updateUI('playing');
-}).catch(e => {
-updateUI('error');
-});
-});
-// Control de Volumen
-volumeSlider.addEventListener('input', function() {
-player.volume = this.value;
-});
-// Eventos del elemento Audio
-player.addEventListener('playing', function() {
-updateUI('playing');
-});
-player.addEventListener('pause', function() {
-updateUI('paused');
-});
-player.addEventListener('waiting', function() {
-updateUI('loading');
-});
-player.addEventListener('error', function() {
-updateUI('error');
-});
-// Iniciar intento de autoplay al cargar
-attemptAutoPlay();
-
-});
-</script>
 <script>
 (() => {
-  const toggle = document.getElementById('menuToggle');
-  const menu = document.getElementById('siteMenu');
-  if (!toggle || !menu) return;
-  const setMenu = (open) => {
-    menu.classList.toggle('header__nav--open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+  const player = document.getElementById('radioPlayer');
+  const playBtn = document.getElementById('playPauseBtn');
+  const iconPlay = document.getElementById('iconPlay');
+  const iconPause = document.getElementById('iconPause');
+  const statusIndicator = document.getElementById('statusIndicator');
+  const statusText = document.getElementById('statusText');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const errorMsg = document.getElementById('errorMsg');
+  const autoplayFallback = document.getElementById('autoplayFallback');
+  const fallbackBtn = document.getElementById('fallbackBtn');
+  if (!player || !playBtn || !iconPlay || !iconPause || !statusIndicator || !statusText || !volumeSlider || !errorMsg || !autoplayFallback || !fallbackBtn) return;
+
+  let userPaused = false;
+  let attemptId = 0;
+  let retryTimer = null;
+  const scheduleReconnect = () => {
+    if (userPaused || retryTimer !== null) return;
+    retryTimer = window.setTimeout(() => {
+      retryTimer = null;
+      startPlayback();
+    }, 15000);
   };
-  toggle.addEventListener('click', (event) => { event.stopPropagation(); setMenu(!menu.classList.contains('header__nav--open')); });
-  menu.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
-  document.addEventListener('click', (event) => { if (!menu.contains(event.target) && event.target !== toggle) setMenu(false); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
-})();
-</script>
-<script>
-(() => {
-  const lightbox = document.getElementById('heroBrandsLightbox');
-  const image = document.getElementById('heroBrandsImage');
-  const title = document.getElementById('heroBrandsTitle');
-  const description = document.getElementById('heroBrandsDescription');
-  const close = document.getElementById('heroBrandsClose');
-  if (!lightbox || !image || !title || !description || !close) return;
-  const closeBox = () => { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden', 'true'); };
-  document.querySelectorAll('.hero__brand-thumb').forEach((thumb) => thumb.addEventListener('click', () => {
-    image.src = thumb.dataset.image; image.alt = thumb.dataset.title; title.textContent = thumb.dataset.title; description.textContent = thumb.dataset.description;
-    lightbox.classList.add('active'); lightbox.setAttribute('aria-hidden', 'false');
-  }));
-  close.addEventListener('click', closeBox);
-  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeBox(); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeBox(); });
-})();
-</script>
-<script>
-(() => {
-  const lightbox = document.getElementById('studioLightbox');
-  const image = document.getElementById('studioLightboxImage');
-  const title = document.getElementById('studioLightboxTitle');
-  const description = document.getElementById('studioLightboxDescription');
-  const close = document.getElementById('studioLightboxClose');
-  if (!lightbox || !image || !title || !description || !close) return;
-  const closeBox = () => { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden', 'true'); };
-  document.querySelectorAll('.studio-thumb').forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      image.src = thumb.dataset.image;
-      image.alt = thumb.dataset.title;
-      title.textContent = thumb.dataset.title;
-      description.textContent = thumb.dataset.description;
-      lightbox.classList.add('active');
-      lightbox.setAttribute('aria-hidden', 'false');
-    });
+  const setState = (state, message) => {
+    statusIndicator.classList.remove('live', 'loading');
+    errorMsg.style.display = 'none';
+    if (state === 'playing') {
+      if (retryTimer !== null) window.clearTimeout(retryTimer);
+      retryTimer = null;
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+      statusIndicator.classList.add('live');
+      statusText.textContent = 'EN VIVO';
+      autoplayFallback.classList.remove('visible');
+    } else if (state === 'loading') {
+      statusIndicator.classList.add('loading');
+      statusText.textContent = 'Conectando...';
+    } else if (state === 'paused') {
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      statusText.textContent = message || 'Pausado';
+    } else if (state === 'error') {
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      statusText.textContent = 'Sin conexión';
+      errorMsg.textContent = message || 'No se pudo conectar con la transmisión. Volvé a intentar.';
+      errorMsg.style.display = 'block';
+    }
+  };
+
+  const startPlayback = async (fromUserGesture = false) => {
+    if (userPaused && !fromUserGesture) return;
+    if (fromUserGesture) userPaused = false;
+    const thisAttempt = ++attemptId;
+    setState('loading');
+    try {
+      await player.play();
+      if (thisAttempt === attemptId) setState('playing');
+    } catch (error) {
+      if (thisAttempt !== attemptId || error.name === 'AbortError') return;
+      if (error.name === 'NotAllowedError') {
+        setState('paused', 'Tocá para escuchar');
+        autoplayFallback.classList.add('visible');
+      } else {
+        setState('error', 'La transmisión está fuera de línea o no responde. Se reintentará automáticamente.');
+        scheduleReconnect();
+      }
+    }
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (player.paused) startPlayback(true);
+    else {
+      userPaused = true;
+      attemptId++;
+      if (retryTimer !== null) window.clearTimeout(retryTimer);
+      retryTimer = null;
+      player.pause();
+      setState('paused');
+    }
   });
-  close.addEventListener('click', closeBox);
-  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeBox(); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeBox(); });
+  fallbackBtn.addEventListener('click', () => startPlayback(true));
+  volumeSlider.addEventListener('input', () => { player.volume = Number(volumeSlider.value); });
+  player.addEventListener('playing', () => setState('playing'));
+  player.addEventListener('pause', () => { if (!player.ended) setState('paused'); });
+  player.addEventListener('waiting', () => setState('loading'));
+  player.addEventListener('error', () => {
+    if (userPaused) return;
+    setState('error', 'La transmisión está fuera de línea o no responde. Se reintentará automáticamente.');
+    scheduleReconnect();
+  });
+  player.volume = Number(volumeSlider.value);
+
+  // Intento inmediato al entrar. Si el navegador lo bloquea, se muestra el botón
+  // de activación; la política del navegador no permite forzar audio con sonido.
+  startPlayback();
+})();
+</script>
+<script>
+(() => {
+  const frame = document.getElementById('radioContent');
+  const allowedPages = new Set(['radio-site.html', 'home.html', 'marcas.html', 'novedades.html', 'eventos.html', 'programas.html', 'encuentros-en-el-bosque-audios.html']);
+  const requestedPage = new URLSearchParams(window.location.search).get('page');
+  if (requestedPage && allowedPages.has(requestedPage)) frame.src = requestedPage;
 })();
 </script>
 </body>
